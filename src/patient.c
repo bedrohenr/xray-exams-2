@@ -51,3 +51,15 @@ const char* get_patient_name(const Patient *patient){
 struct tm* get_patient_birthdate(const Patient *patient){
     return patient->birthdate;
 }
+
+// Retorna a data de nascimento do paciente.
+char* get_patient_birthdate_string(const Patient *patient){
+    return asctime(get_patient_birthdate(patient));
+}
+
+void print_patient(Patient *patient){
+    printf("Paciente\nId: %d\n", get_patient_id(patient));
+    printf("Nome: %s\n", get_patient_name(patient));
+    printf("Data de Nascimento: %s\n", get_patient_birthdate_string(patient));
+
+}

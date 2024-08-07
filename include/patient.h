@@ -21,4 +21,7 @@ const char* get_patient_name(const Patient *patient);
 // Retorna a data de nascimento do paciente. 
 struct tm* get_patient_birthdate(const Patient *patient);
 
+char* get_patient_birthdate_string(const Patient *patient);
+
+void print_patient(Patient *patient);
 #endif
