@@ -62,3 +62,15 @@ int get_exam_rx_id(const Exam *exam){
 struct tm* get_exam_time(const Exam *exam){
     return exam->time;
 }
+
+char* get_exam_time_string(const Exam *exam){
+    return asctime(exam->time);
+}
+
+void print_exam(Exam *exam){
+    printf("Exame\nId: %d\n", get_exam_id(exam));
+    printf("Id do Paciente: %d\n", get_exam_patient_id(exam));
+    printf("Id do Raio X: %d\n", get_exam_rx_id(exam));
+    // condition
+    printf("Data/Hora do Exame: %s", get_exam_time_string(exam));
+}

@@ -23,4 +23,8 @@ int get_exam_rx_id(const Exam *exam);
 // Retorna o horário de realização do exame.
 struct tm* get_exam_time(const Exam *exam);
 
+char* get_exam_time_string(const Exam *exam);
+
+void print_exam(Exam *exam);
+
 #endif
