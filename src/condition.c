@@ -41,6 +41,10 @@ Condition *create_condition(char *name, int gravity){
     return new_condition;
 }
 
+void destroy_condition(Condition *condition){
+    free(condition);
+}
+
 char *get_condition_name(Condition *condition){
     return condition->name;
 }
@@ -96,6 +100,5 @@ Condition *get_condition(){
 }
 
 void print_condition(Condition *condition){
-    printf("Condição: %s", get_condition_name(condition));
-    printf("Gravidade: %d", get_condition_gravity(condition));
+    printf("Condição: %s, Gravidade: %d", get_condition_name(condition), get_condition_gravity(condition));
 }
