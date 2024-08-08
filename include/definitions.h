@@ -13,4 +13,8 @@ typedef enum {
 
 void print_by_struct_type(StructType type, void *p);
 
+struct tm create_date(int ano, int mes, int dia);
+
+struct tm* get_time();
+
 #endif
