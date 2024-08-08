@@ -100,5 +100,5 @@ Condition *get_condition(){
 }
 
 void print_condition(Condition *condition){
-    printf("Condição: %s, Gravidade: %d", get_condition_name(condition), get_condition_gravity(condition));
+    printf("Condição: %s, Gravidade: %d\n", get_condition_name(condition), get_condition_gravity(condition));
 }
