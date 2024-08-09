@@ -23,4 +23,8 @@ int validate_name(const char* name, int id);
 
 int get_random_number();
 
+struct tm create_date(int ano, int mes, int dia);
+
+struct tm* get_time();
+
 #endif
