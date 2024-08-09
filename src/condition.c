@@ -25,7 +25,7 @@ struct condition{
     int gravity;
 } condition;
 
-Condition *create_condition(char *name, int gravity){
+Condition* create_condition(char *name, int gravity){
     Condition *new_condition = (Condition *)malloc(sizeof(Condition));
 
     if(new_condition == NULL){
@@ -45,7 +45,7 @@ void destroy_condition(Condition *condition){
     free(condition);
 }
 
-char *get_condition_name(Condition *condition){
+char* get_condition_name(Condition *condition){
     return condition->name;
 }
 
@@ -53,7 +53,7 @@ int get_condition_gravity(Condition *condition){
     return condition->gravity;
 }
 
-Condition *get_condition(){
+Condition* get_condition(){
     char *name;
     int gravity;
 
@@ -101,4 +101,11 @@ Condition *get_condition(){
 
 void print_condition(Condition *condition){
     printf("Condição: %s, Gravidade: %d\n", get_condition_name(condition), get_condition_gravity(condition));
+}
+
+char* condition_output(Condition *condition){
+    char *output = (char *)malloc(sizeof(char) * 32);
+    // sprintf(output, "Condição: %s, Gravidade: %d\n", get_condition_name(condition), get_condition_gravity(condition));
+    sprintf(output, "%s", get_condition_name(condition));
+    return output;
 }
