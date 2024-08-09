@@ -1,4 +1,5 @@
 #include "report.h"
+#include "definitions.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -17,6 +18,8 @@ Report* create_report(int id, int exam_id, Condition *condition, struct tm *time
     new_report->exam_id = exam_id;
     new_report->condition = condition;
     new_report->timestamp = timestamp;
+
+    db_save(report_output(new_report), TYPE_REPORT);
 
     return new_report;
 }
@@ -51,4 +54,10 @@ void print_report(Report *report){
     printf("Id do Exame: %d\n", get_report_exam_id(report));
     print_condition(get_report_condition(report));
     printf("Laudo gerado em: %s", get_report_time_string(report)); 
+}
+
+char* report_output(Report *report){
+    char *output = (char *)malloc(sizeof(char) * 128);
+    sprintf(output, "%d,%d,%s,%s", get_report_id(report), get_report_exam_id(report), condition_output(get_report_condition(report)), get_report_time_string(report));
+    return output;
 }

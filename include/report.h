@@ -23,4 +23,6 @@ char* get_report_time_string(Report *report);
 
 void print_report(Report *report);
 
+char* report_output(Report *report);
+
 #endif
