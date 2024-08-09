@@ -27,4 +27,6 @@ char* get_exam_time_string(const Exam *exam);
 
 void print_exam(Exam *exam);
 
+char* exam_output(Exam *exam);
+
 #endif

@@ -1,6 +1,8 @@
 // Arquivos de cabeçalho criados localmente
 #include "exam.h"
 #include "functions.h"
+#include "condition.h"
+#include "definitions.h"
 
 // Arquivos de cabeçalho
 #include <time.h> // struct tm
@@ -12,7 +14,7 @@ struct exam {
     int id;
     int patient_id;
     int rx_id;
-    //condition_ia
+    Condition *condition_IA;
     struct tm *time;
 } exam;
 
@@ -34,6 +36,9 @@ Exam* create_exam(int id, int patient_id, int rx_id, struct tm *time){
     if(validate_id(patient_id, "exame, id paciente")) new_exam->patient_id = patient_id;
     if(validate_id(rx_id, "id raio-x")) new_exam->rx_id = rx_id;
     if(validate_time(time, "exame time")) new_exam->time = time;
+    new_exam->condition_IA = get_condition();
+
+    db_save(exam_output(new_exam), TYPE_EXAM);
 
     return new_exam;
 } 
@@ -67,10 +72,24 @@ char* get_exam_time_string(const Exam *exam){
     return asctime(exam->time);
 }
 
+Condition* get_exam_condition(Exam *exam){
+    return exam->condition_IA;
+}
+
+char* get_exam_condition_name(Exam *exam){
+    return get_condition_name(exam->condition_IA);
+}
+
 void print_exam(Exam *exam){
     printf("Exame\nId: %d\n", get_exam_id(exam));
     printf("Id do Paciente: %d\n", get_exam_patient_id(exam));
     printf("Id do Raio X: %d\n", get_exam_rx_id(exam));
-    // condition
+    print_condition(get_exam_condition(exam));
     printf("Data/Hora do Exame: %s", get_exam_time_string(exam));
+}
+
+char* exam_output(Exam *exam){
+    char *output = (char *)malloc(sizeof(char) * 128);
+    sprintf(output, "%d,%d,%d,%s,%s", get_exam_id(exam), get_exam_patient_id(exam), get_exam_rx_id(exam), condition_output(get_exam_condition(exam)), get_exam_time_string(exam));
+    return output;
 }
