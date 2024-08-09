@@ -27,4 +27,8 @@ struct tm create_date(int ano, int mes, int dia);
 
 struct tm* get_time();
 
+char* get_timestamp_from_datetime(struct tm* date);
+
+char* get_date_from_datetime(struct tm* date);
+
 #endif

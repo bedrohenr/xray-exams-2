@@ -86,3 +86,18 @@ struct tm* get_time(){
     return localtime(&current_time); // Converter o tempo para a hora local
 }
 
+// YY-mm-dd HH:MM:SS
+char* get_timestamp_from_datetime(struct tm* date){
+    char *output = (char *)malloc(sizeof(char) * 32);
+    // date->tm_year retorna quantos anos desde 1900
+    sprintf(output, "%d-%d-%d %d:%d:%d", (1900 + date->tm_year), date->tm_mon, date->tm_mday, date->tm_hour, date->tm_min, date->tm_sec);
+    return output;
+}
+
+// YY-mm-dd
+char* get_date_from_datetime(struct tm* date){
+    char *output = (char *)malloc(sizeof(char) * 32);
+    // date->tm_year retorna quantos anos desde 1900
+    sprintf(output, "%d-%d-%d", (1900 + date->tm_year), date->tm_mon, date->tm_mday);
+    return output;
+}
