@@ -63,7 +63,7 @@ void db_save(char *content, StructType type){
 
     file_pointer = fopen(path, "a");
 
-    fprintf(file_pointer, "%s;", content);
+    fprintf(file_pointer, "%s\n", content);
 
     fclose(file_pointer);
 }
