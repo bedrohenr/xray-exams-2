@@ -68,7 +68,6 @@ void print_patient(Patient *patient){
 
 char* patient_output(Patient *patient){
     char *output = (char *)malloc(sizeof(char) * 128);
-   // sprintf(output, "%d,%s,%s", get_patient_id(patient), get_patient_name(patient), get_patient_birthdate_string(patient));
-    sprintf(output, "%d,%s,%s", get_patient_id(patient), get_patient_name(patient), get_patient_birthdate_string(patient));
+    sprintf(output, "%d,%s,%s", get_patient_id(patient), get_patient_name(patient), get_date_from_datetime(get_patient_birthdate(patient)));
     return output;
 }

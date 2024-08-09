@@ -1,5 +1,6 @@
 #include "report.h"
 #include "definitions.h"
+#include "functions.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -58,6 +59,6 @@ void print_report(Report *report){
 
 char* report_output(Report *report){
     char *output = (char *)malloc(sizeof(char) * 128);
-    sprintf(output, "%d,%d,%s,%s", get_report_id(report), get_report_exam_id(report), condition_output(get_report_condition(report)), get_report_time_string(report));
+    sprintf(output, "%d,%d,%s,%s", get_report_id(report), get_report_exam_id(report), condition_output(get_report_condition(report)), get_timestamp_from_datetime(get_report_time(report)));
     return output;
 }

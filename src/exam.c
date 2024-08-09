@@ -90,6 +90,6 @@ void print_exam(Exam *exam){
 
 char* exam_output(Exam *exam){
     char *output = (char *)malloc(sizeof(char) * 128);
-    sprintf(output, "%d,%d,%d,%s,%s", get_exam_id(exam), get_exam_patient_id(exam), get_exam_rx_id(exam), condition_output(get_exam_condition(exam)), get_exam_time_string(exam));
+    sprintf(output, "%d,%d,%d,%s,%s", get_exam_id(exam), get_exam_patient_id(exam), get_exam_rx_id(exam), condition_output(get_exam_condition(exam)), get_timestamp_from_datetime(get_exam_time(exam)));
     return output;
 }
