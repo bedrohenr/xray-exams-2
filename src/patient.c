@@ -1,5 +1,6 @@
 #include "patient.h" // Arquivo header
 #include "functions.h" // Arquivo header com funções
+#include "definitions.h"
 
 #include <stdio.h> // perror
 #include <stdlib.h> // malloc
@@ -28,6 +29,8 @@ Patient *create_patient(int id, const char *name, struct tm *birthdate){
     if( validate_id(id, "id paciente") ) new_patient->id = id;
     if( validate_name(name, id) ) new_patient->name = strdup(name); // Reserva espaço de armazenamento para uma cópia da string name
     if( validate_time(birthdate, "Data nascimento do paciente") ) new_patient->birthdate = birthdate;
+
+    db_save(patient_output(new_patient), TYPE_PATIENT);
 
     return new_patient;
 }
@@ -61,5 +64,11 @@ void print_patient(Patient *patient){
     printf("Paciente\nId: %d\n", get_patient_id(patient));
     printf("Nome: %s\n", get_patient_name(patient));
     printf("Data de Nascimento: %s\n", get_patient_birthdate_string(patient));
+}
 
+char* patient_output(Patient *patient){
+    char *output = (char *)malloc(sizeof(char) * 128);
+   // sprintf(output, "%d,%s,%s", get_patient_id(patient), get_patient_name(patient), get_patient_birthdate_string(patient));
+    sprintf(output, "%d,%s,%s", get_patient_id(patient), get_patient_name(patient), get_patient_birthdate_string(patient));
+    return output;
 }
