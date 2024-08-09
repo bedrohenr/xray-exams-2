@@ -1,5 +1,0 @@
-1,João Silva,Sun Jun 15 00:00:00 1990
-;3,Jona,Sun Jun 15 00:00:00 1990
-;4,Andre,Sun Jun 15 00:00:00 1990
-;5,Marcela,Sun Jun 15 00:00:00 1990
-;
