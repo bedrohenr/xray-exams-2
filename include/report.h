@@ -21,6 +21,10 @@ struct tm* get_report_time(Report *report);
 
 char* get_report_time_string(Report *report);
 
+void check_condition(Report *report);
+
+void change_condition(Report *report);
+
 void print_report(Report *report);
 
 char* report_output(Report *report);

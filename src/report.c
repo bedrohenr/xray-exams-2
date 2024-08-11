@@ -26,7 +26,7 @@ Report* create_report(int id, int exam_id, Condition *condition, struct tm *time
 }
 
 void destroy_report(Report *report){
-    destroy_condition(report->condition);
+    destroy_condition(get_report_condition(report));
     free(report);
 }
 
@@ -48,6 +48,27 @@ struct tm* get_report_time(Report *report){
 
 char* get_report_time_string(Report *report){
     return asctime(get_report_time(report));
+}
+
+void check_condition(Report *report){
+    int rng = get_random_number(10);
+    printf("\nRNG: %d\n", rng);
+    if(rng >= 8)
+        change_condition(report);
+}
+
+void change_condition(Report *report){
+    Condition *condition = get_report_condition(report);
+    int last_condition_id = get_condition_id(condition);
+    int new_condition_id;
+
+    do {
+        destroy_condition(condition);
+        condition = get_condition();
+        new_condition_id = get_condition_id(condition);
+    } while (new_condition_id == last_condition_id);
+
+    report->condition = condition;
 }
 
 void print_report(Report *report){
