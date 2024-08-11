@@ -1,6 +1,11 @@
 // Arquivo de cabeçalho criado localmente
 #include "functions.h"
 
+#include "patient.h"
+#include "exam.h"
+#include "report.h"
+#include "queue.h"
+
 // Arquivos de cabeçalho
 #include <stdlib.h> // malloc, EXIT_FAILURE
 #include <string.h> // strcmp
@@ -65,16 +70,36 @@ int validate_name(const char* name, int id){
 }
 
 int get_random_number(int max_number){
-    srand(time(0));
+    srand(time(NULL));
     return rand() % (max_number + 1);
 }
 
-struct tm create_date(int ano, int mes, int dia){
+float get_random_float_number(float max_number){
+    srand((unsigned int)time(NULL));
+
+    return ((rand()/(float)(RAND_MAX)) * max_number);
+}
+
+int validate_day_of_month(int month, int day){
+    if(month > 11)
+        month = 11;
+
+    int DAYS_IN_MONTH[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
+
+    if(day > DAYS_IN_MONTH[month])
+        return DAYS_IN_MONTH[month];
+    else
+        return day;
+}
+
+struct tm create_date(int year, int month, int day){
     struct tm date = {0}; // Inicializar a estrutura com zeros
 
-    date.tm_year = ano; // Ano 1990
-    date.tm_mon = mes; // Junho (0-indexed)
-    date.tm_mday = dia; // Dia 
+    day = validate_day_of_month(month, day);
+
+    date.tm_year = year; // Ano 1990
+    date.tm_mon = month; // Junho (0-indexed)
+    date.tm_mday = day; // Dia 
    
     return date;
 }
@@ -100,4 +125,89 @@ char* get_date_from_datetime(struct tm* date){
     // date->tm_year retorna quantos anos desde 1900
     sprintf(output, "%d-%d-%d", (1900 + date->tm_year), date->tm_mon, date->tm_mday);
     return output;
+}
+
+void print_by_struct_type(StructType type, void *p) {
+    switch (type) {
+        case TYPE_PATIENT:
+            print_patient(p);
+            break;
+
+        case TYPE_EXAM:
+            print_exam(p);
+            break;
+
+        case TYPE_REPORT:
+            print_report(p);
+            break;
+
+        default:
+            break;
+    }
+}
+
+char* output_by_struct_type(StructType type, void *p) {
+    switch (type) {
+        case TYPE_PATIENT:
+                return patient_output(p);
+                break;
+
+        case TYPE_EXAM:
+            return exam_output(p);
+            break;
+
+        case TYPE_REPORT:
+            return report_output(p);
+            break;
+    }
+}
+
+void db_save(char *content, StructType type){
+    char *path;
+    switch (type) {
+        case TYPE_PATIENT:
+            printf("flag patient");
+            path = "./src/static/db_patient.txt";
+            break;
+        
+        case TYPE_EXAM:
+            printf("flag exam");
+            path = "./src/static/db_exam.txt";
+            break;
+        
+        case TYPE_REPORT:
+            printf("flag report");
+            path = "./src/static/db_report.txt";
+            break;
+
+        default:
+            break;
+    }
+
+    FILE *file_pointer; 
+
+    file_pointer = fopen(path, "a");
+
+    fprintf(file_pointer, "%s\n", content);
+
+    fclose(file_pointer);
+}
+
+void free_by_struct_type(StructType type, void *p) {
+    switch (type) {
+        case TYPE_PATIENT:
+            destroy_patient(p);
+            break;
+
+        case TYPE_EXAM:
+            destroy_exam(p);
+            break;
+
+        case TYPE_REPORT:
+            destroy_report(p);
+            break;
+
+        default:
+            break;
+    }
 }
