@@ -20,12 +20,13 @@
 #include <stdio.h>
 
 struct condition{
+    int id;
     char *name;
     // float prob;
     int gravity;
 } condition;
 
-Condition* create_condition(char *name, int gravity){
+Condition* create_condition(int id, char *name, int gravity){
     Condition *new_condition = (Condition *)malloc(sizeof(Condition));
 
     if(new_condition == NULL){
@@ -35,6 +36,7 @@ Condition* create_condition(char *name, int gravity){
         error_exit(EXIT_FAILURE);
     }   
 
+    new_condition->id = id;
     new_condition->name = strdup(name);
     new_condition->gravity = gravity;
 
@@ -43,6 +45,10 @@ Condition* create_condition(char *name, int gravity){
 
 void destroy_condition(Condition *condition){
     free(condition);
+}
+
+int get_condition_id(Condition *condition){
+    return condition->id;
 }
 
 char* get_condition_name(Condition *condition){
@@ -54,49 +60,59 @@ int get_condition_gravity(Condition *condition){
 }
 
 Condition* get_condition(){
+    int id;
     char *name;
     int gravity;
 
     int rng = get_random_number(99); // 0 até 99
 
     if(rng <= 29) {
+        id = 1;
         name = "Saúde Normal";
         gravity = 1;
     }
     else if(rng >= 30 && rng <= 49){
+        id = 2;
         name = "Bronquite";
         gravity = 2;
     }
     else if(rng >= 50 && rng <= 59){
+        id = 3;
         name = "Pneumonia";
         gravity = 3;
     }
     else if(rng >= 60 && rng <= 69){
+        id = 4;
         name = "COVID";
         gravity = 4;
     }
     else if(rng >= 70 && rng <= 74){
+        id = 5;
         name = "Embolia Pulmonar";
         gravity = 4;
     }
     else if(rng >= 75 && rng <= 79){
+        id = 6;
         name = "Derrame Pleural";
         gravity = 4;
     }
     else if(rng >= 80 && rng <= 84){
+        id = 7;
         name = "Fibrose Pulmonar";
         gravity = 5;
     }
     else if(rng >= 85 && rng <= 89){
+        id = 8;
         name = "Tuberculose";
         gravity = 5;
     }
     else if(rng >= 89 && rng <= 99){
+        id = 9;
         name = "Câncer de Pulmão";
         gravity = 6;
     }
 
-    return create_condition(name, gravity);
+    return create_condition(id, name, gravity);
 }
 
 void print_condition(Condition *condition){

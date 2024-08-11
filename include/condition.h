@@ -3,9 +3,11 @@
 
 typedef struct condition Condition;
 
-Condition* create_condition(char *name, int gravity);
+Condition* create_condition(int id, char *name, int gravity);
 
 void destroy_condition(Condition *condition);
+
+int get_condition_id(Condition *condition);
 
 char* get_condition_name(Condition *condition);
 
