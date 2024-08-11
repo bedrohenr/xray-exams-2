@@ -57,7 +57,7 @@ struct tm* get_patient_birthdate(const Patient *patient){
 
 // Retorna a data de nascimento do paciente.
 char* get_patient_birthdate_string(const Patient *patient){
-    return asctime(get_patient_birthdate(patient));
+    return get_date_from_datetime(get_patient_birthdate(patient));
 }
 
 void print_patient(Patient *patient){
