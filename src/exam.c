@@ -1,7 +1,6 @@
 // Arquivos de cabeçalho criados localmente
 #include "exam.h"
 #include "functions.h"
-#include "condition.h"
 #include "definitions.h"
 
 // Arquivos de cabeçalho
@@ -36,6 +35,7 @@ Exam* create_exam(int id, int patient_id, int rx_id, struct tm *time){
     if(validate_id(patient_id, "exame, id paciente")) new_exam->patient_id = patient_id;
     if(validate_id(rx_id, "id raio-x")) new_exam->rx_id = rx_id;
     if(validate_time(time, "exame time")) new_exam->time = time;
+
     new_exam->condition_IA = get_condition();
 
     db_save(exam_output(new_exam), TYPE_EXAM);
@@ -78,6 +78,14 @@ Condition* get_exam_condition(Exam *exam){
 
 char* get_exam_condition_name(Exam *exam){
     return get_condition_name(exam->condition_IA);
+}
+
+int get_exam_condition_gravity(Exam *exam){
+    return get_condition_gravity(get_exam_condition(exam));
+}
+
+void set_exam_condition(Exam *exam, int id, char* nome_cond, int grav){
+    exam->condition_IA = create_condition(id, nome_cond, grav);
 }
 
 void print_exam(Exam *exam){
