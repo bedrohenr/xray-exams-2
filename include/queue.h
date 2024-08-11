@@ -8,9 +8,13 @@ typedef struct queue_node QueueNode;
 
 Queue* q_create();
 
+int q_size(Queue *q);
+
 int q_is_empty(Queue *q);
 
 void q_enqueue(Queue *q, StructType type, void *p);
+
+void q_enqueue_exam_prio(Queue *q, StructType type, void *p);
 
 void* q_dequeue(Queue *q);
 
