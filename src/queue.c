@@ -60,46 +60,47 @@ void q_enqueue_exam_prio(Queue *q, StructType type, void *p) {
     // Exam *new_exam = p;
     int new_exam_gravity = get_exam_condition_gravity(p);
 
-    printf("\n\nEmtpy q: %d\n\n", q_is_empty(q));
     if(q_is_empty(q)){
-        printf("\n\nflag empty\n\n\n");
+        printf("flag empty: %d\n", new_exam_gravity);
         q_enqueue(q, type, p);
-    }
-    else{
+    } else{
         Exam *exam, *next_exam;
         int gravity, next_gravity;
 
+        QueueNode *prev_ptr;
         int counter = 0;
-        for(QueueNode *ptr = q->front; ptr->next != NULL; ptr = ptr->next){
-            if(ptr == NULL || ptr->next == NULL){
-                printf("CARALHOOOOOOOO\n");
+        for(QueueNode *ptr = q->front; ptr != NULL; ptr = ptr->next){
+            if(ptr == NULL){
+                // printf("CARALHOOOOOOOO\n");
                 q_enqueue(q, type, ptr);
                 return;
             
             }
             exam = ptr->info;
-            next_exam = ptr->next->info;
+            // next_exam = ptr->next->info;
 
             gravity = get_exam_condition_gravity(exam);
             // next_gravity = get_exam_condition_gravity(next_exam);
             
-            printf("if grav: %d > %d\n", new_exam_gravity, gravity);
+            // printf("\nif grav: %d > %d", new_exam_gravity, gravity);
             if(new_exam_gravity > gravity){
-                printf("\nINSERTING\n");
+                // printf("\nEntered grav: %d > %d\n", new_exam_gravity, gravity);
                 if(counter == 0){
+                    // printf("\nINSERTING FIRST g: %d", new_exam_gravity);
                     q->front = node;
                     node->next = ptr;
                 } else {
+                    // printf("\nINSERTING g: %d", new_exam_gravity);
+                    prev_ptr->next = node;
                     node->next = ptr;
-                    ptr->next = next_exam;
                 }
 
                 return;
             }
-            printf("%d, c: %d\n", new_exam_gravity, counter);
+            prev_ptr = ptr;
             counter++;
         }
-        printf("flag enqueue");
+        // printf("\nflag enqueue: %d, loop: %d",new_exam_gravity, counter);
         q_enqueue(q, type, p);
     }
 
