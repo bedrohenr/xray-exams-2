@@ -6,6 +6,7 @@
 #include <stdlib.h> // malloc
 #include <string.h> // strdup
 
+// Definição da estrutura Patient
 struct patient {
     int id;
     char *name;
@@ -30,9 +31,10 @@ Patient *create_patient(int id, const char *name, struct tm *birthdate){
     if( validate_name(name, id) ) new_patient->name = strdup(name); // Reserva espaço de armazenamento para uma cópia da string name
     if( validate_time(birthdate, "Data nascimento do paciente") ) new_patient->birthdate = birthdate;
 
-    db_save(patient_output(new_patient), TYPE_PATIENT);
+    // Salva no arquivo ao criar o novo Patient
+    db_save(TYPE_PATIENT, patient_output(new_patient));
 
-    return new_patient;
+    return new_patient; // Retorna o ponteiro
 }
 
 // Libera a memória alocada para a estrutura do paciente. 
@@ -60,14 +62,18 @@ char* get_patient_birthdate_string(const Patient *patient){
     return get_date_from_datetime(get_patient_birthdate(patient));
 }
 
+// Imprime na tela as propriedades do Patient
 void print_patient(Patient *patient){
     printf("Paciente\nId: %d\n", get_patient_id(patient));
     printf("Nome: %s\n", get_patient_name(patient));
     printf("Data de Nascimento: %s\n", get_patient_birthdate_string(patient));
 }
 
+// Retorna uma string com as propriedades do Patient
 char* patient_output(Patient *patient){
+    // Alocação de memória para a string
     char *output = (char *)malloc(sizeof(char) * 128);
+    // Estrutura da string
     sprintf(output, "%d,%s,%s", get_patient_id(patient), get_patient_name(patient), get_date_from_datetime(get_patient_birthdate(patient)));
-    return output;
+    return output; // Retorna o ponteiro
 }
