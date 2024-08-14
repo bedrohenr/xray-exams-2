@@ -20,16 +20,18 @@
 #include <string.h>
 #include <stdio.h>
 
+// Definição da struct Condition
 struct condition{
     int id;
     char *name;
-    // float prob;
     int gravity;
 } condition;
 
+// Cria a Condition
 Condition* create_condition(int id, char *name, int gravity){
     Condition *new_condition = (Condition *)malloc(sizeof(Condition));
 
+    // Alocação de memória
     if(new_condition == NULL){
         // Mensagem de erro
         printf("\nErro.\nNao foi possível alocar memória para a condição deste paciente");
@@ -37,29 +39,37 @@ Condition* create_condition(int id, char *name, int gravity){
         error_exit(EXIT_FAILURE);
     }   
 
-    new_condition->id = id;
-    new_condition->name = strdup(name);
-    new_condition->gravity = gravity;
+    if( validate_id(id, "id Condition") ) 
+        new_condition->id = id;
+    if( validate_string(name, "Em Condition, name.") )  
+        new_condition->name = strdup(name); // Reserva espaço de armazenamento para uma cópia da string name
+    if( validate_id(gravity, "gravity em Condition.") )
+        new_condition->gravity = gravity;
 
     return new_condition;
 }
 
+// Remove a alocação de memória do ponteiro Condition
 void destroy_condition(Condition *condition){
     free(condition);
 }
 
+// Retorna o id da Condition
 int get_condition_id(Condition *condition){
     return condition->id;
 }
 
+// Retorna o nome da Condition
 char* get_condition_name(Condition *condition){
     return condition->name;
 }
 
+// Retorna a gravidade da Condition
 int get_condition_gravity(Condition *condition){
     return condition->gravity;
 }
 
+// Retorna uma nova Condition escolhida pela probabilidade definida.
 Condition* get_condition(){
     int id, gravity;
     char *name;
@@ -67,6 +77,7 @@ Condition* get_condition(){
     // Gera um número de 0 até 19
     int rng = get_random_number(19); 
 
+    // if com suas distribuições com a probilidade e número total definido
     if(rng <= 5) {
         id = 1;
         name = "Saúde Normal";
@@ -113,16 +124,18 @@ Condition* get_condition(){
         gravity = 6;
     }
 
+    // Utiliza a função create usando os parametros definidos por chance
     return create_condition(id, name, gravity);
 }
 
+// Imprime a Condition na tela
 void print_condition(Condition *condition){
     printf("Condição: %s, Gravidade: %d\n", get_condition_name(condition), get_condition_gravity(condition));
 }
 
+// Retorna uma string com as propriedades relevantes da Condition para inserir no arquivo
 char* condition_output(Condition *condition){
-    char *output = (char *)malloc(sizeof(char) * 32);
-    // sprintf(output, "Condição: %s, Gravidade: %d\n", get_condition_name(condition), get_condition_gravity(condition));
-    sprintf(output, "%s", get_condition_name(condition));
-    return output;
+    char *output = (char *)malloc(sizeof(char) * 32); // Alocação de memória para novo ponteiro string
+    sprintf(output, "%s", get_condition_name(condition)); // Preenche a string
+    return output; // Retorna o ponteiro
 }
