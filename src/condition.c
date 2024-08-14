@@ -14,6 +14,7 @@
 
 #include "condition.h"
 #include "functions.h"
+#include "definitions.h"
 
 #include <stdlib.h>
 #include <time.h>
@@ -78,47 +79,47 @@ Condition* get_condition(){
     int rng = get_random_number(19); 
 
     // if com suas distribuições com a probilidade e número total definido
-    if(rng <= 5) {
+    if(rng>= I_CONDITION_L && rng <= I_CONDITION_H) {
         id = 1;
         name = "Saúde Normal";
         gravity = 1;
     }
-    else if(rng >= 6 && rng <= 9){
+    else if(rng >= II_CONDITION_L && rng <= II_CONDITION_H){
         id = 2;
         name = "Bronquite";
         gravity = 2;
     }
-    else if(rng >= 10 && rng <= 11){
+    else if(rng >= III_CONDITION_L && rng <= III_CONDITION_H){
         id = 3;
         name = "Pneumonia";
         gravity = 3;
     }
-    else if(rng >= 12 && rng <= 13){
+    else if(rng >= IV_CONDITION_L && rng <= IV_CONDITION_H){
         id = 4;
         name = "COVID";
         gravity = 4;
     }
-    else if(rng == 14){
+    else if(rng >= V_CONDITION_L && rng <= V_CONDITION_H){
         id = 5;
         name = "Embolia Pulmonar";
         gravity = 4;
     }
-    else if(rng >= 15){
+    else if(rng >= VI_CONDITION_L && rng <= VI_CONDITION_H){
         id = 6;
         name = "Derrame Pleural";
         gravity = 4;
     }
-    else if(rng >= 16){
+    else if(rng >= VII_CONDITION_L && rng <= VIII_CONDITION_H){
         id = 7;
         name = "Fibrose Pulmonar";
         gravity = 5;
     }
-    else if(rng >= 17){
+    else if(rng >= VIII_CONDITION_L && rng <= VIII_CONDITION_H){
         id = 8;
         name = "Tuberculose";
         gravity = 5;
     }
-    else if(rng >= 18 && rng <= 19){
+    else if(rng >= IX_CONDITION_L && rng <= IX_CONDITION_H){
         id = 9;
         name = "Câncer de Pulmão";
         gravity = 6;
