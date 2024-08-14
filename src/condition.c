@@ -1,14 +1,15 @@
 /*
     Condição            |   Probabilidade   |  Nível de Gravidade   |   Range   |
-    Saúde Normal        |   0.3             |   1                   |    0 - 29 |
-    Bronquite           |   0.2             |   2                   |   30 - 49 |
-    Pneumonia           |   0.1             |   3                   |   50 - 59 |
-    COVID               |   0.1             |   4                   |   60 - 69 |
-    Embolia pulmonar    |   0.05            |   4                   |   70 - 74 |
-    Derrame pleural     |   0.05            |   4                   |   75 - 79 |
-    Fibrose pulmonar    |   0.05            |   5                   |   80 - 84 |
-    Tuberculose         |   0.05            |   5                   |   85 - 89 |
-    Câncer de pulmão    |   0.1             |   6                   |   90 - 99 |
+    Saúde Normal        |   0.3             |   1                   |    0 - 5  |
+    Bronquite           |   0.2             |   2                   |    6 - 9  |
+    Pneumonia           |   0.1             |   3                   |   10 - 11 |
+    COVID               |   0.1             |   4                   |   12 - 13 |
+    Embolia pulmonar    |   0.05            |   4                   |   14      |
+    Derrame pleural     |   0.05            |   4                   |   15      |
+    Fibrose pulmonar    |   0.05            |   5                   |   16      |
+    Tuberculose         |   0.05            |   5                   |   17      |
+    Câncer de pulmão    |   0.1             |   6                   |   18 - 10 |
+                                                            Total:  |    0 - 19 |
 */
 
 #include "condition.h"
@@ -60,53 +61,53 @@ int get_condition_gravity(Condition *condition){
 }
 
 Condition* get_condition(){
-    int id;
+    int id, gravity;
     char *name;
-    int gravity;
 
-    int rng = get_random_number(99); // 0 até 99
+    // Gera um número de 0 até 19
+    int rng = get_random_number(19); 
 
-    if(rng <= 29) {
+    if(rng <= 5) {
         id = 1;
         name = "Saúde Normal";
         gravity = 1;
     }
-    else if(rng >= 30 && rng <= 49){
+    else if(rng >= 6 && rng <= 9){
         id = 2;
         name = "Bronquite";
         gravity = 2;
     }
-    else if(rng >= 50 && rng <= 59){
+    else if(rng >= 10 && rng <= 11){
         id = 3;
         name = "Pneumonia";
         gravity = 3;
     }
-    else if(rng >= 60 && rng <= 69){
+    else if(rng >= 12 && rng <= 13){
         id = 4;
         name = "COVID";
         gravity = 4;
     }
-    else if(rng >= 70 && rng <= 74){
+    else if(rng == 14){
         id = 5;
         name = "Embolia Pulmonar";
         gravity = 4;
     }
-    else if(rng >= 75 && rng <= 79){
+    else if(rng >= 15){
         id = 6;
         name = "Derrame Pleural";
         gravity = 4;
     }
-    else if(rng >= 80 && rng <= 84){
+    else if(rng >= 16){
         id = 7;
         name = "Fibrose Pulmonar";
         gravity = 5;
     }
-    else if(rng >= 85 && rng <= 89){
+    else if(rng >= 17){
         id = 8;
         name = "Tuberculose";
         gravity = 5;
     }
-    else if(rng >= 89 && rng <= 99){
+    else if(rng >= 18 && rng <= 19){
         id = 9;
         name = "Câncer de Pulmão";
         gravity = 6;
