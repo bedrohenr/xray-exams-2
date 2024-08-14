@@ -7,36 +7,42 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// Definição da estrutura QueueNode.
 struct queue {
     QueueNode *front;
     QueueNode *rear;
 };
 
+// Definição da estrutura QueueNode.
 struct queue_node {
     void* info;
     StructType type;
     QueueNode *next;
 };
 
+// Cria a fila, alocando memória e a retorna.
 Queue *q_create() {
     Queue *q = (Queue *)malloc(sizeof(Queue));
-    q->front = q->rear = NULL;
+    q->front = q->rear = NULL; // Inicializa com valores NULL
 
-    return q;
+    return q; // Retorna o ponteiro
 }
 
+// Percorre a fila e retorna a quantidade de nodes na fila.
 int q_size(Queue *q){
     int count = 0;
-    for(QueueNode *p = q->front; p != NULL; p = p->next)
+    for(QueueNode *p = q->front; p != NULL; p = p->next) // Loop
         count++;
 
-    return count;
+    return count; // Retorna a quantidade
 }
 
+// Retorna se a fila está vazia ou não.
 int q_is_empty(Queue *q) {
     return q->front == NULL;
 }
 
+// Enfileira um ponteiro genérico.
 void q_enqueue(Queue *q, StructType type, void *p) {
     QueueNode *node = (QueueNode *)malloc(sizeof(QueueNode));
     node->info = p;
@@ -78,7 +84,7 @@ void q_enqueue_exam_prio(Queue *q, StructType type, void *p) {
             }
             exam = ptr->info;
             gravity = get_exam_condition_gravity(exam);
-            
+
             // Testa o nível de gravidade do novo exame e o atual do loop.
             if(new_exam_gravity > gravity){
                 // Checa se irá ser o primeiro da lista.
@@ -101,35 +107,43 @@ void q_enqueue_exam_prio(Queue *q, StructType type, void *p) {
 
 }
 
+// Retira o primeiro da fila
 void* q_dequeue(Queue *q) {
-    assert(!q_is_empty(q));
+    assert(!q_is_empty(q)); // Verifica se a lista está vazia.
 
-    void *v = q->front->info;
-    QueueNode *p = q->front;
+    void *v = q->front->info; // Faz do segundo da fila, o primeiro
+    QueueNode *p = q->front; // Atribui o primeiro da fila
 
+    // Checa se só tem um registro na fila
     if(q->front != q->rear)
         q->front = q->front->next;
     else
-        q->front = q->rear = NULL;
+        q->front = q->rear = NULL; 
 
-    free(p);
-    return v;
+    free(p); // Libera memória
+    return v; // Retorna o ponteiro
 }
 
+// Libera toda a memória da fila
 void q_free(Queue *q) {
     QueueNode *p = q->front;
-    
+
+    // Libera memória até não haver nó algum na fila 
     while(p != NULL) {
         QueueNode *t = p->next;
-        free_by_struct_type(p->type, p->info);
+        // Faz a liberação correta de memória, usando as funções corretas
+        free_by_struct_type(p->type, p->info); 
         p = t;
     }
 
+    // Libera memória da Queue
     free(q);
 }
 
+// Imprime todos os elementos na fila
 void q_print(Queue *q) {
     for(QueueNode *p = q->front; p != NULL; p = p->next)
+        // Imprime usando as funções corretas
         print_by_struct_type(p->type, p->info);
 
     printf("\n");
