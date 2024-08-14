@@ -51,56 +51,51 @@ void q_enqueue(Queue *q, StructType type, void *p) {
     q->rear = node;
 }
 
+// Enfileira um ponteiro Exame com prioridade da variável gravidade da estrutura Condition.
 void q_enqueue_exam_prio(Queue *q, StructType type, void *p) {
     QueueNode *node = (QueueNode *)malloc(sizeof(QueueNode));
     node->info = p;
     node->type = type;
     node->next = NULL;
 
-    // Exam *new_exam = p;
+    // Atribui o nível de gravidade da Condition do novo Exame a ser inserido
     int new_exam_gravity = get_exam_condition_gravity(p);
 
+    // Checa se a fila está vazia.
     if(q_is_empty(q)){
-        printf("flag empty: %d\n", new_exam_gravity);
-        q_enqueue(q, type, p);
+        q_enqueue(q, type, p); // Caso esteja, enfileira normalmente.
     } else{
-        Exam *exam, *next_exam;
-        int gravity, next_gravity;
+        // Vars
+        Exam *exam; // Exame atual no loop.
+        int gravity; // Nível de gravidade do exame atual.
+        QueueNode *prev_ptr = NULL; // Armazena o ponteiro prévio do loop.
 
-        QueueNode *prev_ptr;
-        int counter = 0;
         for(QueueNode *ptr = q->front; ptr != NULL; ptr = ptr->next){
             if(ptr == NULL){
-                // printf("CARALHOOOOOOOO\n");
                 q_enqueue(q, type, ptr);
                 return;
             
             }
             exam = ptr->info;
-            // next_exam = ptr->next->info;
-
             gravity = get_exam_condition_gravity(exam);
-            // next_gravity = get_exam_condition_gravity(next_exam);
             
-            // printf("\nif grav: %d > %d", new_exam_gravity, gravity);
+            // Testa o nível de gravidade do novo exame e o atual do loop.
             if(new_exam_gravity > gravity){
-                // printf("\nEntered grav: %d > %d\n", new_exam_gravity, gravity);
-                if(counter == 0){
-                    // printf("\nINSERTING FIRST g: %d", new_exam_gravity);
+                // Checa se irá ser o primeiro da lista.
+                if(prev_ptr == NULL){
                     q->front = node;
                     node->next = ptr;
-                } else {
-                    // printf("\nINSERTING g: %d", new_exam_gravity);
+                } else { // Não será o primeiro da lista.
                     prev_ptr->next = node;
                     node->next = ptr;
                 }
 
-                return;
+                return; // Finaliza a execução da função.
             }
-            prev_ptr = ptr;
-            counter++;
+            prev_ptr = ptr; // Atribuição para o ponteiro anterior.
         }
-        // printf("\nflag enqueue: %d, loop: %d",new_exam_gravity, counter);
+        // Caso nao tenha gravidade maior que nenhum outro.
+        // Será enfileirado ao final.
         q_enqueue(q, type, p);
     }
 
