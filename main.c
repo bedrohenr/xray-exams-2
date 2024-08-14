@@ -34,9 +34,6 @@ int main() {
     Queue *PatientQueue = q_create();
     Queue *ExamPriorityQueue = q_create();
 
-    test_enqueue_prio();
-    return 0;
-
     while(time_units <= RUNTIME){
         // Data de anivesario gera todos aleatorios
         birthdate = create_date(get_random_number(124), get_random_number(11), get_random_number(31));
