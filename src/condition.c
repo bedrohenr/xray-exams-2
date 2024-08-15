@@ -76,7 +76,7 @@ Condition* get_condition(){
     char *name;
 
     // Gera um número de 0 até 19
-    int rng = get_random_number(19); 
+    int rng = get_random_number(RNG_DISTRIBUTION); 
 
     // if com suas distribuições com a probilidade e número total definido
     if(rng>= I_CONDITION_L && rng <= I_CONDITION_H) {

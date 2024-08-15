@@ -20,7 +20,7 @@ typedef enum {
 // --- INÍCIO DEFINIÇÃO DA CONDITION
 
 // Distribuição do número gerado aleatóriamente das Conditions
-#define RNG_DISTRIBUTION 20
+#define RNG_DISTRIBUTION 19 // 0 é incluído.
 
 // Número minimo para a I Condition
 #define I_CONDITION_L 0
