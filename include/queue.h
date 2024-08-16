@@ -14,13 +14,13 @@ typedef struct queue_node QueueNode;
 Queue* q_create();
 
 /**
- * Retorna o tamanho da fila.
+ * Percorre a fila e retorna a quantidade de nodes na fila..
  * 
  * @param q Ponteiro para a estrutura Queue.
  *  
  * @return Quantidade de elementos na fila.
  */
-int q_size(Queue *q);
+int q_size(const Queue *q);
 
 /**
  * Retorna se não contém elementos na fila.
@@ -29,7 +29,7 @@ int q_size(Queue *q);
  *  
  * @return 1 se for vazia, 0 se não for.
  */
-int q_is_empty(Queue *q);
+int q_is_empty(const Queue *q);
 
 /**
  * Insere um ponteiro genérico na fila.

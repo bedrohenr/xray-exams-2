@@ -29,7 +29,7 @@ Queue *q_create() {
 }
 
 // Percorre a fila e retorna a quantidade de nodes na fila.
-int q_size(Queue *q){
+int q_size(const Queue *q){
     int count = 0;
     for(QueueNode *p = q->front; p != NULL; p = p->next) // Loop
         count++;
@@ -38,7 +38,7 @@ int q_size(Queue *q){
 }
 
 // Retorna se a fila está vazia ou não.
-int q_is_empty(Queue *q) {
+int q_is_empty(const Queue *q) {
     return q->front == NULL;
 }
 
