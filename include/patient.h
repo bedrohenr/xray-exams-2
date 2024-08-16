@@ -15,7 +15,7 @@ typedef struct patient Patient;
  * 
  * @return Ponteiro para o Paciente recém criado com os parâmetros.
  */
-Patient *create_patient(int id, const char *name, struct tm *birthdate, struct tm* arrival);
+Patient *create_patient(int id, const char *name, struct tm *birthdate, int arrival);
 
 /**
  * Libera a memória alocada para a estrutura Patient. 
@@ -58,7 +58,7 @@ struct tm* get_patient_birthdate(const Patient *patient);
  * 
  * @return Struct tm com a data de chegada do Patient.
  */
-struct tm* get_patient_arrival(const Patient *patient);
+int get_patient_arrival(const Patient *patient);
 
 /**
  * Retorna a data de nascimento do Patient em formato YY-mm-dd.
@@ -68,8 +68,6 @@ struct tm* get_patient_arrival(const Patient *patient);
  * @return String com a data de nascimento do Patient.
  */
 char* get_patient_birthdate_string(const Patient *patient);
-
-char* get_patient_arrival_string(const Patient *patient);
 
 /**
  * Imprime na tela as propriedades do Patient passado no argumento.

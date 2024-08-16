@@ -11,30 +11,30 @@ struct patient {
     int id;
     char *name;
     struct tm *birthdate;
-    struct tm *arrival;
+    int arrival;
 } patient;
 
 // Cria um novo paciente, alocando memória para a estrutura, preenchendo os campos internos com os dados passados como parâmetros e retornando um ponteiro para a estrutura criada. 
-Patient *create_patient(int id, const char *name, struct tm *birthdate, struct tm* arrival){
+Patient *create_patient(int id, const char *name, struct tm *birthdate, int arrival){
     // Alocação de memória
     Patient *new_patient = (Patient *)malloc(sizeof(Patient));
 
     // Verifica se falha na alocação de memória
     if(new_patient == NULL){
         // Mensagem de erro
-        error_message_id("\nErro.\nNao foi possível alocar memória para o paciente com id", id);
+        printf("\nErro.\nNao foi possível alocar memória para o paciente com id: %d", id);
         // Função para mostrar o erro e finaliza execução
         error_exit(EXIT_FAILURE);
     }   
 
     // Verificações das variáveis antes das atribuições
-    if(validate_id(id, "Patient id") )
+    if(validate_int(id, "Patient id") )
         new_patient->id = id;
     if(validate_string(name, "Patient name") )
         new_patient->name = strdup(name); // Reserva espaço de armazenamento para uma cópia da string name
     if(validate_time(birthdate, "Patient birthdate") )
         new_patient->birthdate = birthdate;
-    if(validate_time(arrival, "Patient arrival"))
+    if(validate_int(arrival, "Patient arrival"))
         new_patient->arrival = arrival;
 
     // Salva no arquivo ao criar o novo Patient
@@ -64,7 +64,7 @@ struct tm* get_patient_birthdate(const Patient *patient){
 }
 
 // Retorna a data de que o paciente foi criado. 
-struct tm* get_patient_arrival(const Patient *patient){
+int get_patient_arrival(const Patient *patient){
     return patient->arrival;
 }
 
@@ -72,12 +72,6 @@ struct tm* get_patient_arrival(const Patient *patient){
 char* get_patient_birthdate_string(const Patient *patient){
     return get_date_from_datetime(get_patient_birthdate(patient));
 }
-
-// Retorna a data de que o paciente foi criado em string.
-char* get_patient_arrival_string(const Patient *patient){
-    return get_timestamp_from_datetime(get_patient_arrival(patient));
-}
-
 
 // Imprime na tela as propriedades do Patient
 void print_patient(const Patient *patient){
@@ -91,6 +85,6 @@ char* patient_output(const Patient *patient){
     // Alocação de memória para a string
     char *output = (char *)malloc(sizeof(char) * 128);
     // Estrutura da string
-    sprintf(output, "%d,%s,%s", get_patient_id(patient), get_patient_name(patient), get_patient_arrival_string(patient));
+    sprintf(output, "%d,%s,%d", get_patient_id(patient), get_patient_name(patient), get_patient_arrival(patient));
     return output; // Retorna o ponteiro
 }
