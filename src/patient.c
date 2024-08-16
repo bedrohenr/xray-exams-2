@@ -11,6 +11,7 @@ struct patient {
     int id;
     char *name;
     struct tm *birthdate;
+    struct tm *arrival;
 } patient;
 
 // Cria um novo paciente, alocando memória para a estrutura, preenchendo os campos internos com os dados passados como parâmetros e retornando um ponteiro para a estrutura criada. 
@@ -62,23 +63,34 @@ struct tm* get_patient_birthdate(const Patient *patient){
     return patient->birthdate;
 }
 
+// Retorna a data de que o paciente foi criado. 
+struct tm* get_patient_arrival(const Patient *patient){
+    return patient->arrival;
+}
+
 // Retorna a data de nascimento do paciente.
 char* get_patient_birthdate_string(const Patient *patient){
     return get_date_from_datetime(get_patient_birthdate(patient));
 }
 
+// Retorna a data de que o paciente foi criado em string.
+char* get_patient_arrival_string(const Patient *patient){
+    return get_timestamp_from_datetime(get_patient_arrival(patient));
+}
+
+
 // Imprime na tela as propriedades do Patient
-void print_patient(Patient *patient){
+void print_patient(const Patient *patient){
     printf("Paciente\nId: %d\n", get_patient_id(patient));
     printf("Nome: %s\n", get_patient_name(patient));
     printf("Data de Nascimento: %s\n", get_patient_birthdate_string(patient));
 }
 
 // Retorna uma string com as propriedades do Patient
-char* patient_output(Patient *patient){
+char* patient_output(const Patient *patient){
     // Alocação de memória para a string
     char *output = (char *)malloc(sizeof(char) * 128);
     // Estrutura da string
-    sprintf(output, "%d,%s,%s", get_patient_id(patient), get_patient_name(patient), get_date_from_datetime(get_patient_birthdate(patient)));
+    sprintf(output, "%d,%s,%s", get_patient_id(patient), get_patient_name(patient), get_patient_arrival_string(patient));
     return output; // Retorna o ponteiro
 }

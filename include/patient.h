@@ -11,10 +11,11 @@ typedef struct patient Patient;
  * @param id  Número identificador do Paciente.
  * @param name  Nome do Paciente.
  * @param birthdate  Data de aniversário do Paciente.
+ * @param arrival  Timestamp do horário de chegada do Paciente.
  * 
  * @return Ponteiro para o Paciente recém criado com os parâmetros.
  */
-Patient *create_patient(int id, const char *name, struct tm *birthdate);
+Patient *create_patient(int id, const char *name, struct tm *birthdate, struct tm* arrival);
 
 /**
  * Libera a memória alocada para a estrutura Patient. 
@@ -42,7 +43,7 @@ int get_patient_id(const Patient *patient);
 const char* get_patient_name(const Patient *patient);
 
 /**
- * Retorna a data de nascimento do paciente.
+ * Retorna a data de nascimento do Patient.
  *
  * @param patient Ponteiro do tipo Patient.
  * 
@@ -51,7 +52,16 @@ const char* get_patient_name(const Patient *patient);
 struct tm* get_patient_birthdate(const Patient *patient);
 
 /**
- * Retorna a data de nascimento do paciente.
+ * Retorna a timestamp de chegada do Patient.
+ *
+ * @param patient Ponteiro do tipo Patient.
+ * 
+ * @return Struct tm com a data de chegada do Patient.
+ */
+struct tm* get_patient_arrival(const Patient *patient);
+
+/**
+ * Retorna a data de nascimento do Patient em formato YY-mm-dd.
  *
  * @param patient Ponteiro do tipo Patient.
  * 
@@ -59,12 +69,14 @@ struct tm* get_patient_birthdate(const Patient *patient);
  */
 char* get_patient_birthdate_string(const Patient *patient);
 
+char* get_patient_arrival_string(const Patient *patient);
+
 /**
  * Imprime na tela as propriedades do Patient passado no argumento.
  *
  * @param patient Ponteiro do tipo Patient.
  */
-void print_patient(Patient *patient);
+void print_patient(const Patient *patient);
 
 /**
  * Retorna as propriedades do Patient passado como arguemento.
@@ -73,6 +85,6 @@ void print_patient(Patient *patient);
  * 
  * @return String com as propriedades do Patient.
  */
-char* patient_output(Patient *patient);
+char* patient_output(const Patient *patient);
 
 #endif
