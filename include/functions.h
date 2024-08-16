@@ -183,4 +183,22 @@ double time_passed(clock_t t);
  */
 void test_enqueue_prio();
 
+/**
+ * 
+// Retorna uma string com nome e sobrenome gerado aleatoriamente.
+ * 
+ * @return String com nome e sobrenome gerados aleatóriamente. 
+ */
+char* get_name();
+
+
+/**
+ * Mostra um relatório, informações da simulação, na tela. 
+ * 
+ * @param patient_count Número de pacientes que passarm pelo hospital.
+ * @param patient_queue_count Número de pacientes na fila aguardando exame.
+ * @param exam_count Número de exames feitos no hospital.
+ * @param report_count Número de laudos gerados no hospital.
+ */
+void simulation_report(int patient_count, int patient_queue_count, int exam_count, int report_count);
 #endif

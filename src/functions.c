@@ -288,3 +288,17 @@ void test_enqueue_prio(){
 
     q_print(ExamPriorityQueue);
 }
+
+void simulation_report(int patient_count, int patient_queue_count, int exam_count, int report_count){
+    // Número de pacientes que visitaram o hospital.
+    printf("\n%d visitaram o hospital.", patient_count);
+    // Número de pacientes na fila aguardando exame.
+    printf("\n%d na fila aguardando exame.", patient_queue_count);
+    // Número de pacientes que já realizaram exame e, dentre estes, a porcentagem do que já receberam laudo.
+    printf("\nNumeros report_count: %d, exam_count: %d.", report_count, exam_count);
+    int report_percentage = (100*report_count/exam_count);
+    printf("\n%d já realizaram exame, %d%% receberam laudo.", exam_count, report_percentage);
+    // Tempo médio de laudo: Tempo médio que os exames ocupam a fila de prioridades.
+    // Tempo médio de laudo por condição: Tempo médio que os exames de uma condição específica (assinalada pelo médico) ocupam a fila de prioridades.
+    // Número de exames realizados após o limite de tempo estabelecido (7200 unidades de tempo).
+}
