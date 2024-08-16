@@ -176,28 +176,75 @@ char* output_by_struct_type(StructType type, void *p) {
     return "Error. StructType inválida.";
 }
 
+// Cria um arquivo.
+static int create_file(const char* path){
+
+    // Tenta abrir o arquvi no modo escrita.
+    FILE *fp = fopen(path, "w"); 
+
+    // Testa se o ponteiro recebe um endereço.
+    if(fp != NULL){
+        fclose(fp); // Fecha o arquivo.
+        return 1; // Arquivo encontrado.
+    }
+
+    return 0; // Arquivo não encontrado.
+}
+
+// Verifica se o arquivo no endereço inserido existe.
+static int file_exists(const char* path){
+
+    // Tenta abrir o arquivo no modo leitura.
+    FILE *fp = NULL;
+    fp = fopen(path, "r"); 
+
+    // Testa se o ponteiro recebe um endereço, provando que o arquivo existe.
+    if(fp != NULL){
+        fclose(fp); // Fecha o arquivo.
+        return 1;
+    } else {
+        return create_file(path); // Cria o arquivo caso não exista.
+    }
+}
+
 // Salva os registros de novas estruturas em seus arquivos db
 char* get_db_path(StructType type){
+    char* path;
 
     // Resolve o endereço do arquivo pelo tipo da estrutura
     switch (type) {
         case TYPE_PATIENT:
-            return "./src/static/db_patient.txt";
+            path = "./src/static/db_patient.txt";
+            break;
         
         case TYPE_EXAM:
-            return "./src/static/db_exam.txt";
+            path = "./src/static/db_exam.txt";
+            break;
         
         case TYPE_REPORT:
-            return "./src/static/db_report.txt";
+            path = "./src/static/db_report.txt";
+            break;
     }
-    return "";
 
+    // Testa se o arquivo existe.
+    if(file_exists(path)) // Se nao existe cria um.
+        return path; // Retorna o endereço do arquivo.
+    else
+        return ""; // -Wall enchendo o saco.
 }
 
 // Adiciona uma linha no arquivo especificado.
-void db_save(StructType type, char* content){
+void db_save(StructType type, const char* content){
     // Endereço do arquivo.
-    char *path = get_db_path(type); 
+    char *path = NULL;
+    path = get_db_path(type); 
+
+    // Checa se string path esta vazia.
+    if(strcmp(path, "") == 0 || path == NULL){
+        printf("Erro ao salvar em arquivo: %s.\n", path);
+        error_exit(EXIT_FAILURE); // Para a execução com o erro.
+    }
+
     FILE *file_pointer; 
 
     // Abre o arquivo em appending mode.
