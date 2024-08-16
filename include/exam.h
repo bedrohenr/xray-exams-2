@@ -17,7 +17,7 @@ typedef struct exam Exam;
  * 
  * @return Ponteiro para o Exame recém criado com os parâmetros.
  */
-Exam* create_exam(int id, int patient_id, int rx_id, struct tm *time);
+Exam* create_exam(int id, int patient_id, int rx_id, int time);
 
 // 
 /**
@@ -54,22 +54,13 @@ int get_exam_patient_id(const Exam *exam);
 int get_exam_rx_id(const Exam *exam);
 
 /**
- * Retorna a Data/Hora de realização do Exame.
+ * Retorna o momento de realização do Exame.
  *
  * @param exam Ponteiro do tipo Exam.
  * 
- * @return Data/Hora de realização do Exame.
+ * @return Inteiro momento de realização do Exame.
  */
-struct tm* get_exam_time(const Exam *exam);
-
-/**
- * Retorna a Data/Hora de realização do Exame no formato String.
- *
- * @param exam Ponteiro do tipo Exam.
- * 
- * @return Data/Hora no formato String.
- */
-char* get_exam_time_string(const Exam *exam);
+int get_exam_time(const Exam *exam);
 
 /**
  * Retorna o ponteiro para a Condition do Exame.

@@ -15,30 +15,30 @@ struct exam {
     int patient_id;
     int rx_id;
     Condition *condition_IA;
-    struct tm *time;
+    int time;
 } exam;
 
 // Cria um novo exame, alocando memória para a estrutura, preenchendo os campos com os dados passados como parâmetros e retornando um ponteiro para a estrutura criada.
-Exam* create_exam(int id, int patient_id, int rx_id, struct tm *time){
+Exam* create_exam(int id, int patient_id, int rx_id, int time){
     // Alocação de memória
     Exam *new_exam = (Exam *)malloc(sizeof(Exam)); 
 
     // Verifica se falha na alocação de memória.
     if(new_exam == NULL) {
         // Mensagem de erro
-        error_message_id("\nErro.\nNao foi possível alocar memória para o exame com id", id);
+        printf("\nErro.\nNao foi possível alocar memória para o exame com id: %d", id);
         // Função para mostrar o erro e finaliza execução.
         error_exit(EXIT_FAILURE);
     }
 
     // Verificações das variáveis antes das atribuições.
-    if(validate_id(id, "Exam id")) 
+    if(validate_int(id, "Exam id")) 
         new_exam->id = id;
-    if(validate_id(patient_id, "Exam patient_id")) 
+    if(validate_int(patient_id, "Exam patient_id")) 
         new_exam->patient_id = patient_id;
-    if(validate_id(rx_id, "Exam rx_id")) 
+    if(validate_int(rx_id, "Exam rx_id")) 
         new_exam->rx_id = rx_id;
-    if(validate_time(time, "Exam time")) 
+    if(validate_int(time, "Exam time")) 
         new_exam->time = time;
 
     // Recebe uma condição e associa-a ao Exame recém criado.
@@ -73,13 +73,8 @@ int get_exam_rx_id(const Exam *exam){
 }
 
 // Retorna o horário de realização do exame.
-struct tm* get_exam_time(const Exam *exam){
+int get_exam_time(const Exam *exam){
     return exam->time;
-}
-
-// Retorna o horário de realização do exame em formato string.
-char* get_exam_time_string(const Exam *exam){
-    return asctime(exam->time);
 }
 
 // Retorna o ponteiro da Condition assoaciada ao Exame .
@@ -115,7 +110,7 @@ void print_exam(const Exam *exam){
     printf("Id do Paciente: %d\n", get_exam_patient_id(exam));
     printf("Id do Raio X: %d\n", get_exam_rx_id(exam));
     print_condition(get_exam_condition(exam)); // Propriedades da Condition
-    printf("Data/Hora do Exame: %s", get_exam_time_string(exam));
+    printf("Tempo da Hora do Exame: %d", get_exam_time(exam));
 }
 
 // Retorna as propriedades do Exame em string.
@@ -124,7 +119,7 @@ char* exam_output(const Exam *exam){
     char *output = (char *)malloc(sizeof(char) * 128);
 
     // Estrutura da string a ser retornada.
-    sprintf(output, "%d,%d,%d,%s,%s", get_exam_id(exam), get_exam_patient_id(exam), get_exam_rx_id(exam), condition_output(get_exam_condition(exam)), get_timestamp_from_datetime(get_exam_time(exam)));
+    sprintf(output, "%d,%d,%d,%s,%d", get_exam_id(exam), get_exam_patient_id(exam), get_exam_rx_id(exam), condition_output(get_exam_condition(exam)), get_exam_time(exam));
 
     return output; // Retorna a string.
 }
