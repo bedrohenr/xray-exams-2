@@ -52,7 +52,7 @@ int validate_time(const struct tm* time, const char *msg){
         // Função para mostrar o erro e finaliza execução.
         error_exit(EXIT_FAILURE);
         return 0;
-    }
+    } 
     return 1;
 }
 
@@ -216,7 +216,7 @@ char* get_db_path(StructType type){
         case TYPE_PATIENT:
             path = "./src/static/db_patient.txt";
             break;
-        
+            
         case TYPE_EXAM:
             path = "./src/static/db_exam.txt";
             break;
@@ -333,6 +333,31 @@ void test_enqueue_prio(){
     q_enqueue_exam_prio(ExamPriorityQueue, TYPE_EXAM, new_aexam);
 
     q_print(ExamPriorityQueue);
+}
+
+// Retorna uma string com nome e sobrenome gerado aleatoriamente
+char* get_name(){
+    // Array com primeiros nome
+    char *first_names[] = {
+        "Lucas","Gabriel","Ana","Pedro","Maria","João","Isabela","Miguel","Sophia","Arthur","Rafael","Bruna","Carla","Felipe","Mariana","Fernanda","Caio","Larissa","Thiago","Amanda"
+    };
+
+    // Array com sobrenomes
+    char *last_names[] = {
+        "Silva","Santos","Oliveira","Souza","Pereira","Costa","Ferreira","Alves","Ribeiro","Carvalho","Moura","Gomes","Martins","Barbosa","Rocha","Lima","Araújo","Cardoso","Correia","Duarte"
+    };
+
+    // Escolhe com ajuda de numero aleatório
+    char* first_name = first_names[get_random_number(19)];
+    char* last_name = last_names[get_random_number(19)];
+
+    // Alocando memória para retornar o ponteiro char
+    char* full_name = (char *)malloc(sizeof(char) * 20);
+
+    // Atribuindo a string com formatação
+    sprintf(full_name, "%s %s", first_name, last_name);
+
+    return full_name; // Retorna o ponteiro
 }
 
 void simulation_report(int patient_count, int patient_queue_count, int exam_count, int report_count){
