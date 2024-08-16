@@ -6,46 +6,62 @@
 #include "queue.h"
 #include "definitions.h"
 
+#include <stdlib.h> // srand
 #include <stdio.h> // printf...
-#include <time.h>
 
 // Função principal de teste
 int main() {
-    // Timer
+   // Iniciando rand.
+    srand(time(0));
+
+    // Timer.
     int time_units = 0;
 
-    // id counters
+    // id counters.
     int patient_id_counter = 1;
     int exam_id_counter = 1;
     int report_id_counter = 1;
 
+    // Propriedades do paciente.
+    char* name;
+    struct tm *arrival;
     struct tm birthdate;
 
-    // Variáveis de struct
+    // Variaveis auxiliares
+    struct tm *timestamp;
+
+    // Variáveis de struct.
     Patient *patient, *next_patient;
     Exam *exam, *new_exam;
     Report *report;
 
-    // Quantidade de maquina de raio X
+    // Quantidade de maquina de raio X.
     Patient *XRMachineManager[5] = {};
-    int timers[5]; // Usada para o timer de cada Maquina Raio X
+    int timers[5]; // Usada para armazenar o timer de cada Maquina Raio X.
 
-    // Filas
+    // Filas.
     Queue *PatientQueue = q_create();
     Queue *ExamPriorityQueue = q_create();
 
     while(time_units <= RUNTIME){
-        // Data de anivesario gera todos aleatorios
-        birthdate = create_date(get_random_number(124), get_random_number(11), get_random_number(31));
+        if(time_units == 10000){
+            simulation_report(patient_id_counter, q_size(PatientQueue), exam_id_counter, report_id_counter);
+        }
+        // 20% de chance de chegada de paciente: 1/5.
+        if(get_random_number(99) < 20){
+            // Obtém nome do paciente
+            name = get_name();
 
-        // 20% de chance de chegada de paciente
-        if(get_random_number(5) > 1){
-            // Definindo uma data de nascimento fictícia para o paciente
+            // Horário de chegada do paciente
+            arrival = get_time();
+
+            // Definindo uma data de nascimento fictícia para o paciente.
             birthdate = create_date(get_random_number(124), get_random_number(11), get_random_number(31));
 
             // Criando um paciente
-            patient = create_patient(patient_id_counter++, "João Silva", &birthdate);
+            patient = create_patient(patient_id_counter++, name, &birthdate, arrival);
 
+            // Paciente entra na fila de pacientes.
             q_enqueue(PatientQueue, TYPE_PATIENT, patient);
         }
 
@@ -53,51 +69,62 @@ int main() {
         // A primeira desocupada será atrelada ao primeiro usuário na fil
         for(int i = 0; i < 5; i++){
             if(XRMachineManager[i] == NULL && !q_is_empty(PatientQueue)){
-                // printf("flag if, i: %d", i);
+                // Retira o paciente da fila e armazena na variável.
                 Patient *next_patient = (Patient *) q_dequeue(PatientQueue);
+
+                // Máquina de raio-X recebe novo paciente.
                 XRMachineManager[i] = next_patient;
-                printf("\n");
-                print_patient(XRMachineManager[i]);
-                timers[i] = time_units + 10;
-                break;
+                timers[i] = time_units + 10; // Atualizado timer da máquina: Daqui a 10 unidades de tempo. 
             }
         }
 
         // Checando se algum exame ja terminou
         for(int i = 0; i < 5; i++){
             if(XRMachineManager[i] != NULL && timers[i] == time_units){
-                next_patient = XRMachineManager[i];
-                // printf("test");
-                // print_patient(next_patient);
-                new_exam = create_exam(exam_id_counter++, get_patient_id(next_patient), (i+1), get_time());
+                // Recebe o paciente que estava na máquina de raio-X.
+                next_patient = (Patient *) XRMachineManager[i];
 
+                // Salvando timestamp
+                timestamp = get_time();
+
+                // Finalizado o uso da máquina de raio-X.
+                // Criando novo Exame.
+                new_exam = create_exam(exam_id_counter++, get_patient_id(next_patient), (i+1), timestamp);
+
+                // Exame entra na fila de prioridade de exames.
                 q_enqueue_exam_prio(ExamPriorityQueue, TYPE_EXAM, new_exam);
+
+                // Variável da máquina de raio-X atualizada: Vazia.
                 XRMachineManager[i] = NULL;
-                timers[i] = 0;
+                timers[i] = 0; // Timer da máquina resetado.
             }
         }
 
+        // Verifica se a fila de prioridade de exames está vazia.
         if(!q_is_empty(ExamPriorityQueue)){
-            printf("\nflag report\n");
-            // Pega o primeira exame na fila de prioridade
-            exam = q_dequeue(ExamPriorityQueue);
-
-            printf("\n");
-            print_exam(exam);
-
-            // Cria um novo laudo com as informações do exame
-            report = create_report(report_id_counter++, get_exam_id(exam), get_exam_condition(exam), get_time());
             
-            // Checa pela condição se precisará ser reavaliado uma nova condição pela % definida
+            // Pega o primeira exame na fila de prioridade.
+            exam = (Exam *) q_dequeue(ExamPriorityQueue);
+
+            // Salvando timestamp
+            timestamp = get_time();
+
+            // Cria um novo laudo com as informações do exame.
+            report = create_report(report_id_counter++, get_exam_id(exam), get_exam_condition(exam), timestamp);
+            
+            // Checa pela condição se precisará ser reavaliado uma nova condição pela % definida.
             check_condition(report);
-
-            printf("\n");
-            print_report(report);
         }
-
-        printf("hello\n");
+        // Incrementa unidade de tempo.
         time_units++;
+
     }
+
+    // Liberando memória.
+    destroy_patient(patient);
+    destroy_patient(next_patient);
+    destroy_exam(exam);
+    destroy_exam(new_exam);
     destroy_report(report);
     q_free(PatientQueue);
     q_free(ExamPriorityQueue);
