@@ -17,7 +17,7 @@ typedef struct report Report;
  * 
  * @return Ponteiro para o Report recém criado com os parâmetros.
  */
-Report* create_report(int id, int exam_id, Condition *condition, struct tm *timestamp);
+Report* create_report(int id, int exam_id, Condition *condition, int timestamp);
 
 /**
  * Libera a memória alocada a estrutura passada no argumento
@@ -59,16 +59,7 @@ Condition* get_report_condition(const Report *report);
  * 
  * @return Datetime da hora de realização do Report.
  */
-struct tm* get_report_time(const Report *report);
-
-/**
- * Retorna a Data/Hora de realização do Report em string.
- * 
- * @param report Ponteiro para a estrutura Report.
- * 
- * @return String do Datetime da hora de realização do Report.
- */
-char* get_report_time_string(const Report *report);
+int get_report_time(const Report *report);
 
 /**
  * Gera um número aleatório e decide se mudará a Condition do Report ou não.

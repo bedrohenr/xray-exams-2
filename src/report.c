@@ -10,19 +10,19 @@ struct report {
     int id;
     int exam_id;
     Condition *condition;
-    struct tm *timestamp;
+    int timestamp;
 } report;
 
 // Cria um novo Laudo, alocando memória para a estrutura e retornando um ponteiro para a estrutura criada. 
-Report* create_report(int id, int exam_id, Condition *condition, struct tm *timestamp){
+Report* create_report(int id, int exam_id, Condition *condition, int timestamp){
     Report *new_report = (Report *)malloc(sizeof(Report));
 
     // Verificações das variáveis antes das atribuições.
-    if(validate_id(id, "Report id"))
+    if(validate_int(id, "Report id"))
         new_report->id = id;
-    if(validate_id(exam_id, "Report exam_id"))
+    if(validate_int(exam_id, "Report exam_id"))
         new_report->exam_id = exam_id;
-    if(validate_time(timestamp, "Report timestamp"))
+    if(validate_int(timestamp, "Report timestamp"))
         new_report->timestamp = timestamp;
 
     new_report->condition = condition;
@@ -56,13 +56,8 @@ Condition* get_report_condition(const Report *report){
 }
 
 // Retorna a Data/Hora de realização do Report. 
-struct tm* get_report_time(const Report *report){
+int get_report_time(const Report *report){
     return report->timestamp;
-}
-
-// Retorna a Data/Hora de realização do Report em string.
-char* get_report_time_string(const Report *report){
-    return asctime(get_report_time(report));
 }
 
 // Gera um número aleatório e decide se mudará a Condition do Report ou não.
@@ -93,14 +88,14 @@ void print_report(const Report *report){
     printf("Laudo\nId do Laudo: %d\n", get_report_id(report));
     printf("Id do Exame: %d\n", get_report_exam_id(report));
     print_condition(get_report_condition(report));
-    printf("Laudo gerado em: %s", get_report_time_string(report)); 
+    printf("Laudo gerado em: %d", get_report_time(report)); 
 }
 
 // Retorna uma string das propriedades do Report passado no argumento.
 char* report_output(const Report *report){
     char *output = (char *)malloc(sizeof(char) * 128); // Aloca memória para o ponteiro
     // Estrutura da string
-    sprintf(output, "%d,%d,%s,%s", get_report_id(report), get_report_exam_id(report), condition_output(get_report_condition(report)), get_timestamp_from_datetime(get_report_time(report)));
+    sprintf(output, "%d,%d,%s,%d", get_report_id(report), get_report_exam_id(report), condition_output(get_report_condition(report)), get_report_time(report));
 
     return output; // Retorna o ponteiro
 }
