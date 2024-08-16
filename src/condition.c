@@ -40,11 +40,11 @@ Condition* create_condition(int id, const char *name, int gravity){
         error_exit(EXIT_FAILURE);
     }   
 
-    if(validate_id(id, "Condition id")) 
+    if(validate_int(id, "Condition id")) 
         new_condition->id = id;
     if(validate_string(name, "Condition name"))  
         new_condition->name = strdup(name); // Reserva espaço de armazenamento para uma cópia da string name
-    if(validate_id(gravity, "Condition gravity"))
+    if(validate_int(gravity, "Condition gravity"))
         new_condition->gravity = gravity;
 
     return new_condition;
