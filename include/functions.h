@@ -64,7 +64,7 @@ int validate_time(const struct tm* time, const char *msg);
 int validate_string(const char* str, const char* message);
 
 /**
- * Gera aleatóriamente um número.
+ * Gera aleatóriamente um número. Precisa-se inicializar srand() anteriormente de sua execução.
  *
  * @param max_number Número máximo.
  *
@@ -73,7 +73,7 @@ int validate_string(const char* str, const char* message);
 int get_random_number(int max_number);
 
 /**
- * Gera aleatóriamente um número float.
+ * Gera aleatóriamente um número float. Precisa-se inicializar srand() anteriormente de sua execução.
  *
  * @param max_number Número máximo.
  *
@@ -116,7 +116,7 @@ struct tm* get_time();
  *
  * @returns em string.
  */
-char* get_timestamp_from_datetime(struct tm* date);
+char* get_timestamp_from_datetime(const struct tm* date);
 
 /**
  * Retorna data em string no formato YY-mm-dd de uma variável datetime
@@ -125,7 +125,7 @@ char* get_timestamp_from_datetime(struct tm* date);
  *
  * @returns Data em string.
  */
-char* get_date_from_datetime(struct tm* date);
+char* get_date_from_datetime(const struct tm* date);
 
 /**
  * Imprime na tela as propriedades de acordo com o tipo da estrutura.
@@ -160,7 +160,7 @@ char* get_db_path(StructType type);
  * @param content String com o texto a ser armazenado no arquivo.
  * @param type Tipo da estrutura.
  */
-void db_save(StructType type, char *content);
+void db_save(StructType type, const char *content);
 
 /**
  * Libera memória da estrutura devido a seu tipo, usando as funções corretas 

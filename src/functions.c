@@ -70,7 +70,6 @@ int validate_string(const char* str, const char* message){
 
 // Gera um número aleatório com número máximo especificado.
 int get_random_number(int max_number){
-    srand(time(NULL));
     return rand() % (max_number + 1); // Retorna o número aleatório.
 }
 
@@ -113,11 +112,11 @@ struct tm create_date(int year, int month, int day){
 struct tm* get_time(){
     time_t current_time;
     current_time = time(NULL); // Obter o tempo atual em segundos desde 01/01/1970.
-    return localtime(&current_time); // Retorna o tempo convertido para a hora local.
+    return localtime(&current_time); // Retorna o ponteiro tempo convertido para a hora local.
 }
 
 // Retorna um timestamp em string no formato YY-mm-dd HH:MM:SS.
-char* get_timestamp_from_datetime(struct tm* date){
+char* get_timestamp_from_datetime(const struct tm* date){
     // Alocação de memória para o ponteiro.
     char *output = (char *)malloc(sizeof(char) * 32);
     // Estrutura da string.
@@ -126,7 +125,7 @@ char* get_timestamp_from_datetime(struct tm* date){
 }
 
 // Retorna data em string no formato YY-mm-dd de uma variável datetime.
-char* get_date_from_datetime(struct tm* date){
+char* get_date_from_datetime(const struct tm* date){
     // Alocação de memória do ponteiro.
     char *output = (char *)malloc(sizeof(char) * 32);
     // date->tm_year retorna quantos anos desde 1900.
@@ -137,6 +136,7 @@ char* get_date_from_datetime(struct tm* date){
 // Imprime na tela as informações das estruturas
 // É usado a função correta de cada estruturda
 void print_by_struct_type(StructType type, void *p) {
+
     switch (type) {
         case TYPE_PATIENT:
             print_patient(p); // Patient
@@ -273,7 +273,6 @@ void free_by_struct_type(StructType type, void *p) {
     }
 }
 
-
 // Calcula quanto tempo passou desde um ponto anterior onde originou a variavel t
 double time_passed(clock_t t){
     clock_t t2 = clock() - t; // Calcula o tempo atual e o tempo da variavel t
@@ -291,7 +290,7 @@ void test_enqueue_prio(){
 
     struct tm birthdate = create_date(get_random_number(124), get_random_number(11), get_random_number(31));
 
-    Patient *patient = create_patient(patient_id_counter++, "João Silva", &birthdate);
+    Patient *patient = create_patient(patient_id_counter++, "João Silva", &birthdate, get_time());
 
     Queue *ExamPriorityQueue = q_create();
 
