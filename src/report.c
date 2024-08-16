@@ -41,27 +41,27 @@ void destroy_report(Report *report){
 }
 
 // Retorna o número identificador do Report
-int get_report_id(Report *report){
+int get_report_id(const Report *report){
     return report->id;
 }
 
 // Retorna o número identificador do Exame associado ao Report. 
-int get_report_exam_id(Report *report){
+int get_report_exam_id(const Report *report){
     return report->exam_id;
 }
 
 // Retorna a Condition associada ao Report.
-Condition* get_report_condition(Report *report){
+Condition* get_report_condition(const Report *report){
     return report->condition;
 }
 
 // Retorna a Data/Hora de realização do Report. 
-struct tm* get_report_time(Report *report){
+struct tm* get_report_time(const Report *report){
     return report->timestamp;
 }
 
 // Retorna a Data/Hora de realização do Report em string.
-char* get_report_time_string(Report *report){
+char* get_report_time_string(const Report *report){
     return asctime(get_report_time(report));
 }
 
@@ -89,7 +89,7 @@ void change_condition(Report *report){
 }
 
 // Imprime na tela as propriedades do Report passado no argumento.
-void print_report(Report *report){
+void print_report(const Report *report){
     printf("Laudo\nId do Laudo: %d\n", get_report_id(report));
     printf("Id do Exame: %d\n", get_report_exam_id(report));
     print_condition(get_report_condition(report));
@@ -97,7 +97,7 @@ void print_report(Report *report){
 }
 
 // Retorna uma string das propriedades do Report passado no argumento.
-char* report_output(Report *report){
+char* report_output(const Report *report){
     char *output = (char *)malloc(sizeof(char) * 128); // Aloca memória para o ponteiro
     // Estrutura da string
     sprintf(output, "%d,%d,%s,%s", get_report_id(report), get_report_exam_id(report), condition_output(get_report_condition(report)), get_timestamp_from_datetime(get_report_time(report)));

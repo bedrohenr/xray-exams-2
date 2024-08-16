@@ -32,7 +32,7 @@ void destroy_report(Report *report);
  * 
  * @return Número identificador do Report passado no argumento.
  */
-int get_report_id(Report *report);
+int get_report_id(const Report *report);
 
 /**
  * Retorna o número identificador do Exame associado ao Report. 
@@ -41,7 +41,7 @@ int get_report_id(Report *report);
  * 
  * @return Número identificador do Exame associado ao Report.
  */
-int get_report_exam_id(Report *report);
+int get_report_exam_id(const Report *report);
 
 /**
  * Retorna a Condition associada ao Report. 
@@ -50,7 +50,7 @@ int get_report_exam_id(Report *report);
  * 
  * @return Ponteiro para a estrutura Condition associada ao Report.
  */
-Condition* get_report_condition(Report *report);
+Condition* get_report_condition(const Report *report);
 
 /**
  * Retorna a Data/Hora de realização do Report. 
@@ -59,7 +59,7 @@ Condition* get_report_condition(Report *report);
  * 
  * @return Datetime da hora de realização do Report.
  */
-struct tm* get_report_time(Report *report);
+struct tm* get_report_time(const Report *report);
 
 /**
  * Retorna a Data/Hora de realização do Report em string.
@@ -68,7 +68,7 @@ struct tm* get_report_time(Report *report);
  * 
  * @return String do Datetime da hora de realização do Report.
  */
-char* get_report_time_string(Report *report);
+char* get_report_time_string(const Report *report);
 
 /**
  * Gera um número aleatório e decide se mudará a Condition do Report ou não.
@@ -89,7 +89,7 @@ void change_condition(Report *report);
  * 
  * @param report Ponteiro para a estrutura Report.
  */
-void print_report(Report *report);
+void print_report(const Report *report);
 
 /**
  * Retorna uma string das propriedades do Report passado no argumento.
@@ -98,6 +98,6 @@ void print_report(Report *report);
  * 
  * @returns String com as propriedades do Report.
  */
-char* report_output(Report *report);
+char* report_output(const Report *report);
 
 #endif
