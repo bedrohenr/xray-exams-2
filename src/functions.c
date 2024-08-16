@@ -16,19 +16,9 @@ void error_exit(int err_code){
     exit(err_code); 
 }
 
-// Imprime uma mensagem na tela com id.
-void error_message_id(const char *msg, int id){
-    printf("%s: %d.", msg, id);
-}
-
-// Imprime uma mensagem na tela com especificação do campo.
-void error_message_field(const char *msg, char *campo){
-    printf("%s: %s.", msg, campo);
-}
-
 // Verifica se o número inteiro id é válido, maior que zero.
-int validate_id(int num, const char *msg){
-    if ( num > 0 ) {
+int validate_int(int num, const char *msg){
+    if ( num >= 0 ) {
         return 1;
     } else {
         // Mensagem de erro.
@@ -47,6 +37,7 @@ int validate_time(const struct tm* time, const char *msg){
         time->tm_mon  == 0 &&
         time->tm_mday == 0 ){
 
+        printf("\n%s", get_timestamp_from_datetime(time));
         // Mensagem de erro.
         printf("Erro.\nData/Hora não informada em %s.", msg);
         // Função para mostrar o erro e finaliza execução.
@@ -179,7 +170,7 @@ char* output_by_struct_type(StructType type, void *p) {
 // Cria um arquivo.
 static int create_file(const char* path){
 
-    // Tenta abrir o arquvi no modo escrita.
+    // Cria um arquivo novo com o modo escrita.
     FILE *fp = fopen(path, "w"); 
 
     // Testa se o ponteiro recebe um endereço.
@@ -288,51 +279,56 @@ void test_enqueue_prio(){
     int patient_id_counter = 1;
     int exam_id_counter = 1;
 
+    // Instante de tempo para teste
+    int time = 1;
+
     struct tm birthdate = create_date(get_random_number(124), get_random_number(11), get_random_number(31));
 
-    Patient *patient = create_patient(patient_id_counter++, "João Silva", &birthdate, get_time());
+    Patient *patient = create_patient(patient_id_counter++, "João Silva", &birthdate, time);
 
     Queue *ExamPriorityQueue = q_create();
 
     char* condition = "Muito sono";
 
     Exam *new_aexam;
-    new_aexam = create_exam(exam_id_counter++, get_patient_id(patient), (1), get_time());
+
+    // Instanciamentos de exames com nivel de gravidade diferentes.
+    new_aexam = create_exam(exam_id_counter++, get_patient_id(patient), (1), time);
     set_exam_condition(new_aexam, 10, condition, 4);
 
     q_enqueue_exam_prio(ExamPriorityQueue, TYPE_EXAM, new_aexam);
 
-    new_aexam = create_exam(exam_id_counter++, get_patient_id(patient), (1), get_time());
+    new_aexam = create_exam(exam_id_counter++, get_patient_id(patient), (1), time);
     set_exam_condition(new_aexam, 10, condition, 1);
 
     q_enqueue_exam_prio(ExamPriorityQueue, TYPE_EXAM, new_aexam);
 
-    new_aexam = create_exam(exam_id_counter++, get_patient_id(patient), (1), get_time());
+    new_aexam = create_exam(exam_id_counter++, get_patient_id(patient), (1), time);
     set_exam_condition(new_aexam, 10, condition, 5);
 
     q_enqueue_exam_prio(ExamPriorityQueue, TYPE_EXAM, new_aexam);
 
-    new_aexam = create_exam(exam_id_counter++, get_patient_id(patient), (1), get_time());
+    new_aexam = create_exam(exam_id_counter++, get_patient_id(patient), (1), time);
     set_exam_condition(new_aexam, 10, condition, 3);
 
     q_enqueue_exam_prio(ExamPriorityQueue, TYPE_EXAM, new_aexam);
 
-    new_aexam = create_exam(exam_id_counter++, get_patient_id(patient), (1), get_time());
+    new_aexam = create_exam(exam_id_counter++, get_patient_id(patient), (1), time);
     set_exam_condition(new_aexam, 10, condition, 2);
 
     q_enqueue_exam_prio(ExamPriorityQueue, TYPE_EXAM, new_aexam);
 
-    new_aexam = create_exam(exam_id_counter++, get_patient_id(patient), (1), get_time());
+    new_aexam = create_exam(exam_id_counter++, get_patient_id(patient), (1), time);
     set_exam_condition(new_aexam, 10, condition, 5);
 
     q_enqueue_exam_prio(ExamPriorityQueue, TYPE_EXAM, new_aexam);
 
-    new_aexam = create_exam(exam_id_counter++, get_patient_id(patient), (1), get_time());
+    new_aexam = create_exam(exam_id_counter++, get_patient_id(patient), (1), time);
     set_exam_condition(new_aexam, 10, condition, 5);
 
     q_enqueue_exam_prio(ExamPriorityQueue, TYPE_EXAM, new_aexam);
 
-    q_print(ExamPriorityQueue);
+    q_print(ExamPriorityQueue); // Checagem na tela se a função enfileirou corretamente.
 }
 
 // Retorna uma string com nome e sobrenome gerado aleatoriamente
@@ -363,13 +359,18 @@ char* get_name(){
 void simulation_report(int patient_count, int patient_queue_count, int exam_count, int report_count){
     // Número de pacientes que visitaram o hospital.
     printf("\n%d visitaram o hospital.", patient_count);
+
     // Número de pacientes na fila aguardando exame.
     printf("\n%d na fila aguardando exame.", patient_queue_count);
+
     // Número de pacientes que já realizaram exame e, dentre estes, a porcentagem do que já receberam laudo.
     printf("\nNumeros report_count: %d, exam_count: %d.", report_count, exam_count);
     int report_percentage = (100*report_count/exam_count);
     printf("\n%d já realizaram exame, %d%% receberam laudo.", exam_count, report_percentage);
+
     // Tempo médio de laudo: Tempo médio que os exames ocupam a fila de prioridades.
+
     // Tempo médio de laudo por condição: Tempo médio que os exames de uma condição específica (assinalada pelo médico) ocupam a fila de prioridades.
+
     // Número de exames realizados após o limite de tempo estabelecido (7200 unidades de tempo).
 }

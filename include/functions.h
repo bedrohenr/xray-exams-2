@@ -13,27 +13,6 @@
 void error_exit(int err_code);
 
 /**
- * Mostra a mensagem de erro com especificação do campo
- *
- * @param msg Mensagem a ser impressa na tela.
- * @param campo Campo onde ocorreu o erro, para caso falhe a validação.
- *
- * @returns 1 para válido, 0 para invalidado.
- */
-void error_message_field(const char *msg, char *campo);
-
-// Mostra a mensagem de erro com especificação do id
-/**
- * Mostra mensagem de erro com especificação do id.
- *
- * @param msg Mensagem a ser impressa na tela.
- * @param id Número identificador da estrutura onde ocorreu o erro, para caso falhe a validação.
- *
- * @returns 1 para válido, 0 para invalidado.
- */
-void error_message_id(const char *msg, int id);
-
-/**
  * Verifica se o número é maior ou igual a zero.
  *
  * @param num Variável time a ser testada.
@@ -41,7 +20,7 @@ void error_message_id(const char *msg, int id);
  *
  * @returns 1 para válido, 0 para invalidado.
  */
-int validate_id(int num, const char *msg);
+int validate_int(int num, const char *msg);
 
 /**
  * Verifica se o Dia, Mês e Ano são igual a zero.
