@@ -32,13 +32,13 @@ Exam* create_exam(int id, int patient_id, int rx_id, struct tm *time){
     }
 
     // Verificações das variáveis antes das atribuições.
-    if(validate_id(id, "id exame")) 
+    if(validate_id(id, "Exam id")) 
         new_exam->id = id;
-    if(validate_id(patient_id, "exame, id paciente")) 
+    if(validate_id(patient_id, "Exam patient_id")) 
         new_exam->patient_id = patient_id;
-    if(validate_id(rx_id, "id raio-x")) 
+    if(validate_id(rx_id, "Exam rx_id")) 
         new_exam->rx_id = rx_id;
-    if(validate_time(time, "exame time")) 
+    if(validate_time(time, "Exam time")) 
         new_exam->time = time;
 
     // Recebe uma condição e associa-a ao Exame recém criado.

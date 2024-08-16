@@ -27,9 +27,14 @@ Patient *create_patient(int id, const char *name, struct tm *birthdate){
     }   
 
     // Verificações das variáveis antes das atribuições
-    if( validate_id(id, "id paciente") ) new_patient->id = id;
-    if( validate_name(name, id) ) new_patient->name = strdup(name); // Reserva espaço de armazenamento para uma cópia da string name
-    if( validate_time(birthdate, "Data nascimento do paciente") ) new_patient->birthdate = birthdate;
+    if(validate_id(id, "Patient id") )
+        new_patient->id = id;
+    if(validate_string(name, "Patient name") )
+        new_patient->name = strdup(name); // Reserva espaço de armazenamento para uma cópia da string name
+    if(validate_time(birthdate, "Patient birthdate") )
+        new_patient->birthdate = birthdate;
+    if(validate_time(arrival, "Patient arrival"))
+        new_patient->arrival = arrival;
 
     // Salva no arquivo ao criar o novo Patient
     db_save(TYPE_PATIENT, patient_output(new_patient));

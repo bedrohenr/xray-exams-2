@@ -27,12 +27,12 @@ void error_message_field(const char *msg, char *campo){
 }
 
 // Verifica se o número inteiro id é válido, maior que zero.
-int validate_id(int num, char *campo){
+int validate_id(int num, const char *msg){
     if ( num > 0 ) {
         return 1;
     } else {
         // Mensagem de erro.
-        error_message_field("Erro.\nNumero inválido em campo", campo);
+        printf("Erro.\nNumero inválido em %s.", msg);
         // Finaliza execução.
         error_exit(EXIT_FAILURE);
         return 0;
@@ -40,29 +40,15 @@ int validate_id(int num, char *campo){
 }
 
 // Verifica se o Dia, Mês e Ano é igual a zero.
-int validate_time(const struct tm* time, char *campo){
+int validate_time(const struct tm* time, const char *msg){
 
+    // Checa por números zerados
     if( time->tm_year == 0 &&
         time->tm_mon  == 0 &&
         time->tm_mday == 0 ){
 
-        char msg[] = "Data/Hora não informada no campo: ";
-        strcat(msg, campo);
-
         // Mensagem de erro.
-        error_message_field("Erro.\nData/Hora não informada no campo", campo);
-        // Função para mostrar o erro e finaliza execução.
-        error_exit(EXIT_FAILURE);
-        return 0;
-    } 
-    return 1;
-}
-
-// Verifica se o a variável name está vazia e especifica o id.
-int validate_name(const char* name, int id){
-    if( strcmp(name, "") == 0 || strcmp(name, " ") == 0){
-        // Mensagem de erro.
-        error_message_id("Erro.\nNão foi possível encontrar o nome do paciente com id", id);
+        printf("Erro.\nData/Hora não informada em %s.", msg);
         // Função para mostrar o erro e finaliza execução.
         error_exit(EXIT_FAILURE);
         return 0;
@@ -71,10 +57,10 @@ int validate_name(const char* name, int id){
 }
 
 // Verifica se o a variável string está vazia e mostra mensagem de erro.
-int validate_string(const char* str, char* message){
+int validate_string(const char* str, const char* message){
     if( strcmp(str, "") == 0 || strcmp(str, " ") == 0){
         // Mensagem de erro
-        printf("Erro.\nString vazia. %s", message);
+        printf("Erro.\nString vazia em %s.", message);
         // Função para mostrar o erro e finaliza execução.
         error_exit(EXIT_FAILURE);
         return 0;

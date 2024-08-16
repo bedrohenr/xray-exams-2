@@ -37,31 +37,21 @@ void error_message_id(const char *msg, int id);
  * Verifica se o número é maior ou igual a zero.
  *
  * @param num Variável time a ser testada.
- * @param campo Campo onde ocorreu o erro, para caso falhe a validação.
+ * @param msg String de indentificação de onde ocorreu o erro, para caso falhe a validação.
  *
  * @returns 1 para válido, 0 para invalidado.
  */
-int validate_id(int num, char *campo);
+int validate_id(int num, const char *msg);
 
 /**
  * Verifica se o Dia, Mês e Ano são igual a zero.
  *
  * @param time Variável time a ser testada.
- * @param campo Campo onde ocorreu o erro, para caso falhe a validação.
+ * @param msg Campo de identificação de onde ocorreu o erro, para caso falhe a validação.
  *
  * @returns 1 para válido, 0 para invalidado.
  */
-int validate_time(const struct tm* time, char *campo);
-
-/**
- * Checa se a string é vazia.
- *
- * @param name String a ser testada.
- * @param id Número de identificação da estrutura.
- *
- * @returns 1 para válido, 0 para invalidado.
- */
-int validate_name(const char* name, int id);
+int validate_time(const struct tm* time, const char *msg);
 
 /**
  * Checa se a string é vazia.
@@ -71,7 +61,7 @@ int validate_name(const char* name, int id);
  *
  * @returns 1 para válido, 0 para invalidado.
  */
-int validate_string(const char* str, char* message);
+int validate_string(const char* str, const char* message);
 
 /**
  * Gera aleatóriamente um número.

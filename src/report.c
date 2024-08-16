@@ -18,11 +18,11 @@ Report* create_report(int id, int exam_id, Condition *condition, struct tm *time
     Report *new_report = (Report *)malloc(sizeof(Report));
 
     // Verificações das variáveis antes das atribuições.
-    if(validate_id(id, "id, Report."))
+    if(validate_id(id, "Report id"))
         new_report->id = id;
-    if(validate_id(exam_id, "exam_id, Report."))
+    if(validate_id(exam_id, "Report exam_id"))
         new_report->exam_id = exam_id;
-    if(validate_time(timestamp, "timestamp, Report."))
+    if(validate_time(timestamp, "Report timestamp"))
         new_report->timestamp = timestamp;
 
     new_report->condition = condition;
