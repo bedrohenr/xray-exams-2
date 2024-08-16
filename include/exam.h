@@ -28,7 +28,7 @@ void destroy_exam(Exam *exam);
 /**
  * Retorna o número de identificação do Exame passado no argumento
  *
- * @param exam  Ponteiro do tipo Exam.
+ * @param exam Ponteiro do tipo Exam.
  * 
  * @return Número identificador do Exame.
  */
@@ -43,13 +43,20 @@ int get_exam_id(const Exam *exam);
  */
 int get_exam_patient_id(const Exam *exam);
 
-// Retorna a identificação única do aparelho de raio-X utilizado no exame.
+// 
+/**
+ * Retorna o número de identificação do aparelho de raio-X utilizado no exame.
+ *
+ * @param exam Ponteiro do tipo Exam.
+ * 
+ * @return Número de identificação do paciente do Exame.
+ */
 int get_exam_rx_id(const Exam *exam);
 
 /**
  * Retorna a Data/Hora de realização do Exame.
  *
- * @param exam  Ponteiro do tipo Exam.
+ * @param exam Ponteiro do tipo Exam.
  * 
  * @return Data/Hora de realização do Exame.
  */
@@ -58,7 +65,7 @@ struct tm* get_exam_time(const Exam *exam);
 /**
  * Retorna a Data/Hora de realização do Exame no formato String.
  *
- * @param exam  Ponteiro do tipo Exam.
+ * @param exam Ponteiro do tipo Exam.
  * 
  * @return Data/Hora no formato String.
  */
@@ -67,20 +74,20 @@ char* get_exam_time_string(const Exam *exam);
 /**
  * Retorna o ponteiro para a Condition do Exame.
  *
- * @param exam  Ponteiro do tipo Exam.
+ * @param exam Ponteiro do tipo Exam.
  * 
  * @return Ponteiro do tipo Condition.
  */
-Condition* get_exam_condition(Exam *exam);
+Condition* get_exam_condition(const Exam *exam);
 
 /**
  * Retorna o nível de gravidade da Condition associada ao Exame.
  *
- * @param exam  Ponteiro do tipo Exam.
+ * @param exam Ponteiro do tipo Exam.
  * 
  * @return Inteiro do nível de gravidade da Condition no Exame.
  */
-int get_exam_condition_gravity(Exam *exam);
+int get_exam_condition_gravity(const Exam *exam);
 
 /**
  * Retorna o nome da Condition associada ao Exame.
@@ -89,7 +96,7 @@ int get_exam_condition_gravity(Exam *exam);
  * 
  * @return String do nome da Condition no Exame.
  */
-char* get_exam_condition_name(Exam *exam);
+char* get_exam_condition_name(const Exam *exam);
 
 /**
  * Muda manualmente as propriedades da Condition associada ao Exame.
@@ -101,7 +108,7 @@ char* get_exam_condition_name(Exam *exam);
  * 
  * @return String do nome da Condition no Exame.
  */
-void set_exam_condition(Exam *exam, int id, char* nome_cond, int grav);
+void set_exam_condition(Exam *exam, int id, const char* nome_cond, int grav);
 
 /**
  * Imprime na tela as propriedades do Exame
@@ -109,7 +116,7 @@ void set_exam_condition(Exam *exam, int id, char* nome_cond, int grav);
  * @param exam  Ponteiro do tipo Exam.
  * 
  */
-void print_exam(Exam *exam);
+void print_exam(const Exam *exam);
 
 /**
  * Retorna as propriedades do Exame em String.
@@ -118,6 +125,6 @@ void print_exam(Exam *exam);
  * 
  * @return String com propriedades do Exame.
  */
-char* exam_output(Exam *exam);
+char* exam_output(const Exam *exam);
 
 #endif

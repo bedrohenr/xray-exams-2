@@ -83,22 +83,23 @@ char* get_exam_time_string(const Exam *exam){
 }
 
 // Retorna o ponteiro da Condition assoaciada ao Exame .
-Condition* get_exam_condition(Exam *exam){
+Condition* get_exam_condition(const Exam *exam){
     return exam->condition_IA;
 }
 
 // Retorna o nome da Condition associada ao Exame.
-char* get_exam_condition_name(Exam *exam){
+char* get_exam_condition_name(const Exam *exam){
     return get_condition_name(exam->condition_IA);
 }
 
 // Retorna o nível de gravidade da Condition associada ao Exame.
-int get_exam_condition_gravity(Exam *exam){
+int get_exam_condition_gravity(const Exam *exam){
     return get_condition_gravity(get_exam_condition(exam));
 }
 
 // Manualmente muda as propriedades da Condition associada ao Exame.
-void set_exam_condition(Exam *exam, int id, char* nome_cond, int grav){
+// Usada para testes.
+void set_exam_condition(Exam *exam, int id, const char* nome_cond, int grav){
     Condition *old_condition = get_exam_condition(exam); // Aux
 
     // Recebe nova Condition com as propriedades inseridas.
@@ -109,7 +110,7 @@ void set_exam_condition(Exam *exam, int id, char* nome_cond, int grav){
 }
 
 // Imprime na tela as propriedades do Exame.
-void print_exam(Exam *exam){
+void print_exam(const Exam *exam){
     printf("Exame\nId: %d\n", get_exam_id(exam));
     printf("Id do Paciente: %d\n", get_exam_patient_id(exam));
     printf("Id do Raio X: %d\n", get_exam_rx_id(exam));
@@ -118,7 +119,7 @@ void print_exam(Exam *exam){
 }
 
 // Retorna as propriedades do Exame em string.
-char* exam_output(Exam *exam){
+char* exam_output(const Exam *exam){
     // Alocação de memória do ponteiro a ser retornado.
     char *output = (char *)malloc(sizeof(char) * 128);
 
