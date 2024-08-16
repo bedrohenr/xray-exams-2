@@ -15,7 +15,7 @@ struct patient {
 } patient;
 
 // Cria um novo paciente, alocando memória para a estrutura, preenchendo os campos internos com os dados passados como parâmetros e retornando um ponteiro para a estrutura criada. 
-Patient *create_patient(int id, const char *name, struct tm *birthdate){
+Patient *create_patient(int id, const char *name, struct tm *birthdate, struct tm* arrival){
     // Alocação de memória
     Patient *new_patient = (Patient *)malloc(sizeof(Patient));
 
