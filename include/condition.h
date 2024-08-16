@@ -12,7 +12,7 @@ typedef struct condition Condition;
  * 
  * @return Ponteiro para a Condition recém criada com os parâmetros.
  */
-Condition* create_condition(int id, char *name, int gravity);
+Condition* create_condition(int id, const char *name, int gravity);
 
 /**
  * Remove e libera alocação de memória do ponteiro do tipo Condition.
@@ -28,7 +28,7 @@ void destroy_condition(Condition *condition);
  * 
  * @return Número identificador da Condition.
  */
-int get_condition_id(Condition *condition);
+int get_condition_id(const Condition *condition);
 
 /**
  * Retorna o nome da Condition passada no argumento.
@@ -37,7 +37,7 @@ int get_condition_id(Condition *condition);
  * 
  * @return Nome da Condition.
  */
-char* get_condition_name(Condition *condition);
+char* get_condition_name(const Condition *condition);
 
 /**
  * Retorna a gravidade da Condition passada no argumento.
@@ -46,7 +46,7 @@ char* get_condition_name(Condition *condition);
  * 
  * @return Nível de gravidade da Condition.
  */
-int get_condition_gravity(Condition *condition);
+int get_condition_gravity(const Condition *condition);
 
 /**
  * Retorna um ponteiro criado com a condição escolhida pela probabilidade definida.
@@ -60,7 +60,7 @@ Condition* get_condition();
  * 
  * @param condition Ponteiro do tipo Condition.
  */
-void print_condition(Condition *condition);
+void print_condition(const Condition *condition);
 
 /**
  * Retorna string com todas informações da Condition passada no argumento.
@@ -69,6 +69,6 @@ void print_condition(Condition *condition);
  * 
  * @return String com todas propriedades do ponteiro Condition.
  */
-char* condition_output(Condition *condition);
+char* condition_output(const Condition *condition);
 
 #endif

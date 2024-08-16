@@ -29,7 +29,7 @@ struct condition{
 } condition;
 
 // Cria a Condition
-Condition* create_condition(int id, char *name, int gravity){
+Condition* create_condition(int id, const char *name, int gravity){
     Condition *new_condition = (Condition *)malloc(sizeof(Condition));
 
     // Alocação de memória
@@ -56,17 +56,17 @@ void destroy_condition(Condition *condition){
 }
 
 // Retorna o id da Condition
-int get_condition_id(Condition *condition){
+int get_condition_id(const Condition *condition){
     return condition->id;
 }
 
 // Retorna o nome da Condition
-char* get_condition_name(Condition *condition){
+char* get_condition_name(const Condition *condition){
     return condition->name;
 }
 
 // Retorna a gravidade da Condition
-int get_condition_gravity(Condition *condition){
+int get_condition_gravity(const Condition *condition){
     return condition->gravity;
 }
 
@@ -130,12 +130,12 @@ Condition* get_condition(){
 }
 
 // Imprime a Condition na tela
-void print_condition(Condition *condition){
+void print_condition(const Condition *condition){
     printf("Condição: %s, Gravidade: %d\n", get_condition_name(condition), get_condition_gravity(condition));
 }
 
 // Retorna uma string com as propriedades relevantes da Condition para inserir no arquivo
-char* condition_output(Condition *condition){
+char* condition_output(const Condition *condition){
     char *output = (char *)malloc(sizeof(char) * 32); // Alocação de memória para novo ponteiro string
     sprintf(output, "%s", get_condition_name(condition)); // Preenche a string
     return output; // Retorna o ponteiro
