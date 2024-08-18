@@ -71,7 +71,7 @@ float get_random_float_number(float max_number){
     return ((rand()/(float)(RAND_MAX)) * max_number);
 }
 
-// Verifica se o número de dias está correto para aquele mês.
+// Verifica se o número de dias está correto para o mês especificado.
 int validate_day_of_month(int month, int day){
     if(month > 11) // Verifica se o número do mês é válido.
         month = 11;
@@ -125,7 +125,7 @@ char* get_date_from_datetime(const struct tm* date){
 }
 
 // Imprime na tela as informações das estruturas
-// É usado a função correta de cada estruturda
+// É usado a função correta de cada estrutura
 void print_by_struct_type(StructType type, void *p) {
 
     switch (type) {
@@ -149,7 +149,7 @@ void print_by_struct_type(StructType type, void *p) {
 }
 
 // Retorna as informações das estruturas em string
-// É usado a função correta de cada estruturda
+// É usado a função correta de cada estrutura
 char* output_by_struct_type(StructType type, void *p) {
     switch (type) {
         case TYPE_PATIENT:
