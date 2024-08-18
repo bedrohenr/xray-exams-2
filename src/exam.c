@@ -82,6 +82,11 @@ Condition* get_exam_condition(const Exam *exam){
     return exam->condition_IA;
 }
 
+// Retorna o número de identificação da condition associada ao exame
+int get_exam_condition_id(const Exam *exam){
+    return get_condition_id(get_exam_condition(exam));
+}
+
 // Retorna o nome da Condition associada ao Exame.
 char* get_exam_condition_name(const Exam *exam){
     return get_condition_name(exam->condition_IA);

@@ -58,7 +58,7 @@ int get_exam_rx_id(const Exam *exam);
  *
  * @param exam Ponteiro do tipo Exam.
  * 
- * @return Inteiro momento de realização do Exame.
+ * @return Inteiro do instante de realização do Exame.
  */
 int get_exam_time(const Exam *exam);
 
@@ -70,6 +70,15 @@ int get_exam_time(const Exam *exam);
  * @return Ponteiro do tipo Condition.
  */
 Condition* get_exam_condition(const Exam *exam);
+
+/**
+ * Retorna o número de identificação da condition associada ao exame.
+ *
+ * @param exam Ponteiro do tipo Exam.
+ * 
+ * @return Inteiro do número de identificação da Condition no Exame.
+ */
+int get_exam_condition_id(const Exam *exam);
 
 /**
  * Retorna o nível de gravidade da Condition associada ao Exame.
@@ -102,7 +111,7 @@ char* get_exam_condition_name(const Exam *exam);
 void set_exam_condition(Exam *exam, int id, const char* nome_cond, int grav);
 
 /**
- * Imprime na tela as propriedades do Exame
+ * Imprime na tela as propriedades do Exame.
  * 
  * @param exam  Ponteiro do tipo Exam.
  * 
