@@ -31,7 +31,7 @@ Aqui especificaremos os conteúdos dos arquivos de cabeçalho e o conteúdo dess
 
 ## Exam
 
-Define uma struct **Exam** que consiste de:
+Define uma struct **Exam**(Exame), que consiste de:
 
 ### Variáveis
 
@@ -63,7 +63,7 @@ Define uma struct **Exam** que consiste de:
 
 ## Patient
 
-Define a struct **Patient**, que consiste de:
+Define a struct **Patient**(Paciente), que consiste de:
 
 ### Variáveis
 
@@ -90,7 +90,8 @@ Define a struct **Patient**, que consiste de:
 
 ## Condition
 
-Define a struct **Condition**, que consiste de:
+I
+Define a struct **Condition**(Condição), que consiste de:
 
 ### Variáveis
 
@@ -117,7 +118,7 @@ Define a struct **Condition**, que consiste de:
 
 ## Report
 
-Define a struct **Report**, que consiste de:
+Define a struct **Report**(Laudo), que consiste de:
 
 ### Variáveis
 
@@ -146,6 +147,7 @@ Define a struct **Report**, que consiste de:
 
 ## Queue
 
+Implementação de fila de pointeiros genéricos.
 Define a struct **Queue** e **QueueNode**, que consiste de:
 
 **Queue**:
@@ -180,16 +182,63 @@ Define a struct **Queue** e **QueueNode**, que consiste de:
 | [q_free(...)](src/queue.c?#L128)    | const **Queue** q | // Imprime todos os elementos na fila. |  |
 | [q_print(...)](src/queue.c?#L144)    | const **Queue** q | // Libera toda a memória da fila. |  |
 
+## Definitions
+
+Consiste nas constantes definidas para o sistema.
+
+### Variáveis
+
+| Variável                        | Tipo           | Finalidade |
+| ------------------------------- | -------------- | --------------------------------------------------------------- |
+| [RUNTIME](src/definitions.c?#L12)        | Inteiro    | Tempo total de execução do programa.                       |
+| [SIM_RERPOT_TIME](src/definitions.c?#L13)     | Inteiro       | A cada quantas unidades de tempo mostrar o relatório. |
+| [SIM_RERPOT_WAITING_TIME](src/definitions.c?#L13)     | Inteiro | Quanto tempo esperar ao mostrar o relatório. |
+| [RNG_DISTRIBUTION](src/definitions.c?#L13)     | Inteiro | Distribuição do número gerado aleatóriamente das Conditions. |
+| [I_CONDITION_L](src/definitions.c?#L13)     | Inteiro      | Número minimo para a I Condition. |
+| [I_CONDITION_H](src/definitions.c?#L13)     | Inteiro      | Número máximo para a I Condition. |
+| [II_CONDITION_L](src/definitions.c?#L13)     | Inteiro      | Número mínimo para a II Condition. |
+| [II_CONDITION_H](src/definitions.c?#L13)     | Inteiro      | Número máximo para a II Condition. |
+| [III_CONDITION_L](src/definitions.c?#L13)     | Inteiro      | Número mínimo para a III Condition. |
+| [III_CONDITION_H](src/definitions.c?#L13)     | Inteiro      | Número máximo para a III Condition. |
+| [IV_CONDITION_L](src/definitions.c?#L13)     | Inteiro      | Número mínimo para a IV Condition. |
+| [IV_CONDITION_H](src/definitions.c?#L13)     | Inteiro      | Número máximo para a IV Condition. |
+| [V_CONDITION_L](src/definitions.c?#L13)     | Inteiro      | Número mínimo para a V Condition. |
+| [V_CONDITION_H](src/definitions.c?#L13)     | Inteiro      | Número máximo para a V Condition. |
+| [VI_CONDITION_L](src/definitions.c?#L13)     | Inteiro      | Número mínimo para a VI Condition. |
+| [VI_CONDITION_H](src/definitions.c?#L13)     | Inteiro      | Número máximo para a VI Condition. |
+| [VII_CONDITION_L](src/definitions.c?#L13)     | Inteiro      | Número mínimo para a VII Condition. |
+| [VII_CONDITION_H](src/definitions.c?#L13)     | Inteiro      | Número máximo para a VII Condition. |
+| [VIII_CONDITION_L](src/definitions.c?#L13)     | Inteiro      | Número mínimo para a VIII Condition. |
+| [VIII_CONDITION_H](src/definitions.c?#L13)     | Inteiro      | Número máximo para a VIII Condition. |
+| [IX_CONDITION_L](src/definitions.c?#L13)     | Inteiro      | Número mínimo para a IX Condition. |
+| [IX_CONDITION_H](src/definitions.c?#L13)     | Inteiro      | Número máximo para a II Condition. |
+
 ## Functions
-Implementada por conter funções úteis para ambas **Exam** e **Patient**.
+Implementada para conter funções úteis para toda execução do programa.
 
 ### Funções
 
 | Função                                           |  Recebe                                  | Execução | Retorna     |
 | ------------------------------------------------ | ---------------------------------------- | -------- | ----------- |
-| [error_exit(...)](src/functions.c?#L10)          | **int** error_code                       | Finaliza o programa com um código de erro, normalmente, EXIT_FAILURE.|  |
-| [error_message_id(...)](src/functions.c?#L14)    | const  **char**  *msg,  **int**  id | Mostra na tela uma mensagem de erro com um id, seja do paciente ou do exame. |  |
-| [error_message_field(...)](src/functions.c?#L18) | const  **char**  *msg,  **char** campo | Mostra na tela uma mensagem de erro com o campo de onde foi encontrado o erro. |  |
-| [validate_int(...)](src/functions.c?#L23)         | **int**  num,  **char**  *campo          | Verifica se o número é maior que zero, assim, confirmando se é um número válido. Caso não seja, usa as outras funções para mostrar uma mensagem de erro e terminando a execução.| Char * |
-| [validate_time(...)](src/functions.c?#L36)       | const  **struct  tm***  time,  **char**  *campo | Verifica se o ano, mês e dia, com a variável do tipo struct tm passada como argumento, são iguais a 0. Caso seja, utiliza das outras funções para mostrar uma mensagem de erro e terminar a execução.|  Inteiro     |
-| [validate_name(...)](src/functions.c?#L55)       | const  **char**  *name,  **int**  id     | Verifica se a variável char* passada com argumento é vazia. Caso seja, utiliza as outras funções para mostrar uma mensagem de erro e terminar a execução. | Struct tm * |
+| [error_exit(...)](src/functions.c?#L15)          | **int** error_code                       | Finaliza o programa com um código de erro, normalmente, EXIT_FAILURE.|  |
+| [validate_int(...)](src/functions.c?#L20)        | **int** num, const **char**  *msg        | Verifica se o número inteiro id é válido, maior que zero. Retorna 0, caso a validação falhe.| Char * |
+| [validate_time(...)](src/functions.c?#L33)       | const **struct tm***  time,  **char**  *campo | Verifica se o ano, mês e dia, com a variável do tipo struct tm passada como argumento, são iguais a 0. Caso seja, utiliza das outras funções para mostrar uma mensagem de erro e terminar a execução.|  Inteiro     |
+| [validate_string(...)](src/functions.c?#L51)       | const **char** *name,  **int**  id     | Verifica se o a variável string está vazia e mostra mensagem de erro. | Struct tm * |
+| [get_random_number(...)](src/functions.c?#L63)       | **int** max_number     | Gera um número aleatório entre 0 e o  número máximo especificado. | Inteiro |
+| [get_random_float_number(...)](src/functions.c?#L68)       | **int** max_number     | Gera um número de ponto flutuante aleatório entre 0 e o número máximo especificado. | Inteiro |
+| [validate_day_of_month(...)](src/functions.c?#L75)       | **int** month, **int** day | Verifica se o número de dias está correto para o mês especificado. Retorna o dia máximo de dias do mês especificado caso falhe. | Inteiro |
+| [create_date(...)](src/functions.c?#L90)       | **int** year, **int** month, **int** day | Cria e retorna uma data com os parâmetros especificados. | Struct tm |
+| [get_time(...)](src/functions.c?#L103)  |  | Retorna a Data/Hora atual. | Struct tm * |
+| [get_timestamp_from_datetime(...)](src/functions.c?#L110)  | const **struct tm** *date | Retorna um timestamp em string no formato YY-mm-dd HH:MM:SS. | Char * |
+| [get_date_from_datetime(...)](src/functions.c?#L119)  | const **struct tm** *date | Retorna data em string no formato YY-mm-dd de uma variável datetime. | Char * |
+| [print_by_structure_type(...)](src/functions.c?#L129)  | **StructType** type, **void** *p | Imprime na tela as informações das estruturas. É usado a função correta de cada estrutura. |  |
+| [output_by_structure_type(...)](src/functions.c?#L153)  | **StructType** type, **void** *p | Retorna as informações das estruturas em string. É usado a função correta de cada estrutura |  |
+| [static create_file(...)](src/functions.c?#L171)  | const **char** *path | Cria um arquivo. | Inteiro |
+| [static file_exists(...)](src/functions.c?#L186)  | const **char** *path | Verifica se o arquivo no endereço inserido existe. Retorna 1 se o arquivo existe. | Inteiro |
+| [get_db_path(...)](src/functions.c?#L202)  | const **StructType** type | Retorna o arquivo db da estrutura passada no argumento. | Char * |
+| [db_save(...)](src/functions.c?#L228)  | const **StructType** type, const **char** *content | Adiciona uma linha no arquivo especificado. | Char * |
+| [free_by_structure_type(...)](src/functions.c?#L250)  | const **StructType** type, **void** *p | Libera memória da estrutura devido a seu tipo, usando as funções corretas. | Char * |
+| [time_passed(...)](src/functions.c?#L268)  | **clock_t** t | Calcula quanto tempo passou desde um ponto anterior onde originou a variavel t. | double |
+| [test_enqueue_prio(...)](src/functions.c?#L276)  | | Cria exames de prioridades diferentes, de forma não sequencial para checar se a lista de prioridade de exame esta funcionando. |  |
+| [get_name(...)](src/functions.c?#L335)  | | Retorna uma string com nome e sobrenome gerado aleatoriamente. | Char * |
+| [simulation_report(...)](src/functions.c?#L359) | **int** patient_count, **int** patient_queue_count, **int** exam_count, **int** report_count, **int** time_exam_in_queue, **int** *condition_time, **int** *condition_count, **int** condition_array_length, **int** exam_at_defined_time_limit| Mostra os valores selecionados da simulação na tela. | void |
