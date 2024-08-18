@@ -2,7 +2,8 @@
     "files.associations": {
         "time.h": "c",
         "condition.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "definitions.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
