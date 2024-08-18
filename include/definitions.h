@@ -68,4 +68,8 @@ typedef enum {
 #define IX_CONDITION_H 19
 
 // --- FIM DEFINIÇÃO DA CONDITION
+
+// Tempo limite estabelecido
+#define TIME_LIMIT 7200
+
 #endif
