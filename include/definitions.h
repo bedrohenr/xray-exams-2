@@ -11,15 +11,15 @@ typedef enum {
 // Tempo total de execução do programa.
 #define RUNTIME 43200
 
-// A cada quantas unidades de tempo mostrar o relatório
+// A cada quantas unidades de tempo mostrar o relatório.
 #define SIM_REPORT_TIME 10000
 
-// Quanto tempo esperar ao mostrar o relatório
+// Quanto tempo esperar ao mostrar o relatório.
 #define SIM_REPORT_WAITING_TIME 5
 
 // --- INÍCIO DEFINIÇÃO DA CONDITION
 
-// Distribuição do número gerado aleatóriamente das Conditions
+// Distribuição do número gerado aleatóriamente das Conditions.
 #define RNG_DISTRIBUTION 19 // 0 é incluído.
 
 // Número minimo para a I Condition
