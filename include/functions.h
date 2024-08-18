@@ -179,5 +179,5 @@ char* get_name();
  * @param exam_count Número de exames feitos no hospital.
  * @param report_count Número de laudos gerados no hospital.
  */
-void simulation_report(int patient_count, int patient_queue_count, int exam_count, int report_count);
+void simulation_report(int patient_count, int patient_queue_count, int exam_count, int report_count, int time_exam_in_queue, int *condition_time, int *condition_count, int condition_array_length, int exam_at_defined_time_limit);
 #endif
