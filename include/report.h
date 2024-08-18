@@ -45,7 +45,7 @@ int get_report_exam_id(const Report *report);
 
 /**
  * Retorna a Condition associada ao Report. 
- * *
+ * 
  * @param report Ponteiro para a estrutura Report.
  * 
  * @return Ponteiro para a estrutura Condition associada ao Report.
@@ -53,7 +53,16 @@ int get_report_exam_id(const Report *report);
 Condition* get_report_condition(const Report *report);
 
 /**
- * Retorna a Data/Hora de realização do Report. 
+ * Retorna o número identificador da condition associada ao Report.
+ * *
+ * @param report Ponteiro para a estrutura Report.
+ * 
+ * @return Retorna o número identificador da condition associada ao Report.
+ */
+int get_report_condition_id(const Report *report);
+
+/**
+ * Retorna a unidade de tempo de realização do Report. 
  * *
  * @param report Ponteiro para a estrutura Report.
  * 
@@ -65,6 +74,7 @@ int get_report_time(const Report *report);
  * Gera um número aleatório e decide se mudará a Condition do Report ou não.
  * *
  * @param report Ponteiro para a estrutura Report.
+ * 
  */
 void check_condition(Report *report);
 

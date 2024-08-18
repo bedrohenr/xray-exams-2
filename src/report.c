@@ -55,6 +55,11 @@ Condition* get_report_condition(const Report *report){
     return report->condition;
 }
 
+// Retorna o número identificador da condition associada ao Report
+int get_report_condition_id(const Report *report){
+    return get_condition_id(get_report_condition(report));
+}
+
 // Retorna a Data/Hora de realização do Report. 
 int get_report_time(const Report *report){
     return report->timestamp;
@@ -62,9 +67,9 @@ int get_report_time(const Report *report){
 
 // Gera um número aleatório e decide se mudará a Condition do Report ou não.
 void check_condition(Report *report){
-    int rng = get_random_number(10); // Recebe um número gerado aleatoriamento de 0 a 10
+    int rng = get_random_number(10); // Recebe um número gerado aleatoriamento de 0 a 10.
     if(rng > 8) 
-        change_condition(report); // Gera aleatóriamente outra Condition
+        change_condition(report); // Gera aleatóriamente outra Condition.
 }
 
 // Gera uma nova Condition, mudando a atual do Report.
