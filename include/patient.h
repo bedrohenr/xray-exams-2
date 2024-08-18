@@ -77,7 +77,7 @@ char* get_patient_birthdate_string(const Patient *patient);
 void print_patient(const Patient *patient);
 
 /**
- * Retorna as propriedades do Patient passado como arguemento.
+ * Retorna as propriedades do Patient passado como arguemento em uma string.
  *
  * @param patient Ponteiro do tipo Patient.
  * 
