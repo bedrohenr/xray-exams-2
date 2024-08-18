@@ -39,6 +39,16 @@ int get_condition_id(const Condition *condition);
  */
 char* get_condition_name(const Condition *condition);
 
+// 
+/**
+ * Retorna o nome da Condition pelo número de identificação.
+ * 
+ * @param condition Ponteiro do tipo Condition.
+ * 
+ * @return Nome da Condition.
+ */
+char* get_condition_name_by_id(int id);
+
 /**
  * Retorna a gravidade da Condition passada no argumento.
  * 
@@ -63,7 +73,7 @@ Condition* get_condition();
 void print_condition(const Condition *condition);
 
 /**
- * Retorna string com todas informações da Condition passada no argumento.
+ * Retorna string com todas informações da Condition passada no argumento em uma string.
  * 
  * @param condition Ponteiro do tipo Condition.
  * 

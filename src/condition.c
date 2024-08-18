@@ -65,6 +65,13 @@ char* get_condition_name(const Condition *condition){
     return condition->name;
 }
 
+// Retorna o nome da Condition
+char* get_condition_name_by_id(int id){
+    char* condition_names[] = {"Saúde Normal","Bronquite","Pneumonia","COVID","Embolia Pulmonar","Derrame Pleural", "Fibrose Pulmonar","Tuberculose","Câncer de Pulmão"};
+
+    return condition_names[id];
+}
+
 // Retorna a gravidade da Condition
 int get_condition_gravity(const Condition *condition){
     return condition->gravity;
