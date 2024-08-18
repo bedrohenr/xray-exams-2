@@ -31,7 +31,7 @@ Aqui especificaremos os conteúdos dos arquivos de cabeçalho e o conteúdo dess
 
 ## Exam
 
-Define uma struct **Exam**(Exame), que consiste de:
+Define uma struct **Exam** (**Exame**), que consiste de:
 
 ### Variáveis
 
@@ -63,7 +63,7 @@ Define uma struct **Exam**(Exame), que consiste de:
 
 ## Patient
 
-Define a struct **Patient**(Paciente), que consiste de:
+Define a struct **Patient** (**Paciente**), que consiste de:
 
 ### Variáveis
 
@@ -91,7 +91,7 @@ Define a struct **Patient**(Paciente), que consiste de:
 ## Condition
 
 I
-Define a struct **Condition**(Condição), que consiste de:
+Define a struct **Condition** (**Condição**), que consiste de:
 
 ### Variáveis
 
@@ -118,7 +118,7 @@ Define a struct **Condition**(Condição), que consiste de:
 
 ## Report
 
-Define a struct **Report**(Laudo), que consiste de:
+Define a struct **Report** (**Laudo**), que consiste de:
 
 ### Variáveis
 
