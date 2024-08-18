@@ -11,6 +11,9 @@
 
 // Função principal de teste
 int main() {
+    // Resetando os arquivos db
+    db_reset();
+
    // Iniciando rand.
     srand(time(0));
 

@@ -222,6 +222,7 @@ char* get_db_path(StructType type){
         return path; // Retorna o endereço do arquivo.
     else
         return ""; // -Wall enchendo o saco.
+    
 }
 
 // Adiciona uma linha no arquivo especificado.
@@ -381,4 +382,22 @@ void simulation_report(int patient_count, int patient_queue_count, int exam_coun
 
     // Número de exames realizados após o limite de tempo estabelecido (7200 unidades de tempo).
     printf("\nExames realizados após limite de tempo estabelecido: %d.", patient_count - exam_at_defined_time_limit);
+}
+
+// Apaga o conteúdo dos arquivos db
+void db_reset(){
+    char* path;
+
+    // Resetando arquivo db_patient.
+    path = "./src/static/db_patient.txt";
+    create_file(path);
+
+    // Resetando db_exam.
+    path = "./src/static/db_exam.txt";
+    create_file(path);
+
+    // Resetando db_report.
+    path = "./src/static/db_report.txt";
+    create_file(path);
+
 }
