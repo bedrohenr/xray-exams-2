@@ -205,15 +205,15 @@ char* get_db_path(StructType type){
     // Resolve o endereço do arquivo pelo tipo da estrutura
     switch (type) {
         case TYPE_PATIENT:
-            path = "./src/static/db_patient.txt";
+            path = DB_PATIENT_PATH;
             break;
             
         case TYPE_EXAM:
-            path = "./src/static/db_exam.txt";
+            path = DB_EXAM_PATH;
             break;
         
         case TYPE_REPORT:
-            path = "./src/static/db_report.txt";
+            path = DB_REPORT_PATH;
             break;
     }
 
@@ -222,7 +222,6 @@ char* get_db_path(StructType type){
         return path; // Retorna o endereço do arquivo.
     else
         return ""; // -Wall enchendo o saco.
-    
 }
 
 // Adiciona uma linha no arquivo especificado.
@@ -358,7 +357,7 @@ char* get_name(){
 }
 
 void simulation_report(int patient_count, int patient_queue_count, int exam_count, int report_count, int time_exam_in_queue, int *condition_time, int *condition_count, int condition_array_length, int exam_at_defined_time_limit){
-    printf("AA: %d", condition_array_length);
+    printf("-- RELATÓRIO -- ");
     // Número de pacientes que visitaram o hospital.
     printf("\nVisitaram o hospital: %d.", patient_count);
 
@@ -382,6 +381,8 @@ void simulation_report(int patient_count, int patient_queue_count, int exam_coun
 
     // Número de exames realizados após o limite de tempo estabelecido (7200 unidades de tempo).
     printf("\nExames realizados após limite de tempo estabelecido: %d.", patient_count - exam_at_defined_time_limit);
+
+    printf("-- FIM RELATÓRIO -- ");
 }
 
 // Apaga o conteúdo dos arquivos db
@@ -389,15 +390,29 @@ void db_reset(){
     char* path;
 
     // Resetando arquivo db_patient.
-    path = "./src/static/db_patient.txt";
+    path = DB_PATIENT_PATH;
     create_file(path);
 
     // Resetando db_exam.
-    path = "./src/static/db_exam.txt";
+    path = DB_EXAM_PATH;
     create_file(path);
 
     // Resetando db_report.
-    path = "./src/static/db_report.txt";
+    path = DB_REPORT_PATH;
     create_file(path);
+}
 
+// Testa e mostra a distribuição de probabiliade das Conditions.
+void show_condition_rng(){
+    printf("Teste de distribuição de probabilidade das Conditions");
+    printf("\nNúmeros gerados de [0, %.0f].", RNG_DISTRIBUTION);
+    printf("\nCondition  %d: %d => rng <= %.0f", 1, I_CONDITION_L, I_CONDITION_H);
+    printf("\nCondition %d: %.0f => rng <= %.0f", 2, II_CONDITION_L, II_CONDITION_H);
+    printf("\nCondition %d: %.0f => rng <= %.0f", 3, III_CONDITION_L, III_CONDITION_H);
+    printf("\nCondition %d: %.0f => rng <= %.0f", 4, IV_CONDITION_L, IV_CONDITION_H);
+    printf("\nCondition %d: %.0f => rng <= %.0f", 5, V_CONDITION_L, V_CONDITION_H);
+    printf("\nCondition %d: %.0f => rng <= %.0f", 6, VI_CONDITION_L, VI_CONDITION_H);
+    printf("\nCondition %d: %.0f => rng <= %.0f", 7, VII_CONDITION_L, VII_CONDITION_H);
+    printf("\nCondition %d: %.0f => rng <= %.0f", 8, VIII_CONDITION_L, VIII_CONDITION_H);
+    printf("\nCondition %d: %.0f => rng <= %.0f", 9, IX_CONDITION_L, IX_CONDITION_H);
 }

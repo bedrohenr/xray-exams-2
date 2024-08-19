@@ -184,4 +184,7 @@ void simulation_report(int patient_count, int patient_queue_count, int exam_coun
 // Apaga o conteúdo dos arquivos db.
 void db_reset();
 
+// Testa a distribuição de probabiliade das Conditions.
+void test_condition_rng();
+
 #endif
