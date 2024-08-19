@@ -58,6 +58,9 @@ int main() {
     Queue *ExamPriorityQueue = q_create();
 
     while(time <= 10000){
+
+        test_condition_rng();
+        return 0;
         // Salva a quantidade de pacientes no tempo estabelecido, no relatorio subtrai pelo final
         if(time == 1000){
             exam_at_defined_time_limit = patient_id_counter;
