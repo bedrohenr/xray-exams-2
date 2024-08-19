@@ -190,28 +190,42 @@ Consiste nas constantes definidas para o sistema.
 
 | Variável                        | Tipo           | Finalidade |
 | ------------------------------- | -------------- | --------------------------------------------------------------- |
-| [RUNTIME](src/definitions.c?#L12)        | Inteiro    | Tempo total de execução do programa.                       |
-| [SIM_RERPOT_TIME](src/definitions.c?#L13)     | Inteiro       | A cada quantas unidades de tempo mostrar o relatório. |
-| [SIM_RERPOT_WAITING_TIME](src/definitions.c?#L13)     | Inteiro | Quanto tempo esperar ao mostrar o relatório. |
-| [RNG_DISTRIBUTION](src/definitions.c?#L13)     | Inteiro | Distribuição do número gerado aleatóriamente das Conditions. |
-| [I_CONDITION_L](src/definitions.c?#L13)     | Inteiro      | Número minimo para a I Condition. |
-| [I_CONDITION_H](src/definitions.c?#L13)     | Inteiro      | Número máximo para a I Condition. |
-| [II_CONDITION_L](src/definitions.c?#L13)     | Inteiro      | Número mínimo para a II Condition. |
-| [II_CONDITION_H](src/definitions.c?#L13)     | Inteiro      | Número máximo para a II Condition. |
-| [III_CONDITION_L](src/definitions.c?#L13)     | Inteiro      | Número mínimo para a III Condition. |
-| [III_CONDITION_H](src/definitions.c?#L13)     | Inteiro      | Número máximo para a III Condition. |
-| [IV_CONDITION_L](src/definitions.c?#L13)     | Inteiro      | Número mínimo para a IV Condition. |
-| [IV_CONDITION_H](src/definitions.c?#L13)     | Inteiro      | Número máximo para a IV Condition. |
-| [V_CONDITION_L](src/definitions.c?#L13)     | Inteiro      | Número mínimo para a V Condition. |
-| [V_CONDITION_H](src/definitions.c?#L13)     | Inteiro      | Número máximo para a V Condition. |
-| [VI_CONDITION_L](src/definitions.c?#L13)     | Inteiro      | Número mínimo para a VI Condition. |
-| [VI_CONDITION_H](src/definitions.c?#L13)     | Inteiro      | Número máximo para a VI Condition. |
-| [VII_CONDITION_L](src/definitions.c?#L13)     | Inteiro      | Número mínimo para a VII Condition. |
-| [VII_CONDITION_H](src/definitions.c?#L13)     | Inteiro      | Número máximo para a VII Condition. |
-| [VIII_CONDITION_L](src/definitions.c?#L13)     | Inteiro      | Número mínimo para a VIII Condition. |
-| [VIII_CONDITION_H](src/definitions.c?#L13)     | Inteiro      | Número máximo para a VIII Condition. |
-| [IX_CONDITION_L](src/definitions.c?#L13)     | Inteiro      | Número mínimo para a IX Condition. |
-| [IX_CONDITION_H](src/definitions.c?#L13)     | Inteiro      | Número máximo para a II Condition. |
+| [DB_PATIENT_PATH](include/definitions.h?#L12)     | Inteiro | Endereço do arquivo db Patient. |
+| [DB_EXAM_PATH](include/definitions.h?#L15)        | Inteiro | Tempo total de execução do programa.                       |
+| [DB_REPORT_PATH](include/definitions.c?#L18)      | Inteiro | Tempo total de execução do programa.                       |
+| [RUNTIME](include/definitions.h?#L21)        | Inteiro      | Tempo total de execução do programa.                       |
+| [SIM_RERPOT_TIME](include/definitions.h?#L24)     | Inteiro | A cada quantas unidades de tempo mostrar o relatório. |
+| [SIM_RERPOT_WAITING_TIME](include/definitions.h?#L27)     | Inteiro | Quanto tempo esperar ao mostrar o relatório. |
+| [RNG_INPUT](include/definitions.h?#L33)           | Inteiro | Faixa de números gerados para as Conditions. |
+| [I_CONDITION_PROB](include/definitions.h?#L36)    | Inteiro | Probabilidade para a I Condition. |
+| [I_CONDITION_L](include/definitions.h?#L38)       | Inteiro | Número minimo para a I Condition. |
+| [I_CONDITION_H](include/definitions.h?#L40)       | Inteiro | Número máximo para a I Condition. |
+| [II_CONDITION_PROB](include/definitions.h?#L43)   | Inteiro | Probabilidade para a II Condition. |
+| [II_CONDITION_L](include/definitions.h?#L45)      | Inteiro | Número mínimo para a II Condition. |
+| [II_CONDITION_H](include/definitions.h?#L47)      | Inteiro | Número máximo para a II Condition. |
+| [III_CONDITION_PROB](include/definitions.h?#L50)  | Inteiro | Probabilidade para a III Condition. |
+| [III_CONDITION_L](include/definitions.h?#L52)     | Inteiro | Número mínimo para a III Condition. |
+| [III_CONDITION_H](include/definitions.h?#L54)     | Inteiro | Número máximo para a III Condition. |
+| [IV_CONDITION_PROB](include/definitions.h?#L57)   | Inteiro | Probabilidade para a IV Condition. |
+| [IV_CONDITION_L](include/definitions.h?#L59)      | Inteiro | Número mínimo para a IV Condition. |
+| [IV_CONDITION_H](include/definitions.h?#L61)      | Inteiro | Número máximo para a IV Condition. |
+| [V_CONDITION_PROB](include/definitions.h?#L64)    | Inteiro | Probabilidade para a V Condition. |
+| [V_CONDITION_L](include/definitions.h?#L66)       | Inteiro | Número mínimo para a V Condition. |
+| [V_CONDITION_H](include/definitions.h?#L68)       | Inteiro | Número máximo para a V Condition. |
+| [VI_CONDITION_PROB](include/definitions.h?#L71)   | Inteiro | Probabilidade para a VI Condition. |
+| [VI_CONDITION_L](include/definitions.h?#L73)      | Inteiro | Número mínimo para a VI Condition. |
+| [VI_CONDITION_H](include/definitions.h?#L75)      | Inteiro | Número máximo para a VI Condition. |
+| [VII_CONDITION_PROB](include/definitions.h?#L78)  | Inteiro | Probabilidade para a VII Condition. |
+| [VII_CONDITION_L](include/definitions.h?#L80)     | Inteiro | Número mínimo para a VII Condition. |
+| [VII_CONDITION_H](include/definitions.h?#L82)     | Inteiro | Número máximo para a VII Condition. |
+| [VIII_CONDITION_PROB](include/definitions.h?#L85) | Inteiro | Probabilidade para a VIII Condition. |
+| [VIII_CONDITION_L](include/definitions.h?#L87)    | Inteiro | Número mínimo para a VIII Condition. |
+| [VIII_CONDITION_H](include/definitions.h?#L89)    | Inteiro | Número máximo para a VIII Condition. |
+| [IX_CONDITION_PROB](include/definitions.h?#L92)   | Inteiro | Probabilidade para a IX Condition. |
+| [IX_CONDITION_L](include/definitions.h?#L94)      | Inteiro | Número mínimo para a IX Condition. |
+| [IX_CONDITION_H](include/definitions.h?#L96)      | Inteiro | Número máximo para a IX Condition. |
+| [RNG_DISTRIBUTION](include/definitions.h?#L100)   | Inteiro | Distribuição do número gerado aleatóriamente das Conditions. Recebe o número da IX_CONDITION_H. |
+| [TIME_LIMIT](include/definitions.h?#L83)          | Inteiro | Tempo limite estabelecido. |
 
 ## Functions
 Implementada para conter funções úteis para toda execução do programa.
@@ -242,4 +256,5 @@ Implementada para conter funções úteis para toda execução do programa.
 | [test_enqueue_prio(...)](src/functions.c?#L276)  | | Cria exames de prioridades diferentes, de forma não sequencial para checar se a lista de prioridade de exame esta funcionando. |  |
 | [get_name(...)](src/functions.c?#L335)  | | Retorna uma string com nome e sobrenome gerado aleatoriamente. | Char * |
 | [simulation_report(...)](src/functions.c?#L359) | **int** patient_count, **int** patient_queue_count, **int** exam_count, **int** report_count, **int** time_exam_in_queue, **int** *condition_time, **int** *condition_count, **int** condition_array_length, **int** exam_at_defined_time_limit| Mostra os valores selecionados da simulação na tela. | void |
-| [db_reset(...)](src/functions.c?#L335)  | | Apaga o conteúdo dos arquivos db. | |
+| [db_reset(...)](src/functions.c?#L389)  | | Apaga o conteúdo dos arquivos db. | |
+| [show_condition_rng(...)](src/functions.c?#L406)  | | Testa e mostra a distribuição de probabiliade das Conditions. | |
