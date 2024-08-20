@@ -37,7 +37,9 @@ int main() {
     int arrival;
 
     // Variáveis para o relatório de tempo do exame
-    int condition_id;
+    int sim_report_timer = SIM_REPORT_TIME; // A cada quantas u.t. mostrar o relatório
+    int condition_id; // aux
+    int novo_paciente; // Armazena se chegou novo paciente
     int exam_queue_time = 0;
     int condition_count[9] = {0}; // Quantos exames tiveram de cada condition.
     int condition_time[9]  = {0}; // Tempo que levou cada condition do exame.
@@ -57,23 +59,24 @@ int main() {
     Queue *PatientQueue = q_create();
     Queue *ExamPriorityQueue = q_create();
 
-    while(time <= 10000){
-
-        test_condition_rng();
-        return 0;
+    while(time <= RUNTIME){
         // Salva a quantidade de pacientes no tempo estabelecido, no relatorio subtrai pelo final
-        if(time == 1000){
+        if(time == TIME_LIMIT){
             exam_at_defined_time_limit = patient_id_counter;
         }
         // Relatório
-        if(time == 10000 || time == 20000 || time == 30000 || time == 43000){
+        if(time == sim_report_timer){
+            // Tamanho do array de conditions
             condition_array_length = sizeof(condition_count)/sizeof(condition_count[0]);
+            // Chamada para a função do relatório
             simulation_report(patient_id_counter, q_size(PatientQueue), exam_id_counter, report_id_counter, exam_queue_time, condition_time, condition_count, condition_array_length, exam_at_defined_time_limit);
-            return 0;
+
+            sim_report_timer += time; // Incrementa o timer
         }
         // 20% de chance de chegada de paciente
         // Gera um número de 0 a 4 -> 1/5
-        if(get_random_number(4) == 0){
+        novo_paciente = get_random_number(4) == 0;
+        if(novo_paciente){ // Checa se novo paciente
             // Obtém nome do paciente aleatoriamente
             name = get_name(); 
 
@@ -81,10 +84,10 @@ int main() {
             arrival = time;
 
             // Definindo uma data de nascimento fictícia para o paciente.
-            year = get_random_number(124);
-            month = get_random_number(11);
-            day = get_random_number(31);
-            birthdate = create_date(year, month, day);
+            year = get_random_number(124); // Gera um número de 0 a 124, que vai ser adicionado a 1900
+            month = get_random_number(11); // Gera um número de 0 a 11
+            day = get_random_number(31);   // Gera um número de 0 a 31
+            birthdate = create_date(year, month, day);  // Recebe um struct tm com os números
 
             // Criando um paciente
             patient = create_patient(patient_id_counter++, name, &birthdate, arrival);
@@ -125,6 +128,7 @@ int main() {
                 // Variável da máquina de raio-X atualizada: Vazia.
                 XRMachineManager[i] = NULL;
                 XRMachineTimer[i] = 0; // Timer da máquina resetado.
+                break;
             }
         }
 
