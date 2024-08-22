@@ -104,4 +104,10 @@ typedef enum {
 // Tempo limite estabelecido.
 #define TIME_LIMIT 7200
 
+// Quantidade de maquinas de Raio-X.
+#define XRAY_MACHINES_QUANTITY 5
+
+// Duração do uso da máquina de Raio-X em unidade de tempo.
+#define XRAY_DURATION 10
+
 #endif

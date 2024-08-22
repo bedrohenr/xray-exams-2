@@ -52,13 +52,15 @@ int main() {
     Report *report;
 
     // Quantidade de maquina de raio X.
-    Patient *XRMachineManager[5] = {};
-    int XRMachineTimer[5]; // Usada para armazenar o timer de cada Maquina Raio X.
+    Patient *XRMachineManager[XRAY_MACHINES_QUANTITY] = {};
+    int XRMachineTimer[XRAY_MACHINES_QUANTITY]; // Usada para armazenar o timer de cada Maquina Raio X.
 
     // Filas.
     Queue *PatientQueue = q_create();
     Queue *ExamPriorityQueue = q_create();
 
+    printf("Simulação iniciada.");
+    // Programa irá rodar até o tempo definido em RUNTIME (43200 ut)
     while(time <= RUNTIME){
         // Salva a quantidade de pacientes no tempo estabelecido, no relatorio subtrai pelo final
         if(time == TIME_LIMIT){
@@ -70,7 +72,7 @@ int main() {
             condition_array_length = sizeof(condition_count)/sizeof(condition_count[0]);
             // Chamada para a função do relatório
             simulation_report(patient_id_counter, q_size(PatientQueue), exam_id_counter, report_id_counter, exam_queue_time, condition_time, condition_count, condition_array_length, exam_at_defined_time_limit);
-
+            printf("\nRetornando a simulação...");
             sim_report_timer += time; // Incrementa o timer
         }
         // 20% de chance de chegada de paciente
@@ -98,19 +100,19 @@ int main() {
 
         // Checando se alguma maquina de raio x está desocupada
         // A primeira desocupada será atrelada ao primeiro usuário na fil
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < XRAY_MACHINES_QUANTITY; i++){
             if(XRMachineManager[i] == NULL && !q_is_empty(PatientQueue)){
                 // Retira o paciente da fila e armazena na variável.
                 Patient *next_patient = (Patient *) q_dequeue(PatientQueue);
 
                 // Máquina de raio-X recebe novo paciente.
                 XRMachineManager[i] = next_patient;
-                XRMachineTimer[i] = time + 10; // Atualizado timer da máquina: Daqui a 10 unidades de tempo. 
+                XRMachineTimer[i] = time + XRAY_DURATION; // Atualizado timer da máquina: Daqui a 10 unidades de tempo. 
             }
         }
 
         // Checando se algum exame ja terminou
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < XRAY_MACHINES_QUANTITY; i++){
             if(XRMachineManager[i] != NULL && XRMachineTimer[i] == time){
                 // Recebe o paciente que estava na máquina de raio-X.
                 next_patient = (Patient *) XRMachineManager[i];
@@ -128,7 +130,6 @@ int main() {
                 // Variável da máquina de raio-X atualizada: Vazia.
                 XRMachineManager[i] = NULL;
                 XRMachineTimer[i] = 0; // Timer da máquina resetado.
-                break;
             }
         }
 
@@ -151,21 +152,24 @@ int main() {
             check_condition(report);
 
             // Faz com que obtenha o id da condition após reavaliação, se houver.
-            condition_id = get_report_condition_id(report) - 1; // Ids começa em 1
+            condition_id = get_report_condition_id(report) - 1; // Ids começa em 1, arrays em 0
             condition_count[condition_id] += 1;  // Armazena quantidade de cada condition
             condition_time[condition_id] += time - get_exam_time(exam); // Tempo acumulado de cada condition.
 
+            // Libera memória do laudo recém criado.
+            destroy_report(report);
         }
         // Incrementa unidade de tempo.
         time++;
     }
+
+    printf("Simulação concluída.");
 
     // Liberando memória.
     destroy_patient(patient);
     destroy_patient(next_patient);
     destroy_exam(exam);
     destroy_exam(new_exam);
-    destroy_report(report);
     q_free(PatientQueue);
     q_free(ExamPriorityQueue);
 }

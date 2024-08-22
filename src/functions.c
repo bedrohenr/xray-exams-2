@@ -357,7 +357,10 @@ char* get_name(){
 }
 
 void simulation_report(int patient_count, int patient_queue_count, int exam_count, int report_count, int time_exam_in_queue, int *condition_time, int *condition_count, int condition_array_length, int exam_at_defined_time_limit){
-    printf("-- RELATÓRIO -- ");
+    int report_percentage;
+    int median_exam_report = 0;
+    int exam_at_time_limit = 0;
+    printf("\n-- RELATÓRIO -- ");
     // Número de pacientes que visitaram o hospital.
     printf("\nVisitaram o hospital: %d.", patient_count);
 
@@ -365,24 +368,32 @@ void simulation_report(int patient_count, int patient_queue_count, int exam_coun
     printf("\nNa fila aguardando exame %d.", patient_queue_count);
 
     // Número de pacientes que já realizaram exame e, dentre estes, a porcentagem do que já receberam laudo.
-    int report_percentage = (100*report_count/exam_count);
+    report_percentage = (100*report_count/exam_count);
     printf("\nRealizaram exame: %d, %d%% receberam laudo.", exam_count, report_percentage);
 
     // Tempo médio de laudo: Tempo médio que os exames ocupam a fila de prioridades.
-    int median_exam_report = time_exam_in_queue/exam_count;
+    median_exam_report = time_exam_in_queue/exam_count;
     printf("\nTempo médio de laudo: %d ut.", median_exam_report);
 
     // Tempo médio de laudo por condição: Tempo médio que os exames de uma condição específica (assinalada pelo médico) ocupam a fila de prioridades.
-    printf("\nTempo médio de laudo por condição");
+    printf("\nTempo médio de laudo por condição:"); 
     for(int i = 0; i < condition_array_length; i++){
-        median_exam_report = condition_time[i]/condition_count[i];
+        median_exam_report = 0;
+        // Não contenha divisão por zero
+        if(condition_count[i] > 0)
+            median_exam_report = condition_time[i]/condition_count[i];
+
+        // printf("\nCondição %d: %d, %d", i, condition_time[i], condition_count[i]);
         printf("\nCondição %s: %d ut.", get_condition_name_by_id(i), median_exam_report);
     }
 
     // Número de exames realizados após o limite de tempo estabelecido (7200 unidades de tempo).
-    printf("\nExames realizados após limite de tempo estabelecido: %d.", patient_count - exam_at_defined_time_limit);
+    if(exam_at_defined_time_limit != 0)
+        exam_at_time_limit = patient_count - exam_at_defined_time_limit;
 
-    printf("-- FIM RELATÓRIO -- ");
+    printf("\nExames realizados após limite de tempo estabelecido: %d.", exam_at_time_limit);
+
+    printf("\n-- FIM RELATÓRIO -- ");
 }
 
 // Apaga o conteúdo dos arquivos db
