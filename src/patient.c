@@ -28,12 +28,11 @@ Patient *create_patient(int id, const char *name, struct tm *birthdate, int arri
     }   
 
     // Verificações das variáveis antes das atribuições
-    if(validate_int(id, "Patient id") )
+    if(validate_int(id, "Patient id"))
         new_patient->id = id;
-    if(validate_string(name, "Patient name") )
+    if(validate_string(name, "Patient name"))
         new_patient->name = strdup(name); // Reserva espaço de armazenamento para uma cópia da string name
-    if(validate_time(birthdate, "Patient birthdate") )
-        new_patient->birthdate = birthdate;
+    new_patient->birthdate = birthdate;  // Data de Nascimento puramente cosmética, não precisa de tratamento
     if(validate_int(arrival, "Patient arrival"))
         new_patient->arrival = arrival;
 
