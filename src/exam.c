@@ -24,12 +24,7 @@ Exam* create_exam(int id, int patient_id, int rx_id, int time){
     Exam *new_exam = (Exam *)malloc(sizeof(Exam)); 
 
     // Verifica se falha na alocação de memória.
-    if(new_exam == NULL) {
-        // Mensagem de erro
-        printf("\nErro.\nNao foi possível alocar memória para o exame com id: %d", id);
-        // Função para mostrar o erro e finaliza execução.
-        error_exit(EXIT_FAILURE);
-    }
+    check_malloc(new_exam, "\nErro.\nNao foi possível alocar memória para o Exam.");
 
     // Verificações das variáveis antes das atribuições.
     if(validate_int(id, "Exam id")) 
@@ -122,7 +117,7 @@ void print_exam(const Exam *exam){
 char* exam_output(const Exam *exam){
     // Alocação de memória do ponteiro a ser retornado.
     char *output = (char *)malloc(sizeof(char) * 128);
-
+    check_malloc(output, "Erro.\nNão foi possível alocar memória para o output do Exam, em exam_output()");
     // Estrutura da string a ser retornada.
     sprintf(output, "%d,%d,%d,%s,%d", get_exam_id(exam), get_exam_patient_id(exam), get_exam_rx_id(exam), condition_output(get_exam_condition(exam)), get_exam_time(exam));
 

@@ -110,6 +110,7 @@ struct tm* get_time(){
 char* get_timestamp_from_datetime(const struct tm* date){
     // Alocação de memória para o ponteiro.
     char *output = (char *)malloc(sizeof(char) * 32);
+    check_malloc(output, "Erro.\nNão foi possível alocar memória para a string em get_timestamp_from_datetime()");
     // Estrutura da string.
     sprintf(output, "%d-%d-%d %d:%d:%d", (1900 + date->tm_year), date->tm_mon, date->tm_mday, date->tm_hour, date->tm_min, date->tm_sec);
     return output; // Retorna o ponteiro.
@@ -119,6 +120,7 @@ char* get_timestamp_from_datetime(const struct tm* date){
 char* get_date_from_datetime(const struct tm* date){
     // Alocação de memória do ponteiro.
     char *output = (char *)malloc(sizeof(char) * 32);
+    check_malloc(output, "Erro.\nNão foi possível alocar memória para a string em get_date_from_datetime()");
     // date->tm_year retorna quantos anos desde 1900.
     sprintf(output, "%d-%d-%d", (1900 + date->tm_year), date->tm_mon, date->tm_mday);
     return output; // Retorna o ponteiro.
@@ -349,7 +351,7 @@ char* get_name(){
 
     // Alocando memória para retornar o ponteiro char
     char* full_name = (char *)malloc(sizeof(char) * 20);
-
+    check_malloc(full_name, "Erro.\nNão foi possível alocar memória para a string em get_name()");
     // Atribuindo a string com formatação
     sprintf(full_name, "%s %s", first_name, last_name);
 
@@ -427,3 +429,15 @@ void show_condition_rng(){
     printf("\nCondition %d: %.0f => rng <= %.0f", 8, VIII_CONDITION_L, VIII_CONDITION_H);
     printf("\nCondition %d: %.0f => rng <= %.0f", 9, IX_CONDITION_L, IX_CONDITION_H);
 }
+
+// Checa se a variável ponteiro é nulo.
+void check_malloc(void *p, char *msg){
+    // Alocação de memória
+    if(p == NULL){
+        // Mensagem de erro
+        printf("%s", msg);
+        // Função para mostrar o erro e finaliza execução
+        error_exit(EXIT_FAILURE);
+    }   
+}
+

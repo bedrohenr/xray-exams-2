@@ -186,5 +186,13 @@ void db_reset();
 
 // Testa a distribuição de probabiliade das Conditions.
 void test_condition_rng();
+/**
+ * Checa se a variavel ponteiro é nulo. Sendo verdadeiro, finaliza a execução .
+ * 
+ * @param p Variável tipo ponteiro genérico.
+ * @param msg String com a mensagem a ser mostrada antes de finalizar a execução.
+ * 
+ */
+void check_malloc(void *p, char *msg);
 
 #endif

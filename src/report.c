@@ -16,6 +16,8 @@ struct report {
 // Cria um novo Laudo, alocando memória para a estrutura e retornando um ponteiro para a estrutura criada. 
 Report* create_report(int id, int exam_id, Condition *condition, int timestamp){
     Report *new_report = (Report *)malloc(sizeof(Report));
+    // Checa a alocação de memória
+    check_malloc(new_report, "Erro.\nNão foi possível alocar memória para o Report.");
 
     // Verificações das variáveis antes das atribuições.
     if(validate_int(id, "Report id"))
@@ -99,6 +101,7 @@ void print_report(const Report *report){
 // Retorna uma string das propriedades do Report passado no argumento.
 char* report_output(const Report *report){
     char *output = (char *)malloc(sizeof(char) * 128); // Aloca memória para o ponteiro
+    check_malloc(output, "Erro.\nNão foi possível alocar memória para o output do Report, em report_output()");
     // Estrutura da string
     sprintf(output, "%d,%d,%s,%d", get_report_id(report), get_report_exam_id(report), condition_output(get_report_condition(report)), get_report_time(report));
 

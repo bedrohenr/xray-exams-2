@@ -23,6 +23,7 @@ struct queue_node {
 // Cria a fila, alocando memória e a retorna.
 Queue *q_create() {
     Queue *q = (Queue *)malloc(sizeof(Queue));
+    check_malloc(q, "Erro.\nNão foi possível alocar memória para a Queue, em q_create().");
     q->front = q->rear = NULL; // Inicializa com valores NULL
 
     return q; // Retorna o ponteiro
@@ -45,6 +46,7 @@ int q_is_empty(const Queue *q) {
 // Enfileira um ponteiro genérico.
 void q_enqueue(Queue *q, StructType type, void *p) {
     QueueNode *node = (QueueNode *)malloc(sizeof(QueueNode));
+    check_malloc(node, "Erro.\nNão foi possível alocar memória para o QueueNode, em q_enqueue().");
     node->info = p;
     node->type = type;
     node->next = NULL;
@@ -60,6 +62,7 @@ void q_enqueue(Queue *q, StructType type, void *p) {
 // Enfileira um ponteiro Exame com prioridade da variável gravidade da estrutura Condition.
 void q_enqueue_exam_prio(Queue *q, StructType type, void *p) {
     QueueNode *node = (QueueNode *)malloc(sizeof(QueueNode));
+    check_malloc(node, "Erro.\nNão foi possível alocar memória para o QueueNode, em q_enqueue_exam_prio().");
     node->info = p;
     node->type = type;
     node->next = NULL;

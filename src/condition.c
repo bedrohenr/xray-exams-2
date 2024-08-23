@@ -33,12 +33,7 @@ Condition* create_condition(int id, const char *name, int gravity){
     Condition *new_condition = (Condition *)malloc(sizeof(Condition));
 
     // Alocação de memória
-    if(new_condition == NULL){
-        // Mensagem de erro
-        printf("\nErro.\nNao foi possível alocar memória para a condição deste paciente");
-        // Função para mostrar o erro e finaliza execução
-        error_exit(EXIT_FAILURE);
-    }   
+    check_malloc(new_condition, "\nErro.\nNao foi possível alocar memória para esta Condition.");
 
     if(validate_int(id, "Condition id")) 
         new_condition->id = id;
@@ -143,7 +138,7 @@ void print_condition(const Condition *condition){
 
 // Retorna uma string com as propriedades relevantes da Condition para inserir no arquivo
 char* condition_output(const Condition *condition){
-    char *output = (char *)malloc(sizeof(char) * 32); // Alocação de memória para novo ponteiro string
+    char *output = (char *)malloc(sizeof(char) * 16); // Alocação de memória para novo ponteiro string
     sprintf(output, "%s", get_condition_name(condition)); // Preenche a string
     return output; // Retorna o ponteiro
 }
