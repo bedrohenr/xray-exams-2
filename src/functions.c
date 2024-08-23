@@ -126,8 +126,7 @@ char* get_date_from_datetime(const struct tm* date){
     return output; // Retorna o ponteiro.
 }
 
-// Imprime na tela as informações das estruturas
-// É usado a função correta de cada estrutura
+// Imprime na tela as informações das estruturas. Faz com que seja usada a função correta de cada estrutura.
 void print_by_struct_type(StructType type, void *p) {
 
     switch (type) {
@@ -150,13 +149,12 @@ void print_by_struct_type(StructType type, void *p) {
     }
 }
 
-// Retorna as informações das estruturas em string
-// É usado a função correta de cada estrutura
+// Retorna as informações das estruturas em string. Faz com que seja usada a função correta de cada estrutura.
 char* output_by_struct_type(StructType type, void *p) {
     switch (type) {
         case TYPE_PATIENT:
-                return patient_output(p); // Patient
-                break;
+            return patient_output(p); // Patient
+            break;
 
         case TYPE_EXAM:
             return exam_output(p); // Exam
@@ -362,7 +360,7 @@ void simulation_report(int patient_count, int patient_queue_count, int exam_coun
     int report_percentage;
     int median_exam_report = 0;
     int exam_at_time_limit = 0;
-    printf("\n-- RELATÓRIO -- ");
+    printf("\n-- Relatório ---------------------");
     // Número de pacientes que visitaram o hospital.
     printf("\nVisitaram o hospital: %d.", patient_count);
 
@@ -385,17 +383,26 @@ void simulation_report(int patient_count, int patient_queue_count, int exam_coun
         if(condition_count[i] > 0)
             median_exam_report = condition_time[i]/condition_count[i];
 
-        // printf("\nCondição %d: %d, %d", i, condition_time[i], condition_count[i]);
-        printf("\nCondição %s: %d ut.", get_condition_name_by_id(i), median_exam_report);
+        printf("\nCondição %d: %d, %d", i, condition_time[i], condition_count[i]);
+        printf("\nCondição %s: %d ut.\n", get_condition_name_by_id(i), median_exam_report);
     }
 
     // Número de exames realizados após o limite de tempo estabelecido (7200 unidades de tempo).
+    // O sistema salva a quantidade de pacientes no tempo deinifido e salva esse valor, subtração é feita para descobrir quantos pacientes > tempo limite.
     if(exam_at_defined_time_limit != 0)
-        exam_at_time_limit = patient_count - exam_at_defined_time_limit;
+        exam_at_time_limit = exam_count - exam_at_defined_time_limit;
 
     printf("\nExames realizados após limite de tempo estabelecido: %d.", exam_at_time_limit);
 
-    printf("\n-- FIM RELATÓRIO -- ");
+    printf("\n----------------------------------");
+
+    printf("\nRetornando execução em: ");
+
+    // Imprime: 5... 4... 3... 2... 1...
+    for(int i = 5; i != 0; i--){
+        printf("%d... ", i);
+        wait(SIM_REPORT_WAITING_TIME); // Pausa a execução por x milisegundos
+    }
 }
 
 // Apaga o conteúdo dos arquivos db
