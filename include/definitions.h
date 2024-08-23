@@ -15,16 +15,16 @@ typedef enum {
 #define DB_EXAM_PATH "./src/static/db_exam.txt"
 
 // Endereço do arquivo db Report.
-#define DB_REPORT_PATH "./src/static/db_exam.txt"
+#define DB_REPORT_PATH "./src/static/db_report.txt"
 
 // Tempo total de execução do programa.
 #define RUNTIME 43200
 
 // A cada quantas unidades de tempo mostrar o relatório.
-#define SIM_REPORT_TIME 10000
+#define SIM_REPORT_TIME 5000
 
-// Quanto tempo esperar ao mostrar o relatório.
-#define SIM_REPORT_WAITING_TIME 5
+// Quanto tempo (em milisegundos) esperar ao mostrar o relatório.
+#define SIM_REPORT_WAITING_TIME 1125 // = 1,125s. 1s parecia muito pouco.
 
 
 // --- INÍCIO DEFINIÇÃO DA CONDITION
@@ -109,5 +109,8 @@ typedef enum {
 
 // Duração do uso da máquina de Raio-X em unidade de tempo.
 #define XRAY_DURATION 10
+
+// Duração da criação do laudo.
+#define REPORT_DURATION 20
 
 #endif
