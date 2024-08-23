@@ -190,42 +190,45 @@ Consiste nas constantes definidas para o sistema.
 
 | Variável                        | Tipo           | Finalidade |
 | ------------------------------- | -------------- | --------------------------------------------------------------- |
-| [DB_PATIENT_PATH](include/definitions.h?#L12)     | Inteiro | Endereço do arquivo db Patient. |
-| [DB_EXAM_PATH](include/definitions.h?#L15)        | Inteiro | Tempo total de execução do programa.                       |
-| [DB_REPORT_PATH](include/definitions.c?#L18)      | Inteiro | Tempo total de execução do programa.                       |
+| [DB_PATIENT_PATH](include/definitions.h?#L12)     | Inteiro | Endereço absoluto do arquivo db Patient. |
+| [DB_EXAM_PATH](include/definitions.h?#L15)        | Inteiro | Endereço absoluto do arquivo db Exam.                       |
+| [DB_REPORT_PATH](include/definitions.c?#L18)      | Inteiro | Endereço absoluto do arquivo db Report.                       |
 | [RUNTIME](include/definitions.h?#L21)        | Inteiro      | Tempo total de execução do programa.                       |
 | [SIM_RERPOT_TIME](include/definitions.h?#L24)     | Inteiro | A cada quantas unidades de tempo mostrar o relatório. |
 | [SIM_RERPOT_WAITING_TIME](include/definitions.h?#L27)     | Inteiro | Quanto tempo esperar ao mostrar o relatório. |
 | [RNG_INPUT](include/definitions.h?#L33)           | Inteiro | Faixa de números gerados para as Conditions. |
-| [I_CONDITION_PROB](include/definitions.h?#L36)    | Inteiro | Probabilidade para a I Condition. |
+| [I_CONDITION_PROB](include/definitions.h?#L36)    | Double | Probabilidade para a I Condition. |
 | [I_CONDITION_L](include/definitions.h?#L38)       | Inteiro | Número minimo para a I Condition. |
-| [I_CONDITION_H](include/definitions.h?#L40)       | Inteiro | Número máximo para a I Condition. |
-| [II_CONDITION_PROB](include/definitions.h?#L43)   | Inteiro | Probabilidade para a II Condition. |
-| [II_CONDITION_L](include/definitions.h?#L45)      | Inteiro | Número mínimo para a II Condition. |
-| [II_CONDITION_H](include/definitions.h?#L47)      | Inteiro | Número máximo para a II Condition. |
-| [III_CONDITION_PROB](include/definitions.h?#L50)  | Inteiro | Probabilidade para a III Condition. |
-| [III_CONDITION_L](include/definitions.h?#L52)     | Inteiro | Número mínimo para a III Condition. |
-| [III_CONDITION_H](include/definitions.h?#L54)     | Inteiro | Número máximo para a III Condition. |
-| [IV_CONDITION_PROB](include/definitions.h?#L57)   | Inteiro | Probabilidade para a IV Condition. |
-| [IV_CONDITION_L](include/definitions.h?#L59)      | Inteiro | Número mínimo para a IV Condition. |
-| [IV_CONDITION_H](include/definitions.h?#L61)      | Inteiro | Número máximo para a IV Condition. |
-| [V_CONDITION_PROB](include/definitions.h?#L64)    | Inteiro | Probabilidade para a V Condition. |
-| [V_CONDITION_L](include/definitions.h?#L66)       | Inteiro | Número mínimo para a V Condition. |
-| [V_CONDITION_H](include/definitions.h?#L68)       | Inteiro | Número máximo para a V Condition. |
-| [VI_CONDITION_PROB](include/definitions.h?#L71)   | Inteiro | Probabilidade para a VI Condition. |
-| [VI_CONDITION_L](include/definitions.h?#L73)      | Inteiro | Número mínimo para a VI Condition. |
-| [VI_CONDITION_H](include/definitions.h?#L75)      | Inteiro | Número máximo para a VI Condition. |
-| [VII_CONDITION_PROB](include/definitions.h?#L78)  | Inteiro | Probabilidade para a VII Condition. |
-| [VII_CONDITION_L](include/definitions.h?#L80)     | Inteiro | Número mínimo para a VII Condition. |
-| [VII_CONDITION_H](include/definitions.h?#L82)     | Inteiro | Número máximo para a VII Condition. |
-| [VIII_CONDITION_PROB](include/definitions.h?#L85) | Inteiro | Probabilidade para a VIII Condition. |
-| [VIII_CONDITION_L](include/definitions.h?#L87)    | Inteiro | Número mínimo para a VIII Condition. |
-| [VIII_CONDITION_H](include/definitions.h?#L89)    | Inteiro | Número máximo para a VIII Condition. |
-| [IX_CONDITION_PROB](include/definitions.h?#L92)   | Inteiro | Probabilidade para a IX Condition. |
-| [IX_CONDITION_L](include/definitions.h?#L94)      | Inteiro | Número mínimo para a IX Condition. |
-| [IX_CONDITION_H](include/definitions.h?#L96)      | Inteiro | Número máximo para a IX Condition. |
-| [RNG_DISTRIBUTION](include/definitions.h?#L100)   | Inteiro | Distribuição do número gerado aleatóriamente das Conditions. Recebe o número da IX_CONDITION_H. |
-| [TIME_LIMIT](include/definitions.h?#L83)          | Inteiro | Tempo limite estabelecido. |
+| [I_CONDITION_H](include/definitions.h?#L40)       | Double | Número máximo para a I Condition. |
+| [II_CONDITION_PROB](include/definitions.h?#L43)   | Double  | Probabilidade para a II Condition. |
+| [II_CONDITION_L](include/definitions.h?#L45)      | Double | Número mínimo para a II Condition. |
+| [II_CONDITION_H](include/definitions.h?#L47)      | Double | Número máximo para a II Condition. |
+| [III_CONDITION_PROB](include/definitions.h?#L50)  | Double | Probabilidade para a III Condition. |
+| [III_CONDITION_L](include/definitions.h?#L52)     | Double | Número mínimo para a III Condition. |
+| [III_CONDITION_H](include/definitions.h?#L54)     | Double | Número máximo para a III Condition. |
+| [IV_CONDITION_PROB](include/definitions.h?#L57)   | Double | Probabilidade para a IV Condition. |
+| [IV_CONDITION_L](include/definitions.h?#L59)      | Double | Número mínimo para a IV Condition. |
+| [IV_CONDITION_H](include/definitions.h?#L61)      | Double | Número máximo para a IV Condition. |
+| [V_CONDITION_PROB](include/definitions.h?#L64)    | Double | Probabilidade para a V Condition. |
+| [V_CONDITION_L](include/definitions.h?#L66)       | Double | Número mínimo para a V Condition. |
+| [V_CONDITION_H](include/definitions.h?#L68)       | Double | Número máximo para a V Condition. |
+| [VI_CONDITION_PROB](include/definitions.h?#L71)   | Double | Probabilidade para a VI Condition. |
+| [VI_CONDITION_L](include/definitions.h?#L73)      | Double | Número mínimo para a VI Condition. |
+| [VI_CONDITION_H](include/definitions.h?#L75)      | Double | Número máximo para a VI Condition. |
+| [VII_CONDITION_PROB](include/definitions.h?#L78)  | Double | Probabilidade para a VII Condition. |
+| [VII_CONDITION_L](include/definitions.h?#L80)     | Double | Número mínimo para a VII Condition. |
+| [VII_CONDITION_H](include/definitions.h?#L82)     | Double | Número máximo para a VII Condition. |
+| [VIII_CONDITION_PROB](include/definitions.h?#L85) | Double | Probabilidade para a VIII Condition. |
+| [VIII_CONDITION_L](include/definitions.h?#L87)    | Double | Número mínimo para a VIII Condition. |
+| [VIII_CONDITION_H](include/definitions.h?#L89)    | Double | Número máximo para a VIII Condition. |
+| [IX_CONDITION_PROB](include/definitions.h?#L92)   | Double | Probabilidade para a IX Condition. |
+| [IX_CONDITION_L](include/definitions.h?#L94)      | Double | Número mínimo para a IX Condition. |
+| [IX_CONDITION_H](include/definitions.h?#L96)      | Double | Número máximo para a IX Condition. |
+| [RNG_DISTRIBUTION](include/definitions.h?#L100)   | Double | Distribuição do número gerado aleatóriamente das Conditions. Recebe o número da IX_CONDITION_H. |
+| [TIME_LIMIT](include/definitions.h?#L105)          | Inteiro | Tempo limite estabelecido. |
+| [XRAY_MACHINES_QUANTITY](include/definitions.h?#L108)          | Inteiro | Quantidade de maquinas de Raio-X. |
+| [XRAY_DURATION](include/definitions.h?#L111)          | Inteiro | Duração do uso da máquina de Raio-X em unidade de tempo. |
+| [REPORT_DURATION](include/definitions.h?#L114)          | Inteiro | Duração da criação do laudo. |
 
 ## Functions
 Implementada para conter funções úteis para toda execução do programa.
@@ -244,8 +247,8 @@ Implementada para conter funções úteis para toda execução do programa.
 | [create_date(...)](src/functions.c?#L90)       | **int** year, **int** month, **int** day | Cria e retorna uma data com os parâmetros especificados. | Struct tm |
 | [get_time(...)](src/functions.c?#L103)  |  | Retorna a Data/Hora atual. | Struct tm * |
 | [get_timestamp_from_datetime(...)](src/functions.c?#L110)  | const **struct tm** *date | Retorna um timestamp em string no formato YY-mm-dd HH:MM:SS. | Char * |
-| [get_date_from_datetime(...)](src/functions.c?#L119)  | const **struct tm** *date | Retorna data em string no formato YY-mm-dd de uma variável datetime. | Char * |
-| [print_by_structure_type(...)](src/functions.c?#L129)  | **StructType** type, **void** *p | Imprime na tela as informações das estruturas. É usado a função correta de cada estrutura. |  |
+| [get_date_from_datetime(...)](src/functions.c?#L120)  | const **struct tm** *date | Retorna data em string no formato YY-mm-dd de uma variável datetime. | Char * |
+| [print_by_structure_type(...)](src/functions.c?#L130)  | **StructType** type, **void** *p | Imprime na tela as informações das estruturas. É usado a função correta de cada estrutura. |  |
 | [output_by_structure_type(...)](src/functions.c?#L153)  | **StructType** type, **void** *p | Retorna as informações das estruturas em string. É usado a função correta de cada estrutura |  |
 | [static create_file(...)](src/functions.c?#L171)  | const **char** *path | Cria um arquivo. | Inteiro |
 | [static file_exists(...)](src/functions.c?#L186)  | const **char** *path | Verifica se o arquivo no endereço inserido existe. Retorna 1 se o arquivo existe. | Inteiro |
@@ -256,5 +259,7 @@ Implementada para conter funções úteis para toda execução do programa.
 | [test_enqueue_prio(...)](src/functions.c?#L276)  | | Cria exames de prioridades diferentes, de forma não sequencial para checar se a lista de prioridade de exame esta funcionando. |  |
 | [get_name(...)](src/functions.c?#L335)  | | Retorna uma string com nome e sobrenome gerado aleatoriamente. | Char * |
 | [simulation_report(...)](src/functions.c?#L359) | **int** patient_count, **int** patient_queue_count, **int** exam_count, **int** report_count, **int** time_exam_in_queue, **int** *condition_time, **int** *condition_count, **int** condition_array_length, **int** exam_at_defined_time_limit| Mostra os valores selecionados da simulação na tela. | void |
-| [db_reset(...)](src/functions.c?#L389)  | | Apaga o conteúdo dos arquivos db. | |
-| [show_condition_rng(...)](src/functions.c?#L406)  | | Testa e mostra a distribuição de probabiliade das Conditions. | |
+| [db_reset(...)](src/functions.c?#L409)  | | Apaga o conteúdo dos arquivos db. | |
+| [show_condition_rng(...)](src/functions.c?#L426)  | | Testa e mostra a distribuição de probabiliade das Conditions. | |
+| [check_malloc(...)](src/functions.c?#L441)  | **void** *p, **Char** *msg | Checa se a variável ponteiro é nulo, e para a execução caso seja nulo. | |
+| [wait(...)](src/functions.c?#L452)  |**int** milisegundos | Testa e mostra a distribuição de probabiliade das Conditions. | |
