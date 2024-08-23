@@ -16,6 +16,7 @@ struct report {
 // Cria um novo Laudo, alocando memória para a estrutura e retornando um ponteiro para a estrutura criada. 
 Report* create_report(int id, int exam_id, Condition *condition, int timestamp){
     Report *new_report = (Report *)malloc(sizeof(Report));
+
     // Checa a alocação de memória
     check_malloc(new_report, "Erro.\nNão foi possível alocar memória para o Report.");
 
