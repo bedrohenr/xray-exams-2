@@ -186,6 +186,7 @@ void db_reset();
 
 // Testa a distribuição de probabiliade das Conditions.
 void test_condition_rng();
+
 /**
  * Checa se a variavel ponteiro é nulo. Sendo verdadeiro, finaliza a execução .
  * 
@@ -194,5 +195,12 @@ void test_condition_rng();
  * 
  */
 void check_malloc(void *p, char *msg);
+/**
+ * Pausa a execução pela quantida de milisegundos especificada.
+ * 
+ * @param milliseconds Tempo em milisegundos.
+ * 
+ */
+void wait(int milliseconds);
 
 #endif

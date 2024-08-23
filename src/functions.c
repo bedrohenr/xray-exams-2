@@ -441,3 +441,11 @@ void check_malloc(void *p, char *msg){
     }   
 }
 
+// Tempo de espera da execução em milissegundos.
+void wait(int milliseconds){
+    clock_t t = clock(); // Armazena o tempo que inicou a função
+    double time_since; // Armazenará a diferença dos milisegundos
+    do{
+        time_since = time_passed(t) * 1000; // Convertido para milissegundos
+    } while(time_since < milliseconds);
+}
