@@ -28,11 +28,11 @@ Report* create_report(int id, int exam_id, Condition *condition, int timestamp){
     if(validate_int(timestamp, "Report timestamp"))
         new_report->timestamp = timestamp;
 
-    new_report->condition = condition;
+    // Cria uma nova condição com as mesmas propriedades. Para não ter duas TAD com o mesmo Condition pointer.
+    new_report->condition = create_condition(get_condition_id(condition), get_condition_name(condition), get_condition_gravity(condition));
 
     // Escreve novo registro no arquivo txt.
     db_save(TYPE_REPORT, report_output(new_report));
-
     return new_report; // Retorna o ponteiro.
 }
 
