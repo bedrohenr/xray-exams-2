@@ -74,7 +74,7 @@ void print_patient(const Patient *patient){
     printf("Data de Nascimento: %s\n", get_patient_birthdate_string(patient));
 }
 
-// Retorna uma string com as propriedades do Patient
+// Retorna uma string com as propriedades do Patient. Deve se liberar a memória desta variável após uso.
 char* patient_output(const Patient *patient){
     // Alocação de memória para a string
     char *output = (char *)malloc(sizeof(char) * 128);

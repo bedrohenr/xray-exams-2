@@ -113,7 +113,7 @@ void print_exam(const Exam *exam){
     printf("Tempo da Hora do Exame: %d", get_exam_time(exam));
 }
 
-// Retorna as propriedades do Exame em string.
+// Retorna as propriedades do Exame em string. Deve se liberar a memória desta variável após uso.
 char* exam_output(const Exam *exam){
     // Alocação de memória do ponteiro a ser retornado.
     char *output = (char *)malloc(sizeof(char) * 128);

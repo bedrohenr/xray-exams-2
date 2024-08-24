@@ -139,7 +139,7 @@ char* get_db_path(StructType type);
  * @param content String com o texto a ser armazenado no arquivo.
  * @param type Tipo da estrutura.
  */
-void db_save(StructType type, const char *content);
+void db_save(StructType type, char *content);
 
 /**
  * Libera memória da estrutura devido a seu tipo, usando as funções corretas 

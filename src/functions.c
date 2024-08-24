@@ -225,7 +225,7 @@ char* get_db_path(StructType type){
 }
 
 // Adiciona uma linha no arquivo especificado.
-void db_save(StructType type, const char* content){
+void db_save(StructType type, char* content){
     // Endereço do arquivo.
     char *path = NULL;
     path = get_db_path(type); 
@@ -238,12 +238,12 @@ void db_save(StructType type, const char* content){
 
     FILE *file_pointer; 
 
-    // Abre o arquivo em appending mode.
-    file_pointer = fopen(path, "a"); 
-    // Adiciona a linha ao arquivo.
-    fprintf(file_pointer, "%s\n", content);
-    // Fecha o arquivo.
-    fclose(file_pointer);
+    file_pointer = fopen(path, "a");  // Abre o arquivo em appending mode.
+    fprintf(file_pointer, "%s\n", content); // Adiciona a linha ao arquivo.
+
+    fclose(file_pointer); // Fecha o arquivo.
+
+    free(content); // Libera a memória alocada para a string.
 }
 
 // Libera memória da estrutura devido a seu tipo, usando as funções corretas 

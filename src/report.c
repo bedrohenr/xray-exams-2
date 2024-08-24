@@ -99,7 +99,7 @@ void print_report(const Report *report){
     printf("Laudo gerado em: %d", get_report_time(report)); 
 }
 
-// Retorna uma string das propriedades do Report passado no argumento.
+// Retorna uma string das propriedades do Report passado no argumento. Deve se liberar a memória desta varíavel após uso. 
 char* report_output(const Report *report){
     char *output = (char *)malloc(sizeof(char) * 128); // Aloca memória para o ponteiro
     check_malloc(output, "Erro.\nNão foi possível alocar memória para o output do Report, em report_output()");
