@@ -3,15 +3,59 @@ Este código em C consiste em simular o processo de realização de exames de ra
 
 ## Fluxo da Simulação
 Uma representação gráfica da simulação do Hospital:
-<img src="./src/static/fluxo_hospital.png" alt="Fluxo da Simulação do Hospital">
+
+<img src="./src/static/fluxo_hospital.png" width="80%" alt="Fluxo da Simulação do Hospital">
 
 ## Detalhamento da Simulação
 
 A lógica da simulação pode ser encontrada na arquivo [main.c](./main.c).
 
-i. [Relatório](./main.c?#L77): É feita a checagem se está na hora de mostrar o relatório na tela.
+ <ol type="1">
+  <li>[Relatório](./main.c?#L77): É feita a checagem se está na hora de mostrar o relatório na tela.</li>
+        <ol type="a">
+            <li>Caso seja, o relatório é mostrado na tela.</li>
+            <li>O Programa aguarda por volta de 5 segundos para retomar a simulação.</li>
+        </ol> 
+  <li>[Chegada de pacientes](./main.c?#L84): É gerado um número entre 0 e 4, onde, caso o número seja 0 é satisfeita a condição de chegada de um novo paciente (1/4, 20%).</li>
+        <ol type="a">
+            <li>É criado um novo ponteiro para a TAD Patient.</li>
+            <li>A função create_patient() antes de retornar o ponteiro, salva um novo registro do paciente no arquivo db_patient.txt.</li>
+        </ol> 
+  <li>[Fila de pacientes](./main.c?#L98): Após chegar um paciente, ele é inserido na fila, TAD Queue, genérica, de pacientes, logo após cadastro.</li>
+  <li>[XRMachineManager](./main.c?#L103): Foi implementado dois arrays para seu funcionamento.</li>
+        <ol type="a">
+            <li>Um [array de Patient*](./main.c?#L109), com 5 posições, para pacientes.</li>
+            <li>Um [array de inteiros](./main.c?#L110), com 5 posições, para salvar em qual momento tal máquina terá terminado o exame.</li>
+            <li>[Um loop](./main.c?#L103) para percorrre os arrays encontrar uma máquina de Raio-X disponível.</li>
+            <li>[Outro loop](./main.c?#L115) para encontrar uma máquina de Raio-X que terminou o exame.</li>
+        </ol>
+    <li>[Exam](./main.c?#L122): Os exames são criados assim que o paciente termina o uso da máquina de Raio-X.</li>
+        <ol type="a">
+            <li>É criado um novo ponteiro para o TAD Exam.</li>
+            <li>A função create_exam() salva o exame no arquivo db_exam.txt.</li>
+        </ol>
+     <li>[ExamPriorityQueue](./main.c?#L125): O exame recém criado é inserido na fila de exames com prioridade.</li>
+         <ol type="a">
+            <li>Exames com maior gravidade serão colocados mais próximos ao início da fila.</li>
+         </ol>
+     <li>[Laudo(Report) finalizado](./main.c?#L137): É checado se o médico **não está disponível** e o tempo de atendimento acabou.</li>
+         <ol type="a">
+            <li>Caso tenha acabado, é [gerado o laudo](./main.c?#L143).</li>
+            <li>Logo após, é checado a probabilidade de [mudar a condição "gerada" pela IA](./main.c?#L146) no laudo.</li>
+            <li>É salvo o registro do laudo recém criado no arquivo db_report.txt.</li>
+            <li>[Atualiza as variáveis](./main.c?#L154), o médico como disponível novamente.</li>
+         </ol>
+     <li>[Laudo(Report)](./main.c?#L163): Checa se o médico **está disponível**.</li>
+         <ol type="a">
+            <li>Caso esteja disponível, [assinala um novo exame](./main.c?#L166) com laudo em andamento.</li>
+            <li>[Atualiza as variáveis](./main.c?#L169&#L170), o médico como não disponível e o tempo que irá durar o atendimento (20 ut).</li>
+         </ol>
+     <li>Retorna ao passo i, incrementando o tempo de simulação em 1 ut.</li>
+</ol> 
+
+i. [Relatório](./main.c?#L77): É feita a checagem se está na hora de mostrar o relatório na tela. <br/>
     a. Caso seja, o relatório é mostrado na tela.
-    b. O Programa aguarda por volta de 5 segundos para retomar a simulação
+    b. O Programa aguarda por volta de 5 segundos para retomar a simulação.
 ii. [Chegada de pacientes](./main.c?#L84): É gerado um número entre 0 e 4, onde, caso o número seja 0 é satisfeita a condição de chegada de um novo paciente (1/4, 20%).
     a. É criado um novo ponteiro para a TAD Patient.
     b. A função create_patient() antes de retornar o ponteiro, salva um novo registro do paciente no arquivo db_patient.txt.
@@ -21,9 +65,13 @@ iii. [XRMachineManager](./main.c?#L103): Foi implementado dois arrays para seu f
     b. Um [array de inteiros](./main.c?#L110), com 5 posições, para salvar em qual momento tal máquina terá terminado o exame.
     c. [Um loop](./main.c?#L103) para percorrre os arrays encontrar uma máquina de Raio-X disponível.
     d. [Outro loop](./main.c?#L115) para encontrar uma máquina de Raio-X que terminou o exame.
+
+    
 iv. [Exam](./main.c?#L122): Os exames são criados assim que o paciente termina o uso da máquina de Raio-X.
     a. É criado um novo ponteiro para o TAD Exam.
     b. A função create_exam() salva o exame no arquivo db_exam.txt.
+
+    
 v. [ExamPriorityQueue](./main.c?#L125): O exame recém criado é inserido na fila de exames com prioridade.
     a. Exames com maior gravidade serão colocados mais próximos ao início da fila.
 vi. [Laudo(Report) finalizado](./main.c?#L137): É checado se o médico **não está disponível** e o tempo de atendimento acabou.
