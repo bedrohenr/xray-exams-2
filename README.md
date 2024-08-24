@@ -10,81 +10,48 @@ Uma representação gráfica da simulação do Hospital:
 
 A lógica da simulação pode ser encontrada na arquivo [main.c](./main.c).
 
- <ol type="1">
-  <li>[Relatório](./main.c?#L77): É feita a checagem se está na hora de mostrar o relatório na tela.</li>
+ <ol type="I">
+  <li><a href="./main.c?#L77" target="_blank"><b>Relatório</b></a>: É feita a checagem se está na hora de mostrar o relatório na tela.</li>
         <ol type="a">
             <li>Caso seja, o relatório é mostrado na tela.</li>
             <li>O Programa aguarda por volta de 5 segundos para retomar a simulação.</li>
         </ol> 
-  <li>[Chegada de pacientes](./main.c?#L84): É gerado um número entre 0 e 4, onde, caso o número seja 0 é satisfeita a condição de chegada de um novo paciente (1/4, 20%).</li>
+  <li><a href="./main.c?#L84" target="_blank"><b>Chegada de pacientes</b></a>: É gerado um número entre 0 e 4, onde, caso o número seja 0 é satisfeita a condição de chegada de um novo paciente (1/4, 20%).</li>
         <ol type="a">
             <li>É criado um novo ponteiro para a TAD Patient.</li>
             <li>A função create_patient() antes de retornar o ponteiro, salva um novo registro do paciente no arquivo db_patient.txt.</li>
         </ol> 
-  <li>[Fila de pacientes](./main.c?#L98): Após chegar um paciente, ele é inserido na fila, TAD Queue, genérica, de pacientes, logo após cadastro.</li>
-  <li>[XRMachineManager](./main.c?#L103): Foi implementado dois arrays para seu funcionamento.</li>
+  <li><a href="./main.c?#L98" target="_blank"><b>Fila de pacientes</b></a>: Após chegar um paciente, ele é inserido na fila, TAD Queue, genérica, de pacientes, logo após cadastro.</li>
+  <li><a href="./main.c?#L103" target="_blank"><b>XRMachineManager</b></a>: Foi implementado dois arrays para seu funcionamento.</li>
         <ol type="a">
-            <li>Um [array de Patient*](./main.c?#L109), com 5 posições, para pacientes.</li>
-            <li>Um [array de inteiros](./main.c?#L110), com 5 posições, para salvar em qual momento tal máquina terá terminado o exame.</li>
-            <li>[Um loop](./main.c?#L103) para percorrre os arrays encontrar uma máquina de Raio-X disponível.</li>
-            <li>[Outro loop](./main.c?#L115) para encontrar uma máquina de Raio-X que terminou o exame.</li>
+            <li>Um <a href="./main.c?#L109" target="_blank">array de Patient*</a>, com 5 posições, para pacientes.</li>
+            <li>Um <a href="./main.c?#L110" target="_blank">array de inteiros</a>, com 5 posições, para salvar em qual momento tal máquina terá terminado o exame.</li>
+            <li><a href="./main.c?#L103" target="_blank">Um loop</a> para percorrrer os arrays e encontrar uma máquina de Raio-X disponível.</li>
+            <li><a href="./main.c?#L115" target="_blank">Outro loop</a> para encontrar uma máquina de Raio-X que terminou o exame.</li>
         </ol>
-    <li>[Exam](./main.c?#L122): Os exames são criados assim que o paciente termina o uso da máquina de Raio-X.</li>
+    <li><a href="./main.c?#L122" target="_blank"><b>Exam</b></a>: Os exames são criados assim que o paciente termina o uso da máquina de Raio-X.</li>
         <ol type="a">
             <li>É criado um novo ponteiro para o TAD Exam.</li>
             <li>A função create_exam() salva o exame no arquivo db_exam.txt.</li>
         </ol>
-     <li>[ExamPriorityQueue](./main.c?#L125): O exame recém criado é inserido na fila de exames com prioridade.</li>
+     <li><a href="./main.c?#L125" target="_blank"><b>ExamPriorityQueue</b></a>: O exame recém criado é inserido na fila de exames com prioridade.</li>
          <ol type="a">
             <li>Exames com maior gravidade serão colocados mais próximos ao início da fila.</li>
          </ol>
-     <li>[Laudo(Report) finalizado](./main.c?#L137): É checado se o médico **não está disponível** e o tempo de atendimento acabou.</li>
+     <li><a href="./main.c?#L137" target="_blank"><b>Laudo(Report) finalizado</b></a>: É checado se o médico <b>não está disponível</b> e o <b>tempo de atendimento</b> acabou.</li>
          <ol type="a">
-            <li>Caso tenha acabado, é [gerado o laudo](./main.c?#L143).</li>
-            <li>Logo após, é checado a probabilidade de [mudar a condição "gerada" pela IA](./main.c?#L146) no laudo.</li>
+            <li>Caso tenha acabado, é <a href="./main.c?#L143" target="_blank">gerado o laudo</a>.</li>
+            <li>Logo após, é checado a probabilidade de <a href="./main.c?#L146" target="_blank">mudar a condição "gerada" pela IA</a> no laudo.</li>
             <li>É salvo o registro do laudo recém criado no arquivo db_report.txt.</li>
-            <li>[Atualiza as variáveis](./main.c?#L154), o médico como disponível novamente.</li>
+            <li><a href="./main.c?#L154" target="_blank">Atualiza as variáveis</a>, o médico como disponível novamente.</li>
          </ol>
-     <li>[Laudo(Report)](./main.c?#L163): Checa se o médico **está disponível**.</li>
+     <li><a href="./main.c?#L163" target="_blank"><b>Laudo(Report)</b></a>: Checa se o médico <b>está disponível</b>.</li>
          <ol type="a">
-            <li>Caso esteja disponível, [assinala um novo exame](./main.c?#L166) com laudo em andamento.</li>
-            <li>[Atualiza as variáveis](./main.c?#L169&#L170), o médico como não disponível e o tempo que irá durar o atendimento (20 ut).</li>
+            <li>Caso esteja disponível, <a href="./main.c?#L166" target="_blank">assinala um novo exame</a> com laudo em andamento.</li>
+            <li><a href="./main.c?#L169&#L170" target="_blank">Atualiza as variáveis</a>, o médico como não disponível e o tempo que irá durar o atendimento (20 ut).</li>
          </ol>
-     <li>Retorna ao passo i, incrementando o tempo de simulação em 1 ut.</li>
+     <li>Retorna ao passo I, incrementando o tempo de simulação em 1 ut.</li>
 </ol> 
-
-i. [Relatório](./main.c?#L77): É feita a checagem se está na hora de mostrar o relatório na tela. <br/>
-    a. Caso seja, o relatório é mostrado na tela.
-    b. O Programa aguarda por volta de 5 segundos para retomar a simulação.
-ii. [Chegada de pacientes](./main.c?#L84): É gerado um número entre 0 e 4, onde, caso o número seja 0 é satisfeita a condição de chegada de um novo paciente (1/4, 20%).
-    a. É criado um novo ponteiro para a TAD Patient.
-    b. A função create_patient() antes de retornar o ponteiro, salva um novo registro do paciente no arquivo db_patient.txt.
-iii. [Fila de pacientes](./main.c?#L98): Após chegar um paciente, ele é inserido na fila, TAD Queue, genérica, de pacientes, logo após cadastro.
-iii. [XRMachineManager](./main.c?#L103): Foi implementado dois arrays para seu funcionamento.
-    a. Um [array de Patient*](./main.c?#L109), com 5 posições, para pacientes.
-    b. Um [array de inteiros](./main.c?#L110), com 5 posições, para salvar em qual momento tal máquina terá terminado o exame.
-    c. [Um loop](./main.c?#L103) para percorrre os arrays encontrar uma máquina de Raio-X disponível.
-    d. [Outro loop](./main.c?#L115) para encontrar uma máquina de Raio-X que terminou o exame.
-
-    
-iv. [Exam](./main.c?#L122): Os exames são criados assim que o paciente termina o uso da máquina de Raio-X.
-    a. É criado um novo ponteiro para o TAD Exam.
-    b. A função create_exam() salva o exame no arquivo db_exam.txt.
-
-    
-v. [ExamPriorityQueue](./main.c?#L125): O exame recém criado é inserido na fila de exames com prioridade.
-    a. Exames com maior gravidade serão colocados mais próximos ao início da fila.
-vi. [Laudo(Report) finalizado](./main.c?#L137): É checado se o médico **não está disponível** e o tempo de atendimento acabou.
-    a. Caso tenha acabado, é [gerado o laudo](./main.c?#L143).
-    b. Logo após, é checado a probabilidade de [mudar a condição "gerada" pela IA](./main.c?#L146) no laudo.
-    c. É salvo o registro do laudo recém criado no arquivo db_report.txt.
-    c. [Atualiza as variáveis](./main.c?#L154), o médico como disponível novamente.
-vii. [Laudo(Report)](./main.c?#L163): Checa se o médico **está disponível**.
-    a. Caso esteja disponível, [assinala um novo exame](./main.c?#L166) com laudo em andamento.
-    b. [Atualiza as variáveis](./main.c?#L169&#L170), o médico como não disponível e o tempo que irá durar o atendimento (20 ut).
-viii. Retorna ao passo i, incrementando o tempo de simulação em 1 ut.
-
-
 
 ## Dependências
 - **[GCC](https://gcc.gnu.org/install/index.html)**, posteriormente usado para compilar o código em C.
@@ -191,14 +158,14 @@ Define a struct **Condition** (**Condição**), que consiste de:
 | Função                                           | Recebe                | Execução | Retorna        |
 | ------------------------------------------------ | --------------------- | -------- |-------------- |
 | [create_condition(...)](src/condition.c?#L32)    | **int**  id,  const **char**  *name, **int**  gravity | Realiza a alocação de memória e atribuições para as variáveis, criando uma nova Condition.| Condition * |
-| [destroy_condition(...)](src/condition.c?#L49)   | **Condition**  condition | Remove e libera alocação de memória do ponteiro do tipo Condition. |  |
-| [get_condition_id(...)](src/condition.c?#L54)   | const **Condition**  condition | Retorna o número identificador da Condition passada no argumento. | Inteiro |
-| [get_condition_name(...)](src/condition.c?#L59)   | const **Condition**  condition | Retorna o nome da Condition passada no argumento. | Char * |
-| [get_condition_name_by_id(...)](src/condition.c?#L64)   | const **Condition**  condition | Retorna o nome da Condition pelo número de identificação. | Char * |
-| [get_condition_gravity(...)](src/condition.c?#L71)   | const **Condition**  condition | Retorna a gravidade da Condition passada no argumento. | Char * |
+| [destroy_condition(...)](src/condition.c?#L49)   | **Condition** *condition | Remove e libera alocação de memória do ponteiro do tipo Condition. |  |
+| [get_condition_id(...)](src/condition.c?#L54)   | const **Condition** *condition | Retorna o número identificador da Condition passada no argumento. | Inteiro |
+| [get_condition_name(...)](src/condition.c?#L59)   | const **Condition** *condition | Retorna o nome da Condition passada no argumento. | Char * |
+| [get_condition_name_by_id(...)](src/condition.c?#L64)   | const **Condition** *condition | Retorna o nome da Condition pelo número de identificação. | Char * |
+| [get_condition_gravity(...)](src/condition.c?#L71)   | const **Condition** *condition | Retorna a gravidade da Condition passada no argumento. | Char * |
 | [get_condition(...)](src/condition.c?#L76)   |  | Retorna um ponteiro criado com a condição escolhida pela probabilidade definida. | Condition * |
-| [print_condition(...)](src/condition.c?#L127)   | const **Condition**  condition | Imprime na tela  passada no argumento. |  |
-| [condition_output(...)](src/condition.c?#L132)   | const **Condition**  condition | Retorna string com todas informações da Condition passada no argumento em uma string. | Char * |
+| [print_condition(...)](src/condition.c?#L127)   | const **Condition** *condition | Imprime na tela  passada no argumento. |  |
+| [condition_output(...)](src/condition.c?#L132)   | const **Condition** *condition | Retorna string com todas informações da Condition passada no argumento em uma string. | Char * |
 
 
 ## Report
@@ -219,16 +186,16 @@ Define a struct **Report** (**Laudo**), que consiste de:
 | Função                                           | Recebe                | Execução | Retorna        |
 | ------------------------------------------------ | --------------------- | -------- |-------------- |
 | [create_report(...)](src/report.c?#L17)    | **int**  id,  **int** exam_id, **Condition** *condition **int** timestamp | Cria um novo Laudo, alocando memória para a estrutura e retornando um ponteiro para a estrutura criada. | Condition * |
-| [destroy_report(...)](src/report.c?#L40)    | **Report** report | Libera a memória alocada a estrutura passada no argumento. |  |
-| [get_report_id(...)](src/report.c?#L47)    | const **Report** report | Retorna o número identificador do Report. | Inteiro |
-| [get_report_exam_id(...)](src/report.c?#L52)    | const **Report** report | Retorna o número identificador do Exame associado ao Report. | Inteiro |
-| [get_report_condition(...)](src/report.c?#L57)    | const **Report** report | Retorna a Condition associada ao Report. | Condition * |
-| [get_report_condition_id(...)](src/report.c?#L62)    | const **Report** report | Retorna o número identificador da Condition associada ao Report. | Inteiro |
-| [get_report_time(...)](src/report.c?#L67)    | const **Report** report | Retorna a unidade de tempo de realização do Report. | Inteiro |
-| [check_condition(...)](src/report.c?#L72)    |  **Report** report | Gera um número aleatório e decide se mudará a Condition do Report ou não. |  |
-| [change_condition(...)](src/report.c?#L79)    |  **Report** report | Gera uma nova Condition, mudando a atual do Report. |  |
-| [print_report(...)](src/report.c?#L95)    |  const **Report** report | Imprime na tela as propriedades do Report passado no argumento. |  |
-| [report_output(...)](src/report.c?#L103)    |  const **Report** report | Retorna uma string das propriedades do Report passado no argumento | Char * |
+| [destroy_report(...)](src/report.c?#L40)    | **Report** *report | Libera a memória alocada a estrutura passada no argumento. |  |
+| [get_report_id(...)](src/report.c?#L47)    | const **Report** *report | Retorna o número identificador do Report. | Inteiro |
+| [get_report_exam_id(...)](src/report.c?#L52)    | const **Report** *report | Retorna o número identificador do Exame associado ao Report. | Inteiro |
+| [get_report_condition(...)](src/report.c?#L57)    | const **Report** *report | Retorna a Condition associada ao Report. | Condition * |
+| [get_report_condition_id(...)](src/report.c?#L62)    | const **Report** *report | Retorna o número identificador da Condition associada ao Report. | Inteiro |
+| [get_report_time(...)](src/report.c?#L67)    | const **Report** *report | Retorna a unidade de tempo de realização do Report. | Inteiro |
+| [check_condition(...)](src/report.c?#L72)    |  **Report** *report | Gera um número aleatório e decide se mudará a Condition do Report ou não. |  |
+| [change_condition(...)](src/report.c?#L79)    |  **Report** *report | Gera uma nova Condition, mudando a atual do Report. |  |
+| [print_report(...)](src/report.c?#L95)    |  const **Report** *report | Imprime na tela as propriedades do Report passado no argumento. |  |
+| [report_output(...)](src/report.c?#L103)    |  const **Report** *report | Retorna uma string das propriedades do Report passado no argumento | Char * |
 
 ## Queue
 
@@ -259,13 +226,13 @@ Define a struct **Queue** e **QueueNode**, que consiste de:
 | Função                                           | Recebe                | Execução | Retorna        |
 | ------------------------------------------------ | --------------------- | -------- |-------------- |
 | [q_create(...)](src/queue.c?#L24)    |  | Cria uma nova fila, Queue, alocando memória para a estrutura e retornando um ponteiro para a estrutura criada. | Queue * |
-| [q_size(...)](src/queue.c?#L32)    | const **Queue** q | Percorre a fila e retorna a quantidade de elementos na fila. | Inteiro |
-| [q_is_empty(...)](src/queue.c?#L42)    | const **Queue** q | Retorna se a fila está vazia ou não. | Inteiro |
-| [q_enqueue(...)](src/queue.c?#L47)    | const **Queue** q, **StructType** type, **void** p | Enfileira um ponteiro genérico. |  |
-| [q_enqueue_exam_prio(...)](src/queue.c?#L63)    | const **Queue** q, **StructType** type, **void** p | Enfileira um ponteiro Exam inserindo-o na posição da fila devido a prioridade do nível de gravidade da Condition vinculada ao Exam. |  |
-| [q_dequeue(...)](src/queue.c?#L114)    | const **Queue** q | Retira o primeiro da fila. | void * |
-| [q_free(...)](src/queue.c?#L131)    | const **Queue** q | // Imprime todos os elementos na fila. |  |
-| [q_print(...)](src/queue.c?#L147)    | const **Queue** q | // Libera toda a memória da fila. |  |
+| [q_size(...)](src/queue.c?#L32)    | const **Queue** *q | Percorre a fila e retorna a quantidade de elementos na fila. | Inteiro |
+| [q_is_empty(...)](src/queue.c?#L42)    | const **Queue** *q | Retorna se a fila está vazia ou não. | Inteiro |
+| [q_enqueue(...)](src/queue.c?#L47)    | const **Queue** *q, **StructType** type, **void** p | Enfileira um ponteiro genérico. |  |
+| [q_enqueue_exam_prio(...)](src/queue.c?#L63)    | const **Queue** *q, **StructType** type, **void** p | Enfileira um ponteiro Exam inserindo-o na posição da fila devido a prioridade do nível de gravidade da Condition vinculada ao Exam. |  |
+| [q_dequeue(...)](src/queue.c?#L114)    | const **Queue** *q | Retira o primeiro da fila. | void * |
+| [q_free(...)](src/queue.c?#L131)    | const **Queue** *q | // Imprime todos os elementos na fila. |  |
+| [q_print(...)](src/queue.c?#L147)    | const **Queue** *q | // Libera toda a memória da fila. |  |
 
 ## Definitions
 
