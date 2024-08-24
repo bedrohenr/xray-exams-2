@@ -156,6 +156,7 @@ int main() {
             // Libera memória do laudo e exame recém criado.
             destroy_exam(exam);
             destroy_report(report);
+            exam = NULL; // Atualiza a variável exam que acabou de ter a memória de seu ponteiro desalocada.
         }
 
         // Verifica se a fila de prioridade de exames está vazia.
@@ -181,6 +182,8 @@ int main() {
         if(XRMachineManager[i]!= NULL) // Se houver paciente na maquina de Raio-X
             destroy_patient(XRMachineManager[i]); // Libera a memória do paciente.
     }
+    if(exam != NULL) // Caso atendimento de laudo tenha começado e não termiando
+        destroy_exam(exam); // free
     q_free(PatientQueue); 
     q_free(ExamPriorityQueue);
 }
