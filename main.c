@@ -96,6 +96,7 @@ int main() {
 
             // Paciente entra na fila de pacientes.
             q_enqueue(PatientQueue, TYPE_PATIENT, patient);
+            patient = NULL; // Reseta o valor da variável após inserida na fila. (Evitando double free).
         }
 
         // Checando se alguma maquina de raio x está desocupada
@@ -126,7 +127,7 @@ int main() {
 
                 // Libera memória do paciente que acabou de fazer o exame.
                 destroy_patient(next_patient);
-
+                new_exam = NULL; // Resetando valor da variável. (Evitando double free).
                 // Variável da máquina de raio-X atualizada como dispoível.
                 XRMachineManager[i] = NULL;
                 XRMachineTimer[i] = 0; // Timer da máquina resetado.
@@ -181,8 +182,6 @@ int main() {
         if(XRMachineManager[i]!= NULL) // Se houver paciente na maquina de Raio-X
             destroy_patient(XRMachineManager[i]); // Libera a memória do paciente.
     }
-    destroy_patient(patient); // Se o último paciente nao conseguiu uma XRMachine, tera de ser liberado da memória aqui.
-    // destroy_exam(new_exam); // Será liberado no ExamPriorityQueue.
     q_free(PatientQueue); 
     q_free(ExamPriorityQueue);
 }
