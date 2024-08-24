@@ -21,7 +21,7 @@ typedef enum {
 #define RUNTIME 43200
 
 // A cada quantas unidades de tempo mostrar o relatório.
-#define SIM_REPORT_TIME 5000
+#define SIM_REPORT_TIME 8640 // 4320 * 2, relatório será mostrado 5 vezes durante a execução completa
 
 // Quanto tempo (em milisegundos) esperar ao mostrar o relatório.
 #define SIM_REPORT_WAITING_TIME 1125 // = 1,125s. 1s parecia muito pouco.
