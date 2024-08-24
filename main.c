@@ -75,7 +75,7 @@ int main() {
             condition_array_length = sizeof(condition_count)/sizeof(condition_count[0]);
             // Chamada para a função do relatório
             simulation_report(patient_id_counter, q_size(PatientQueue), exam_id_counter, report_id_counter, exam_queue_time, condition_time, condition_count, condition_array_length, exam_at_defined_time_limit);
-            printf("\nRetornando a simulação.");
+            printf("\nRetomada a simulação.\n. . .");
             sim_report_timer += SIM_REPORT_TIME; // Incrementa o timer
         }
         // 20% de chance de chegada de paciente
@@ -183,6 +183,6 @@ int main() {
     }
     destroy_patient(patient); // Se o último paciente nao conseguiu uma XRMachine, tera de ser liberado da memória aqui.
     // destroy_exam(new_exam); // Será liberado no ExamPriorityQueue.
-    q_free(PatientQueue);
+    q_free(PatientQueue); 
     q_free(ExamPriorityQueue);
 }
