@@ -305,7 +305,7 @@ Implementada para conter funções úteis para toda execução do programa.
 | [static create_file(...)](src/functions.c?#L171)  | const **char** *path | Cria um arquivo. | Inteiro |
 | [static file_exists(...)](src/functions.c?#L186)  | const **char** *path | Verifica se o arquivo no endereço inserido existe. Retorna 1 se o arquivo existe. | Inteiro |
 | [get_db_path(...)](src/functions.c?#L202)  | const **StructType** type | Retorna o arquivo db da estrutura passada no argumento. | Char * |
-| [db_save(...)](src/functions.c?#L228)  | const **StructType** type, const **char** *content | Adiciona uma linha no arquivo especificado. | Char * |
+| [db_save(...)](src/functions.c?#L228)  | const **StructType** type, **char** *content | Adiciona uma linha no arquivo especificado. | Char * |
 | [free_by_structure_type(...)](src/functions.c?#L250)  | const **StructType** type, **void** *p | Libera memória da estrutura devido a seu tipo, usando as funções corretas. | Char * |
 | [time_passed(...)](src/functions.c?#L268)  | **clock_t** t | Calcula quanto tempo passou desde um ponto anterior onde originou a variavel t. | double |
 | [test_enqueue_prio(...)](src/functions.c?#L276)  | | Cria exames de prioridades diferentes, de forma não sequencial para checar se a lista de prioridade de exame esta funcionando. |  |
