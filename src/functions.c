@@ -385,7 +385,7 @@ void simulation_report(int patient_count, int patient_queue_count, int exam_coun
 
         // printf("\nCondição %d: %d, %d", i, condition_time[i], condition_count[i]); // Verificação das variáveis.
         // A função ja normaliza o início no 0... 
-        printf("\nCondição %s: %d ut.", get_condition_name_by_id(i+1), median_exam_report);
+        printf("\n\t%s: %d ut.", get_condition_name_by_id(i+1), median_exam_report);
     }
 
     // Número de exames realizados após o limite de tempo estabelecido (7200 unidades de tempo).
