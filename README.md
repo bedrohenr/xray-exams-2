@@ -16,12 +16,12 @@ A lógica da simulação pode ser encontrada na arquivo [main.c](./main.c).
             <li>Caso seja, o relatório é mostrado na tela.</li>
             <li>O Programa aguarda por volta de 5 segundos para retomar a simulação.</li>
         </ol> 
-  <li><a href="./main.c?#L84" target="_blank"><b>Chegada de pacientes</b></a>: É gerado um número entre 0 e 4, onde, caso o número seja 0 é satisfeita a condição de chegada de um novo paciente (1/4, 20%).</li>
+  <li><a href="./main.c?#L83" target="_blank"><b>Chegada de pacientes</b></a>: É gerado um número entre 0 e 4, onde, caso o número seja 0 é satisfeita a condição de chegada de um novo paciente (1/4, 20%).</li>
         <ol type="a">
             <li>É criado um novo ponteiro para a TAD Patient.</li>
             <li>A função create_patient() antes de retornar o ponteiro, salva um novo registro do paciente no arquivo db_patient.txt.</li>
         </ol> 
-  <li><a href="./main.c?#L98" target="_blank"><b>Fila de pacientes</b></a>: Após chegar um paciente, ele é inserido na fila, TAD Queue, genérica, de pacientes, logo após cadastro.</li>
+  <li><a href="./main.c?#L97" target="_blank"><b>Fila de pacientes</b></a>: Após chegar um paciente, ele é inserido na fila, TAD Queue, genérica, de pacientes, logo após cadastro.</li>
   <li><a href="./main.c?#L103" target="_blank"><b>XRMachineManager</b></a>: Foi implementado dois arrays para seu funcionamento.</li>
         <ol type="a">
             <li>Um <a href="./main.c?#L109" target="_blank">array de Patient*</a>, com 5 posições, para pacientes.</li>
@@ -47,8 +47,8 @@ A lógica da simulação pode ser encontrada na arquivo [main.c](./main.c).
          </ol>
      <li><a href="./main.c?#L163" target="_blank"><b>Laudo(Report)</b></a>: Checa se o médico <b>está disponível</b>.</li>
          <ol type="a">
-            <li>Caso esteja disponível, <a href="./main.c?#L166" target="_blank">assinala um novo exame</a> com laudo em andamento.</li>
-            <li><a href="./main.c?#L169&#L170" target="_blank">Atualiza as variáveis</a>, o médico como não disponível e o tempo que irá durar o atendimento (20 ut).</li>
+            <li>Caso esteja disponível, <a href="./main.c?#L167" target="_blank">assinala um novo exame</a> com laudo em andamento.</li>
+            <li><a href="./main.c?#L170&#L171" target="_blank">Atualiza as variáveis</a>, o médico como não disponível e o tempo que irá durar o atendimento (20 ut).</li>
          </ol>
      <li>Retorna ao passo I, incrementando o tempo de simulação em 1 ut.</li>
 </ol> 
