@@ -64,7 +64,7 @@ char* get_condition_name(const Condition *condition){
 char* get_condition_name_by_id(int id){
     char* condition_names[] = {"Saúde Normal","Bronquite","Pneumonia","COVID","Embolia Pulmonar","Derrame Pleural", "Fibrose Pulmonar","Tuberculose","Câncer de Pulmão"};
 
-    return condition_names[id];
+    return condition_names[id - 1];
 }
 
 // Retorna a gravidade da Condition
@@ -82,51 +82,43 @@ Condition* get_condition(){
 
     // if com suas distribuições com a probilidade e número total definido
     if(rng>= I_CONDITION_L && rng <= I_CONDITION_H) {
-        id = 1;
-        name = "Saúde Normal";
+        id = 1; // Saúde Normal
         gravity = 1;
     }
     else if(rng >= II_CONDITION_L && rng <= II_CONDITION_H){
-        id = 2;
-        name = "Bronquite";
+        id = 2; // Bronquite
         gravity = 2;
     }
     else if(rng >= III_CONDITION_L && rng <= III_CONDITION_H){
-        id = 3;
-        name = "Pneumonia";
+        id = 3; // Pneumonia
         gravity = 3;
     }
     else if(rng >= IV_CONDITION_L && rng <= IV_CONDITION_H){
-        id = 4;
-        name = "COVID";
+        id = 4; // COVID
         gravity = 4;
     }
     else if(rng >= V_CONDITION_L && rng <= V_CONDITION_H){
-        id = 5;
-        name = "Embolia Pulmonar";
+        id = 5; // Embolia Pulmonar
         gravity = 4;
     }
     else if(rng >= VI_CONDITION_L && rng <= VI_CONDITION_H){
-        id = 6;
-        name = "Derrame Pleural";
+        id = 6; // Derrame Pleural
         gravity = 4;
     }
-    else if(rng >= VII_CONDITION_L && rng <= VIII_CONDITION_H){
-        id = 7;
-        name = "Fibrose Pulmonar";
+    else if(rng >= VII_CONDITION_L && rng <= VII_CONDITION_H){
+        id = 7; // Fibrose Pulmonar
         gravity = 5;
     }
     else if(rng >= VIII_CONDITION_L && rng <= VIII_CONDITION_H){
-        id = 8;
-        name = "Tuberculose";
+        id = 8; // Tuberculose
         gravity = 5;
     }
     else if(rng >= IX_CONDITION_L && rng <= IX_CONDITION_H){
-        id = 9;
-        name = "Câncer de Pulmão";
+        id = 9; // Câncer de Pulmão
         gravity = 6;
     }
 
+    name = get_condition_name_by_id(id);
     // Utiliza a função create usando os parametros definidos por chance
     return create_condition(id, name, gravity);
 }
