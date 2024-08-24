@@ -177,8 +177,12 @@ int main() {
     printf("\nSimulação finalizada.");
 
     // Liberando memória.
-    destroy_patient(patient);
-    destroy_exam(new_exam);
+    for(int i = 0; i < XRAY_MACHINES_QUANTITY; i++){ // Percorre as maquinas de Raio-X.
+        if(XRMachineManager[i]!= NULL) // Se houver paciente na maquina de Raio-X
+            destroy_patient(XRMachineManager[i]); // Libera a memória do paciente.
+    }
+    destroy_patient(patient); // Se o último paciente nao conseguiu uma XRMachine, tera de ser liberado da memória aqui.
+    // destroy_exam(new_exam); // Será liberado no ExamPriorityQueue.
     q_free(PatientQueue);
     q_free(ExamPriorityQueue);
 }
