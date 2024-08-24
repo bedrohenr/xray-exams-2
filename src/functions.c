@@ -366,7 +366,7 @@ void simulation_report(int patient_count, int patient_queue_count, int exam_coun
 
     // Número de pacientes na fila aguardando exame.
     printf("\nNa fila aguardando exame %d.", patient_queue_count);
-    printf("\n report count: %d, exam count: %d", report_count, exam_count);
+    
     // Número de pacientes que já realizaram exame e, dentre estes, a porcentagem do que já receberam laudo.
     report_percentage = (float)report_count/exam_count * 100;
     printf("\nRealizaram exame: %d, %.1f%% receberam laudo.", exam_count, report_percentage);
