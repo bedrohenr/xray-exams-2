@@ -20,7 +20,12 @@ int main() {
     // Timer.
     int time = 0;
 
-    // id counters.
+    // Quando o Dr. estara livre novamente, em unidade de tempo.
+    int medic_availability_time;
+    // Indica se o médico está disponível para um novo laudo.
+    int is_medic_available = 1; // Inicia disponível
+
+    // id contadores.
     int patient_id_counter = 1;
     int exam_id_counter = 1;
     int report_id_counter = 1;
@@ -32,39 +37,37 @@ int main() {
     int month;
     int day;
 
-    // Variaveis auxiliares
-    int timestamp;
-    int arrival;
-
     // Variáveis para o relatório de tempo do exame
     int sim_report_timer = SIM_REPORT_TIME; // A cada quantas u.t. mostrar o relatório
-    int condition_id; // aux
+    int condition_id; // Armazena o id da condição, para manipulação do array (Tempo medio de todas condições)
     int novo_paciente; // Armazena se chegou novo paciente
-    int exam_queue_time = 0;
+    int exam_queue_time = 0; // Tempo total que um exame ficou na fila
     int condition_count[9] = {0}; // Quantos exames tiveram de cada condition.
     int condition_time[9]  = {0}; // Tempo que levou cada condition do exame.
-    int condition_array_length;
+    int condition_array_length; // Tamanho do array condition count/time
     int exam_at_defined_time_limit = 0;
 
     // Variáveis de struct.
     Patient *patient, *next_patient;
-    Exam *exam, *new_exam;
+    Exam *exam = NULL;
+    Exam *new_exam;
     Report *report;
 
-    // Quantidade de maquina de raio X.
+    // Quantidade de maquinas de raio X.
     Patient *XRMachineManager[XRAY_MACHINES_QUANTITY] = {};
     int XRMachineTimer[XRAY_MACHINES_QUANTITY]; // Usada para armazenar o timer de cada Maquina Raio X.
 
     // Filas.
-    Queue *PatientQueue = q_create();
-    Queue *ExamPriorityQueue = q_create();
+    Queue *PatientQueue = q_create(); // Fila de pacientes ao chegar no hospital na simulação.
+    Queue *ExamPriorityQueue = q_create(); // Fila de exames com prioridade.
 
     printf("Simulação iniciada.");
+
     // Programa irá rodar até o tempo definido em RUNTIME (43200 ut)
     while(time <= RUNTIME){
-        // Salva a quantidade de pacientes no tempo estabelecido, no relatorio subtrai pelo final
+        // Salva a quantidade de exames realizados no tempo estabelecido, no relatorio subtrai pelo final
         if(time == TIME_LIMIT){
-            exam_at_defined_time_limit = patient_id_counter;
+            exam_at_defined_time_limit = exam_id_counter;
         }
         // Relatório
         if(time == sim_report_timer){
@@ -72,8 +75,8 @@ int main() {
             condition_array_length = sizeof(condition_count)/sizeof(condition_count[0]);
             // Chamada para a função do relatório
             simulation_report(patient_id_counter, q_size(PatientQueue), exam_id_counter, report_id_counter, exam_queue_time, condition_time, condition_count, condition_array_length, exam_at_defined_time_limit);
-            printf("\nRetornando a simulação...");
-            sim_report_timer += time; // Incrementa o timer
+            printf("\nRetornando a simulação.");
+            sim_report_timer += SIM_REPORT_TIME; // Incrementa o timer
         }
         // 20% de chance de chegada de paciente
         // Gera um número de 0 a 4 -> 1/5
@@ -82,9 +85,6 @@ int main() {
             // Obtém nome do paciente aleatoriamente
             name = get_name(); 
 
-            // Salvando a hora de chegada do paciente
-            arrival = time;
-
             // Definindo uma data de nascimento fictícia para o paciente.
             year = get_random_number(124); // Gera um número de 0 a 124, que vai ser adicionado a 1900
             month = get_random_number(11); // Gera um número de 0 a 11
@@ -92,7 +92,7 @@ int main() {
             birthdate = create_date(year, month, day);  // Recebe um struct tm com os números
 
             // Criando um paciente
-            patient = create_patient(patient_id_counter++, name, &birthdate, arrival);
+            patient = create_patient(patient_id_counter++, name, &birthdate, time);
 
             // Paciente entra na fila de pacientes.
             q_enqueue(PatientQueue, TYPE_PATIENT, patient);
@@ -117,58 +117,66 @@ int main() {
                 // Recebe o paciente que estava na máquina de raio-X.
                 next_patient = (Patient *) XRMachineManager[i];
 
-                // Salvando timestamp
-                timestamp = time;
-
                 // Finalizado o uso da máquina de raio-X.
-                // Criando novo Exame.
-                new_exam = create_exam(exam_id_counter++, get_patient_id(next_patient), (i+1), timestamp);
+                // Criando novo Exame. A condição pela IA será gerada no create_exam()
+                new_exam = create_exam(exam_id_counter++, get_patient_id(next_patient), (i+1), time);
 
                 // Exame entra na fila de prioridade de exames.
                 q_enqueue_exam_prio(ExamPriorityQueue, TYPE_EXAM, new_exam);
 
-                // Variável da máquina de raio-X atualizada: Vazia.
+                // Libera memória do paciente que acabou de fazer o exame.
+                destroy_patient(next_patient);
+
+                // Variável da máquina de raio-X atualizada como dispoível.
                 XRMachineManager[i] = NULL;
                 XRMachineTimer[i] = 0; // Timer da máquina resetado.
             }
         }
 
-        // Verifica se a fila de prioridade de exames está vazia.
-        if(!q_is_empty(ExamPriorityQueue)){
-            
-            // Pega o primeira exame na fila de prioridade.
-            exam = (Exam *) q_dequeue(ExamPriorityQueue);
-
-            // Salvando timestamp
-            timestamp = time;
+        // Verifica se o tempo do laudo em andamento ja terminou.
+        if(medic_availability_time == time && is_medic_available == 0 && exam != NULL){
 
             // Incrementando total de tempo na fila para o relatório;
             exam_queue_time += time - get_exam_time(exam);
 
             // Cria um novo laudo com as informações do exame.
-            report = create_report(report_id_counter++, get_exam_id(exam), get_exam_condition(exam), timestamp);
+            report = create_report(report_id_counter++, get_exam_id(exam), get_exam_condition(exam), time);
             
             // Checa pela condição se precisará ser reavaliado uma nova condição pela % definida.
             check_condition(report);
 
-            // Faz com que obtenha o id da condition após reavaliação, se houver.
-            condition_id = get_report_condition_id(report) - 1; // Ids começa em 1, arrays em 0
-            condition_count[condition_id] += 1;  // Armazena quantidade de cada condition
+            // Obtém a condição do laudo, para caso houver troca de condição (20% chance).
+            condition_id = get_report_condition_id(report) - 1; // Ids começa em 1, arrays em 0.
+            condition_count[condition_id] += 1;  // Armazena quantidade de cada condition.
             condition_time[condition_id] += time - get_exam_time(exam); // Tempo acumulado de cada condition.
 
-            // Libera memória do laudo recém criado.
+            // Muda o status do médico para disponivel
+            is_medic_available = 1;
+
+            // Libera memória do laudo e exame recém criado.
+            destroy_exam(exam);
             destroy_report(report);
+        }
+
+        // Verifica se a fila de prioridade de exames está vazia.
+        // Verifica se o médico esta disponível para iniciar atendimento de outro laudo.
+        if(!q_is_empty(ExamPriorityQueue) && is_medic_available){
+
+            // Pega o primeira exame na fila de prioridade.
+            exam = (Exam *) q_dequeue(ExamPriorityQueue);
+
+            // Atualiza o tempo que o médico estará disponivel novamente.
+            is_medic_available = 0;
+            medic_availability_time = time + REPORT_DURATION;
         }
         // Incrementa unidade de tempo.
         time++;
     }
 
-    printf("Simulação concluída.");
+    printf("\nSimulação finalizada.");
 
     // Liberando memória.
     destroy_patient(patient);
-    destroy_patient(next_patient);
-    destroy_exam(exam);
     destroy_exam(new_exam);
     q_free(PatientQueue);
     q_free(ExamPriorityQueue);
