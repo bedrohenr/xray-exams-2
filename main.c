@@ -173,6 +173,7 @@ int main() {
         time++;
     }
 
+    fflush(stdout); // Força o output pelo buffer.
     printf("\nSimulação finalizada.");
 
     // Liberando memória.
