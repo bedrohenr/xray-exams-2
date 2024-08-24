@@ -3,7 +3,8 @@
         "time.h": "c",
         "condition.h": "c",
         "stdio.h": "c",
-        "definitions.h": "c"
+        "definitions.h": "c",
+        "string.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

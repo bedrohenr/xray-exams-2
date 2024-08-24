@@ -1,6 +1,43 @@
 # X-Ray Exams
 Este código em C consiste em simular o processo de realização de exames de raio-X de tórax em um hospital, com ênfase na organização da fila para laudo médico.
 
+## Fluxo da Simulação
+Uma representação gráfica da simulação do Hospital:
+<img src="./src/static/fluxo_hospital.png" alt="Fluxo da Simulação do Hospital">
+
+## Detalhamento da Simulação
+
+A lógica da simulação pode ser encontrada na arquivo [main.c](./main.c).
+
+i. [Relatório](./main.c?#L77): É feita a checagem se está na hora de mostrar o relatório na tela.
+    a. Caso seja, o relatório é mostrado na tela.
+    b. O Programa aguarda por volta de 5 segundos para retomar a simulação
+ii. [Chegada de pacientes](./main.c?#L84): É gerado um número entre 0 e 4, onde, caso o número seja 0 é satisfeita a condição de chegada de um novo paciente (1/4, 20%).
+    a. É criado um novo ponteiro para a TAD Patient.
+    b. A função create_patient() antes de retornar o ponteiro, salva um novo registro do paciente no arquivo db_patient.txt.
+iii. [Fila de pacientes](./main.c?#L98): Após chegar um paciente, ele é inserido na fila, TAD Queue, genérica, de pacientes, logo após cadastro.
+iii. [XRMachineManager](./main.c?#L103): Foi implementado dois arrays para seu funcionamento.
+    a. Um [array de Patient*](./main.c?#L109), com 5 posições, para pacientes.
+    b. Um [array de inteiros](./main.c?#L110), com 5 posições, para salvar em qual momento tal máquina terá terminado o exame.
+    c. [Um loop](./main.c?#L103) para percorrre os arrays encontrar uma máquina de Raio-X disponível.
+    d. [Outro loop](./main.c?#L115) para encontrar uma máquina de Raio-X que terminou o exame.
+iv. [Exam](./main.c?#L122): Os exames são criados assim que o paciente termina o uso da máquina de Raio-X.
+    a. É criado um novo ponteiro para o TAD Exam.
+    b. A função create_exam() salva o exame no arquivo db_exam.txt.
+v. [ExamPriorityQueue](./main.c?#L125): O exame recém criado é inserido na fila de exames com prioridade.
+    a. Exames com maior gravidade serão colocados mais próximos ao início da fila.
+vi. [Laudo(Report) finalizado](./main.c?#L137): É checado se o médico **não está disponível** e o tempo de atendimento acabou.
+    a. Caso tenha acabado, é [gerado o laudo](./main.c?#L143).
+    b. Logo após, é checado a probabilidade de [mudar a condição "gerada" pela IA](./main.c?#L146) no laudo.
+    c. É salvo o registro do laudo recém criado no arquivo db_report.txt.
+    c. [Atualiza as variáveis](./main.c?#L154), o médico como disponível novamente.
+vii. [Laudo(Report)](./main.c?#L163): Checa se o médico **está disponível**.
+    a. Caso esteja disponível, [assinala um novo exame](./main.c?#L166) com laudo em andamento.
+    b. [Atualiza as variáveis](./main.c?#L169&#L170), o médico como não disponível e o tempo que irá durar o atendimento (20 ut).
+viii. Retorna ao passo i, incrementando o tempo de simulação em 1 ut.
+
+
+
 ## Dependências
 - **[GCC](https://gcc.gnu.org/install/index.html)**, posteriormente usado para compilar o código em C.
 
@@ -48,18 +85,18 @@ Define uma struct **Exam** (**Exame**), que consiste de:
 | Função                    | Recebe           | Execução | Retorna       |
 | ------------------------- | ---------------- | -------- | ------------- |
 | [create_exam(...)](src/exam.c?#L22)         | **int**  id,  **int**  patient_id,  **int**  rx_id,  **int** time | Realiza a alocação de memória e atribuições para as variáveis, criando um novo exame. |Exam *       |
-| [destroy_exam(...)](src/exam.c?#L54)        | **Exam**  *exam  | Apaga o registro do exame em questão, desalocando-o da memória. |  |
-| [get_exam_id(...)](src/exam.c?#L61)         | const **Exam**  *exam  | Retorna o id do paciente passado no argumento. | Inteiro       |
-| [get_exam_patient_id(...)](src/exam.c?#L66) | const **Exam**  *exam  | Retorna o id do paciente vinculado ao Exame. | Inteiro       |
-| [get_exam_rx_id(...)](src/exam.c?#L71)      | const **Exam**  *exam  | Retorna o id do raio x vinculado ao Exame. | Inteiro       |
-| [get_exam_time(...)](src/exam.c?#L76)       | const **Exam**  *exam  | Retorna a unidade de tempo que foi realizado o Exame. | Inteiro       |
-| [get_exam_condition(...)](src/exam.c?#L81)  | const **Exam**  *exam  | Ponteiro para o tipo Condition associado ao Exame. | Condition *      |
-| [get_exam_condition_id(...)](src/exam.c?#L86)  | const **Exam**  *exam  | Ponteiro para o tipo condition associado ao Exame. | Inteiro       |
+| [destroy_exam(...)](src/exam.c?#L49)        | **Exam**  *exam  | Apaga o registro do exame em questão, desalocando-o da memória. |  |
+| [get_exam_id(...)](src/exam.c?#L56)         | const **Exam**  *exam  | Retorna o id do paciente passado no argumento. | Inteiro       |
+| [get_exam_patient_id(...)](src/exam.c?#L61) | const **Exam**  *exam  | Retorna o id do paciente vinculado ao Exame. | Inteiro       |
+| [get_exam_rx_id(...)](src/exam.c?#L66)      | const **Exam**  *exam  | Retorna o id do raio x vinculado ao Exame. | Inteiro       |
+| [get_exam_time(...)](src/exam.c?#L71)       | const **Exam**  *exam  | Retorna a unidade de tempo que foi realizado o Exame. | Inteiro       |
+| [get_exam_condition(...)](src/exam.c?#L76)  | const **Exam**  *exam  | Ponteiro para o tipo Condition associado ao Exame. | Condition *      |
+| [get_exam_condition_id(...)](src/exam.c?#L81)  | const **Exam**  *exam  | Ponteiro para o tipo condition associado ao Exame. | Inteiro       |
+| [get_exam_condition_name(...)](src/exam.c?#L86)  | const **Exam**  *exam  | Nome da Condition associada ao Exame. | Char *      |
 | [get_exam_condition_gravity(...)](src/exam.c?#L91)  | const **Exam**  *exam  | Retorna o nível de gravidade da Condition associada ao Exame. | Inteiro       |
-| [get_exam_condition_name(...)](src/exam.c?#L96)  | const **Exam**  *exam  | Nome da Condition associada ao Exame. | Char *      |
-| [set_exam_condition(...)](src/exam.c?#L102)  | const **Exam**  *exam  | Muda manualmente as propriedades da Condition associada ao Exame. |     |
-| [print_exam(...)](src/exam.c?#L113)  | const **Exam**  *exam  | Imprime na tela as propriedades do Exame. |     |
-| [exam_output(...)](src/exam.c?#L122)  | const **Exam**  *exam  | Retorna as propriedades do Exame em String. | Char *    |
+| [set_exam_condition(...)](src/exam.c?#L97)  | const **Exam**  *exam  | Muda manualmente as propriedades da Condition associada ao Exame. |     |
+| [print_exam(...)](src/exam.c?#L108)  | const **Exam**  *exam  | Imprime na tela as propriedades do Exame. |     |
+| [exam_output(...)](src/exam.c?#L117)  | const **Exam**  *exam  | Retorna as propriedades do Exame em String. | Char *    |
 
 ## Patient
 
@@ -79,14 +116,14 @@ Define a struct **Patient** (**Paciente**), que consiste de:
 | Função                                           | Recebe                | Execução | Retorna        |
 | ------------------------------------------------ | --------------------- | -------- |-------------- |
 | [create_patient(...)](src/patient.c?#L18)        | **int**  id,  const **char**  *name, **struct  tm**  *birthdate, **int** arrival | Realiza a alocação de memória e atribuições para as variáveis, criando um novo paciente.| Patient * |
-| [destroy_patient(...)](src/patient.c?#L47)       | **Patient**  *patient | Apaga o registro do paciente em questão, desalocando-o da memória.|  |
-| [get_patient_id(...)](src/patient.c?#L52)        | const **Patient**  *patient | Retorna o id do paciente passado no argumento.| Inteiro |
-| [get_patient_name(...)](src/patient.c?#L57)      | const **Patient**  *patient | Retorna o nome do paciente passado no argumento.| Char * |
-| [get_patient_birthdate(...)](src/patient.c?#L62) | const **Patient**  *patient | Retorna a data de aniversário do paciente.| Struct tm * |
-| [get_patient_arrival(...)](src/patient.c?#L67) | const **Patient**  *patient | Retorna a unidade de tempo de chegada do Patient.| Inteiro |
-| [get_patient_birthdate_string(...)](src/patient.c?#L72) | const **Patient**  *patient | Retorna a data de nascimento do Patient em formato YY-mm-dd.| Char * |
-| [print_patient(...)](src/patient.c?#L77) | const **Patient**  *patient | Imprime na tela as propriedades do Patient passado no argumento. |  |
-| [patient_output(...)](src/patient.c?#L84) | const **Patient**  *patient | Retorna as propriedades do Patient passado como arguemento em uma string. |  |
+| [destroy_patient(...)](src/patient.c?#L41)       | **Patient**  *patient | Apaga o registro do paciente em questão, desalocando-o da memória.|  |
+| [get_patient_id(...)](src/patient.c?#L46)        | const **Patient**  *patient | Retorna o id do paciente passado no argumento.| Inteiro |
+| [get_patient_name(...)](src/patient.c?#L51)      | const **Patient**  *patient | Retorna o nome do paciente passado no argumento.| Char * |
+| [get_patient_birthdate(...)](src/patient.c?#L56) | const **Patient**  *patient | Retorna a data de aniversário do paciente.| Struct tm * |
+| [get_patient_arrival(...)](src/patient.c?#L61) | const **Patient**  *patient | Retorna a unidade de tempo de chegada do Patient.| Inteiro |
+| [get_patient_birthdate_string(...)](src/patient.c?#L66) | const **Patient**  *patient | Retorna a data de nascimento do Patient em formato YY-mm-dd.| Char * |
+| [print_patient(...)](src/patient.c?#L71) | const **Patient**  *patient | Imprime na tela as propriedades do Patient passado no argumento. |  |
+| [patient_output(...)](src/patient.c?#L78) | const **Patient**  *patient | Retorna as propriedades do Patient passado como arguemento em uma string. |  |
 
 ## Condition
 
@@ -106,14 +143,14 @@ Define a struct **Condition** (**Condição**), que consiste de:
 | Função                                           | Recebe                | Execução | Retorna        |
 | ------------------------------------------------ | --------------------- | -------- |-------------- |
 | [create_condition(...)](src/condition.c?#L32)    | **int**  id,  const **char**  *name, **int**  gravity | Realiza a alocação de memória e atribuições para as variáveis, criando uma nova Condition.| Condition * |
-| [destroy_condition(...)](src/condition.c?#L54)   | **Condition**  condition | Remove e libera alocação de memória do ponteiro do tipo Condition. |  |
-| [get_condition_id(...)](src/condition.c?#L59)   | const **Condition**  condition | Retorna o número identificador da Condition passada no argumento. | Inteiro |
-| [get_condition_name(...)](src/condition.c?#L64)   | const **Condition**  condition | Retorna o nome da Condition passada no argumento. | Char * |
-| [get_condition_name_by_id(...)](src/condition.c?#L69)   | const **Condition**  condition | Retorna o nome da Condition pelo número de identificação. | Char * |
-| [get_condition_gravity(...)](src/condition.c?#L76)   | const **Condition**  condition | Retorna a gravidade da Condition passada no argumento. | Char * |
-| [get_condition(...)](src/condition.c?#L81)   |  | Retorna um ponteiro criado com a condição escolhida pela probabilidade definida. | Condition * |
-| [print_condition(...)](src/condition.c?#L140)   | const **Condition**  condition | Imprime na tela  passada no argumento. |  |
-| [condition_output(...)](src/condition.c?#L145)   | const **Condition**  condition | Retorna string com todas informações da Condition passada no argumento em uma string. | Char * |
+| [destroy_condition(...)](src/condition.c?#L49)   | **Condition**  condition | Remove e libera alocação de memória do ponteiro do tipo Condition. |  |
+| [get_condition_id(...)](src/condition.c?#L54)   | const **Condition**  condition | Retorna o número identificador da Condition passada no argumento. | Inteiro |
+| [get_condition_name(...)](src/condition.c?#L59)   | const **Condition**  condition | Retorna o nome da Condition passada no argumento. | Char * |
+| [get_condition_name_by_id(...)](src/condition.c?#L64)   | const **Condition**  condition | Retorna o nome da Condition pelo número de identificação. | Char * |
+| [get_condition_gravity(...)](src/condition.c?#L71)   | const **Condition**  condition | Retorna a gravidade da Condition passada no argumento. | Char * |
+| [get_condition(...)](src/condition.c?#L76)   |  | Retorna um ponteiro criado com a condição escolhida pela probabilidade definida. | Condition * |
+| [print_condition(...)](src/condition.c?#L127)   | const **Condition**  condition | Imprime na tela  passada no argumento. |  |
+| [condition_output(...)](src/condition.c?#L132)   | const **Condition**  condition | Retorna string com todas informações da Condition passada no argumento em uma string. | Char * |
 
 
 ## Report
@@ -134,16 +171,16 @@ Define a struct **Report** (**Laudo**), que consiste de:
 | Função                                           | Recebe                | Execução | Retorna        |
 | ------------------------------------------------ | --------------------- | -------- |-------------- |
 | [create_report(...)](src/report.c?#L17)    | **int**  id,  **int** exam_id, **Condition** *condition **int** timestamp | Cria um novo Laudo, alocando memória para a estrutura e retornando um ponteiro para a estrutura criada. | Condition * |
-| [destroy_report(...)](src/report.c?#L37)    | **Report** report | Libera a memória alocada a estrutura passada no argumento. |  |
-| [get_report_id(...)](src/report.c?#L44)    | const **Report** report | Retorna o número identificador do Report. | Inteiro |
-| [get_report_exam_id(...)](src/report.c?#L49)    | const **Report** report | Retorna o número identificador do Exame associado ao Report. | Inteiro |
-| [get_report_condition(...)](src/report.c?#L54)    | const **Report** report | Retorna a Condition associada ao Report. | Condition * |
-| [get_report_condition_id(...)](src/report.c?#L59)    | const **Report** report | Retorna o número identificador da Condition associada ao Report. | Inteiro |
-| [get_report_time(...)](src/report.c?#L64)    | const **Report** report | Retorna a unidade de tempo de realização do Report. | Inteiro |
-| [check_condition(...)](src/report.c?#L69)    |  **Report** report | Gera um número aleatório e decide se mudará a Condition do Report ou não. |  |
-| [change_condition(...)](src/report.c?#L76)    |  **Report** report | Gera uma nova Condition, mudando a atual do Report. |  |
-| [print_report(...)](src/report.c?#L92)    |  const **Report** report | Imprime na tela as propriedades do Report passado no argumento. |  |
-| [report_output(...)](src/report.c?#L100)    |  const **Report** report | Retorna uma string das propriedades do Report passado no argumento | Char * |
+| [destroy_report(...)](src/report.c?#L40)    | **Report** report | Libera a memória alocada a estrutura passada no argumento. |  |
+| [get_report_id(...)](src/report.c?#L47)    | const **Report** report | Retorna o número identificador do Report. | Inteiro |
+| [get_report_exam_id(...)](src/report.c?#L52)    | const **Report** report | Retorna o número identificador do Exame associado ao Report. | Inteiro |
+| [get_report_condition(...)](src/report.c?#L57)    | const **Report** report | Retorna a Condition associada ao Report. | Condition * |
+| [get_report_condition_id(...)](src/report.c?#L62)    | const **Report** report | Retorna o número identificador da Condition associada ao Report. | Inteiro |
+| [get_report_time(...)](src/report.c?#L67)    | const **Report** report | Retorna a unidade de tempo de realização do Report. | Inteiro |
+| [check_condition(...)](src/report.c?#L72)    |  **Report** report | Gera um número aleatório e decide se mudará a Condition do Report ou não. |  |
+| [change_condition(...)](src/report.c?#L79)    |  **Report** report | Gera uma nova Condition, mudando a atual do Report. |  |
+| [print_report(...)](src/report.c?#L95)    |  const **Report** report | Imprime na tela as propriedades do Report passado no argumento. |  |
+| [report_output(...)](src/report.c?#L103)    |  const **Report** report | Retorna uma string das propriedades do Report passado no argumento | Char * |
 
 ## Queue
 
@@ -175,12 +212,12 @@ Define a struct **Queue** e **QueueNode**, que consiste de:
 | ------------------------------------------------ | --------------------- | -------- |-------------- |
 | [q_create(...)](src/queue.c?#L24)    |  | Cria uma nova fila, Queue, alocando memória para a estrutura e retornando um ponteiro para a estrutura criada. | Queue * |
 | [q_size(...)](src/queue.c?#L32)    | const **Queue** q | Percorre a fila e retorna a quantidade de elementos na fila. | Inteiro |
-| [q_is_empty(...)](src/queue.c?#L41)    | const **Queue** q | Retorna se a fila está vazia ou não. | Inteiro |
-| [q_enqueue(...)](src/queue.c?#L46)    | const **Queue** q, **StructType** type, **void** p | Enfileira um ponteiro genérico. |  |
-| [q_enqueue_exam_prio(...)](src/queue.c?#L61)    | const **Queue** q, **StructType** type, **void** p | Enfileira um ponteiro Exam inserindo-o na posição da fila devido a prioridade do nível de gravidade da Condition vinculada ao Exam. |  |
-| [q_dequeue(...)](src/queue.c?#L111)    | const **Queue** q | Retira o primeiro da fila. | void * |
-| [q_free(...)](src/queue.c?#L128)    | const **Queue** q | // Imprime todos os elementos na fila. |  |
-| [q_print(...)](src/queue.c?#L144)    | const **Queue** q | // Libera toda a memória da fila. |  |
+| [q_is_empty(...)](src/queue.c?#L42)    | const **Queue** q | Retorna se a fila está vazia ou não. | Inteiro |
+| [q_enqueue(...)](src/queue.c?#L47)    | const **Queue** q, **StructType** type, **void** p | Enfileira um ponteiro genérico. |  |
+| [q_enqueue_exam_prio(...)](src/queue.c?#L63)    | const **Queue** q, **StructType** type, **void** p | Enfileira um ponteiro Exam inserindo-o na posição da fila devido a prioridade do nível de gravidade da Condition vinculada ao Exam. |  |
+| [q_dequeue(...)](src/queue.c?#L114)    | const **Queue** q | Retira o primeiro da fila. | void * |
+| [q_free(...)](src/queue.c?#L131)    | const **Queue** q | // Imprime todos os elementos na fila. |  |
+| [q_print(...)](src/queue.c?#L147)    | const **Queue** q | // Libera toda a memória da fila. |  |
 
 ## Definitions
 
