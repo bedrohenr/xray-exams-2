@@ -396,7 +396,6 @@ void simulation_report(int patient_count, int patient_queue_count, int exam_coun
     printf("\nExames realizados após limite de tempo estabelecido: %d.", exam_at_time_limit);
 
     printf("\n----------------------------------");
-
     printf("\nRetornando execução em: ");
 
     // Imprime: 5... 4... 3... 2... 1...
