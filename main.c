@@ -174,7 +174,7 @@ int main() {
     }
 
     fflush(stdout); // Força o output pelo buffer.
-    printf("\nSimulação finalizada.");
+    printf("\nSimulação finalizada.\n");
 
     // Liberando memória.
     for(int i = 0; i < XRAY_MACHINES_QUANTITY; i++){ // Percorre as maquinas de Raio-X.
