@@ -63,9 +63,9 @@ int main() {
 
     printf("Simulação iniciada.");
 
-    // Programa irá rodar até o tempo definido em RUNTIME (43200 ut)
+    // Programa irá rodar até o tempo definido em RUNTIME (43200 ut).
     while(time <= RUNTIME){
-        // Salva a quantidade de exames realizados no tempo estabelecido, no relatorio subtrai pelo final
+        // Salva a quantidade de exames realizados no tempo estabelecido, no relatorio subtrai pelo final.
         if(time == TIME_LIMIT){
             exam_at_defined_time_limit = exam_id_counter;
         }
@@ -75,23 +75,22 @@ int main() {
             condition_array_length = sizeof(condition_count)/sizeof(condition_count[0]);
             // Chamada para a função do relatório
             simulation_report(patient_id_counter, q_size(PatientQueue), exam_id_counter, report_id_counter, exam_queue_time, condition_time, condition_count, condition_array_length, exam_at_defined_time_limit);
-            printf("\nRetomada a simulação.\n. . .");
-            sim_report_timer += SIM_REPORT_TIME; // Incrementa o timer
+            printf("\nRetomada a simulação.");
+            sim_report_timer += SIM_REPORT_TIME; // Incrementa o timer.
         }
-        // 20% de chance de chegada de paciente
-        // Gera um número de 0 a 4 -> 1/5
+        // 20% de chance de chegada de paciente. Gera um número de 0 a 4 -> 1/5.
         novo_paciente = get_random_number(4) == 0;
-        if(novo_paciente){ // Checa se novo paciente
-            // Obtém nome do paciente aleatoriamente
+        if(novo_paciente){ // Checa se novo paciente.
+            // Obtém nome do paciente aleatoriamente.
             name = get_name(); 
 
             // Definindo uma data de nascimento fictícia para o paciente.
-            year = get_random_number(124); // Gera um número de 0 a 124, que vai ser adicionado a 1900
-            month = get_random_number(11); // Gera um número de 0 a 11
-            day = get_random_number(31);   // Gera um número de 0 a 31
-            birthdate = create_date(year, month, day);  // Recebe um struct tm com os números
+            year = get_random_number(124); // Gera um número de 0 a 124, que vai ser adicionado a 1900.
+            month = get_random_number(11); // Gera um número de 0 a 11.
+            day = get_random_number(31);   // Gera um número de 0 a 31.
+            birthdate = create_date(year, month, day);  // Recebe um struct tm com os números.
 
-            // Criando um paciente
+            // Criando um paciente.
             patient = create_patient(patient_id_counter++, name, &birthdate, time);
 
             // Paciente entra na fila de pacientes.
@@ -99,8 +98,8 @@ int main() {
             patient = NULL; // Reseta o valor da variável após inserida na fila. (Evitando double free).
         }
 
-        // Checando se alguma maquina de raio x está desocupada
-        // A primeira desocupada será atrelada ao primeiro usuário na fil
+        // Checando se alguma maquina de raio x está desocupada.
+        // A primeira desocupada será atrelada ao primeiro usuário na fila.
         for(int i = 0; i < XRAY_MACHINES_QUANTITY; i++){
             if(XRMachineManager[i] == NULL && !q_is_empty(PatientQueue)){
                 // Retira o paciente da fila e armazena na variável.
@@ -112,14 +111,14 @@ int main() {
             }
         }
 
-        // Checando se algum exame ja terminou
+        // Checando se algum exame ja terminou.
         for(int i = 0; i < XRAY_MACHINES_QUANTITY; i++){
             if(XRMachineManager[i] != NULL && XRMachineTimer[i] == time){
                 // Recebe o paciente que estava na máquina de raio-X.
                 next_patient = (Patient *) XRMachineManager[i];
 
                 // Finalizado o uso da máquina de raio-X.
-                // Criando novo Exame. A condição pela IA será gerada no create_exam()
+                // Criando novo Exame. A condição pela IA será gerada no create_exam().
                 new_exam = create_exam(exam_id_counter++, get_patient_id(next_patient), (i+1), time);
 
                 // Exame entra na fila de prioridade de exames.
