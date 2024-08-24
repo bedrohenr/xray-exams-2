@@ -357,7 +357,7 @@ char* get_name(){
 }
 
 void simulation_report(int patient_count, int patient_queue_count, int exam_count, int report_count, int time_exam_in_queue, int *condition_time, int *condition_count, int condition_array_length, int exam_at_defined_time_limit){
-    int report_percentage;
+    double report_percentage = 0;
     int median_exam_report = 0;
     int exam_at_time_limit = 0;
     printf("\n-- Relatório ---------------------");
@@ -366,10 +366,10 @@ void simulation_report(int patient_count, int patient_queue_count, int exam_coun
 
     // Número de pacientes na fila aguardando exame.
     printf("\nNa fila aguardando exame %d.", patient_queue_count);
-
+    printf("\n report count: %d, exam count: %d", report_count, exam_count);
     // Número de pacientes que já realizaram exame e, dentre estes, a porcentagem do que já receberam laudo.
-    report_percentage = (100*report_count/exam_count);
-    printf("\nRealizaram exame: %d, %d%% receberam laudo.", exam_count, report_percentage);
+    report_percentage = (float)report_count/exam_count * 100;
+    printf("\nRealizaram exame: %d, %.1f%% receberam laudo.", exam_count, report_percentage);
 
     // Tempo médio de laudo: Tempo médio que os exames ocupam a fila de prioridades.
     median_exam_report = time_exam_in_queue/exam_count;
