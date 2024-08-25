@@ -398,9 +398,9 @@ void simulation_report(int patient_count, int patient_queue_count, int exam_coun
     printf("\nRetornando a simulação em: ");
 
     // Imprime: 5... 4... 3... 2... 1...
-    for(int i = 5; i != 0; i--){
+    for(int i = SIM_REPORT_WAITING_TIME; i != 0; i--){
         printf("%d... ", i);
-        wait(SIM_REPORT_WAITING_TIME); // Pausa a execução por x milisegundos
+        wait(1125); // Pausa a execução por x milisegundos
         fflush(stdout); // Arruma o output no linux.
     }
 }
