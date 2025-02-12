@@ -54,7 +54,7 @@ A lógica da simulação pode ser encontrada na arquivo [main.c](./main.c).
 </ol> 
 
 ## Dependências
-- **[GCC](https://gcc.gnu.org/install/index.html)**, posteriormente usado para compilar o código em C.
+- **[GCC](https://gcc.gnu.org/install/index.html)**, posteriormente usado para compilação de códigos em C.
 
 ## Execução
 
